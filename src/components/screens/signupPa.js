@@ -32,8 +32,8 @@ class Signup extends React.Component {
     this.setState({ [name]: value }); 
   }
 
-  submit () {
-    var url = 'http://localhost:5000/api/users/patient/signup';
+  submit = () => {
+    var url = 'http://192.168.1.108:8080/api/user/patient/signup';
     axios.post(url,this.state)
     .then(function (response) {
       console.log(response);
