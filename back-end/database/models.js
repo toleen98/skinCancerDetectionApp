@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 //patients schema
 let patientSchema = mongoose.Schema({
   firstName: String,
-  last: String,
+  lastName: String,
   email: String,
   password: String,
   phoneNumber: Number,

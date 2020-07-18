@@ -21,11 +21,11 @@ import HomePatient from './src/components/screens/homePatient'
 import Sidebar from './src/components/common/sideBar';
 import Header from './src/components/common/header';
 
-
+import Signup from './src/components/screens/signupPa';
 
 const DrawerNavigator = createDrawerNavigator({
   HomeScreen :{
-      screen:HomePatient,
+      screen:Signup,
       navigationOptions: ({ navigation }) => ({     
         title :'Home',
         drawerIcon :({tintColor}) =><Feather name='home' size={16} color={tintColor}/>
