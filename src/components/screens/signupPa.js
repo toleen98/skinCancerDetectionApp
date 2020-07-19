@@ -50,7 +50,10 @@ class Signup extends React.Component {
 
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
-      
+        <Block>
+          
+          
+        </Block>
       <KeyboardAvoidingView style={styles.container} behavior="height" enabled>
         <Block
           flex
