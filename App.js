@@ -20,16 +20,16 @@ import {
 import HomePatient from './src/components/screens/homePatient'
 import Sidebar from './src/components/common/sideBar';
 import Header from './src/components/common/header';
-
+import MyDatePicker from './src/components/screens/bookAppointment';
 import Signup from './src/components/screens/signupPa';
 
 const DrawerNavigator = createDrawerNavigator({
   HomeScreen :{
-      screen:Signup,
-      navigationOptions: ({ navigation }) => ({     
+      screen:HomePatient,
+      navigationOptions: {     
         title :'Home',
         drawerIcon :({tintColor}) =><Feather name='home' size={16} color={tintColor}/>
-      })
+      }
    
       
   },
@@ -41,7 +41,7 @@ const DrawerNavigator = createDrawerNavigator({
     }
   },
   AppointmentsScreen :{
-    screen:AppointmentsScreen,
+    screen:MyDatePicker,
     navigationOptions : {
       title :'Appointments',
       drawerIcon :({tintColor}) =><MaterialIcons name="date-range" size={16} color={tintColor} />
