@@ -129,9 +129,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   descreption: {
-    fontSize: 20,
     textAlign: "center",
     margin: 0,
+    fontWeight: "bold",
+    justifyContent: "space-between",
+    padding: 30,
+    fontSize: 25,
   },
   label: {
     fontSize: 25,
