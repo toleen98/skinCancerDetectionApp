@@ -52,7 +52,7 @@ function Login() {
           alert("Email not found")
         }
       })
-      .catch((err) => 
+      .catch((err) => {throw err}
       );
   };
     
