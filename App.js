@@ -26,7 +26,7 @@ import PatientUpdate from './src/components/screens/patientUpdate';
 
 const DrawerNavigator = createDrawerNavigator({
   HomeScreen :{
-      screen:Signup,
+      screen:PatientUpdate,
       navigationOptions: ({ navigation }) => ({     
         title :'Home',
         drawerIcon :({tintColor}) =><Feather name='home' size={16} color={tintColor}/>
