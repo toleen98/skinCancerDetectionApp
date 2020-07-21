@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Alert,ScrollView, StyleSheet, Dimensions, Platform, TouchableOpacity
+    Alert,ScrollView, StyleSheet, Dimensions, Platform, TouchableOpacity, TouchableNativeFeedback
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -13,25 +13,6 @@ import axios from 'axios';
 
 
 const { width } = Dimensions.get('screen');
-
-// const cards = [
-  
-//   {
-//         "_id" :1,
-//         "firstName": "mohamed",
-//         "lastName": "salahat",
-//         "email": "mosalah@gmail.com",
-//         "password": "123568ggikf",
-//         "phoneNumber": "0796668392",
-//         "profileImage": "https://images.unsplash.com/photo-1506321806993-0e39f809ae59?&w=1500&h=1900&fit=crop&crop=entropy&q=300",
-//         "clinicLocation": "tla'a al ali",
-//         "workingFrom": "8:00 am",
-//         "workingTo": "6:00 pm",
-//         "certificate": "",
-//         "notes": ""
-//   }
-  
-// ];
 
 export default class Cards extends React.Component {
     state = {
@@ -62,8 +43,8 @@ export default class Cards extends React.Component {
             text: "Book Apponintment",
             onPress: async () => {
               console.log(1)
+
             },
-           
           },
           {
             text: "Cancel",
@@ -83,10 +64,11 @@ export default class Cards extends React.Component {
         <ScrollView contentContainerStyle={styles.cards}>
           <Block flex space="between" >
             {cards && cards.map((card) => (
-              <TouchableOpacity onPress = {this.bookAppont.bind(this, card._id, card.phoneNumber, card.email)}>
+                
+              < TouchableNativeFeedback onPress = {this.bookAppont.bind(this, card._id, card.phoneNumber, card.email)}>
               <Card 
-                key= {card._id}
-                flex
+                key= {`card-${card._id}`}
+                flex 
                 borderless
                 shadowColor={theme.COLORS.BLUE}
                 titleColor={card.full ? theme.COLORS.BLUE : null}
@@ -99,10 +81,11 @@ export default class Cards extends React.Component {
                   card.padded ? { padding: theme.SIZES.BASE / 2 } : null,
                   card.full ? null : styles.noRadius,
                 ]}
-                
               >
+                {card.full ? <LinearGradient colors={['transparent', 'rgba(0,0,0, 0.8)']} style={styles.gradient} /> : null}
+
               </Card>
-              </TouchableOpacity>
+              </TouchableNativeFeedback>
               
             ))}
           </Block>
