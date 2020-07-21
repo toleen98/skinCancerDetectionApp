@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 //patients schema
 let patientSchema = mongoose.Schema({
   firstName: String,
-  last: String,
+  lastName: String,
   email: String,
   password: String,
   phoneNumber: Number,
@@ -44,7 +44,7 @@ let appointmentSchema = mongoose.Schema({
 let Patient = mongoose.model("Patient", patientSchema, "patients");
 let Doctor = mongoose.model("Doctor", doctorSchema, "doctors");
 let Appointment = mongoose.model("Appointment", appointmentSchema, "appoints");
-
+ 
 module.exports.Patient = Patient;
 module.exports.Doctor = Doctor;
 module.exports.Appointment = Appointment;
