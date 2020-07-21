@@ -14,24 +14,24 @@ import axios from 'axios';
 
 const { width } = Dimensions.get('screen');
 
-const cards = [
+// const cards = [
   
-  {
-        "_id" :1,
-        "firstName": "mohamed",
-        "lastName": "salahat",
-        "email": "mosalah@gmail.com",
-        "password": "123568ggikf",
-        "phoneNumber": "0796668392",
-        "profileImage": "https://images.unsplash.com/photo-1506321806993-0e39f809ae59?&w=1500&h=1900&fit=crop&crop=entropy&q=300",
-        "clinicLocation": "tla'a al ali",
-        "workingFrom": "8:00 am",
-        "workingTo": "6:00 pm",
-        "certificate": "",
-        "notes": ""
-  }
+//   {
+//         "_id" :1,
+//         "firstName": "mohamed",
+//         "lastName": "salahat",
+//         "email": "mosalah@gmail.com",
+//         "password": "123568ggikf",
+//         "phoneNumber": "0796668392",
+//         "profileImage": "https://images.unsplash.com/photo-1506321806993-0e39f809ae59?&w=1500&h=1900&fit=crop&crop=entropy&q=300",
+//         "clinicLocation": "tla'a al ali",
+//         "workingFrom": "8:00 am",
+//         "workingTo": "6:00 pm",
+//         "certificate": "",
+//         "notes": ""
+//   }
   
-];
+// ];
 
 export default class Cards extends React.Component {
     state = {
@@ -40,14 +40,14 @@ export default class Cards extends React.Component {
         
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         
-        var url = 'http://192.168.127.36:8080/api/users/doctors';
+        var url = 'http://192.168.127.67:8080/api/users/doctors';
         var that = this
-        axios.get(url)
+        await axios.get(url)
             .then(function (res) {
                 console.log(res.data)
-            //   that.setState({doctors: response.data});
+              that.setState({doctors: res.data});
             })
             .catch(function (error) {
               console.log(error);
@@ -73,7 +73,8 @@ export default class Cards extends React.Component {
         ],)
     }
   render() {
-    // const card = this.state.doctors;
+    const cards = this.state.doctors;
+    console.log(cards)
 
     return (
      
@@ -84,8 +85,7 @@ export default class Cards extends React.Component {
             {cards && cards.map((card) => (
               <TouchableOpacity onPress = {this.bookAppont.bind(this, card._id, card.phoneNumber, card.email)}>
               <Card 
-              
-                key= {`card-${card.email}`}
+                key= {card._id}
                 flex
                 borderless
                 shadowColor={theme.COLORS.BLUE}
