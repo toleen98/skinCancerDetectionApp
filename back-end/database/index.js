@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const url = "mongodb://localhost/skinCancerUsers";
 const { MongoClient } = require("mongodb");
-
-mongoose.connect(url, {
+const uri = "mongodb+srv://yasmeen:1996292yaso@cluster0-l9jkx.mongodb.net/skinCancer?retryWrites=true&w=majority";
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

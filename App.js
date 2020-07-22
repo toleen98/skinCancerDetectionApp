@@ -21,6 +21,9 @@ import Header from './src/components/common/header';
 import MyDatePicker from './src/components/screens/bookAppointment';
 import Signup from './src/components/screens/signupPa';
 import PatientUpdate from './src/components/screens/patientUpdate';
+import Login from './src/components/screens/login';
+
+
 
 const DrawerNavigator = createDrawerNavigator({
   HomeScreen :{
@@ -34,14 +37,14 @@ const DrawerNavigator = createDrawerNavigator({
       
   },
   ProfileScreen:{
-    screen:ProfileScreen,
+    screen:Login,
     navigationOptions : {
       title :'Profile',
       drawerIcon :({tintColor}) =><Feather name='user' size={16} color={tintColor}/>
     }
   },
   AppointmentsScreen :{
-    screen:MyDatePicker,
+    screen:AppointmentsScreen,
     navigationOptions : {
       title :'Appointments',
       drawerIcon :({tintColor}) =><MaterialIcons name="date-range" size={16} color={tintColor} />
