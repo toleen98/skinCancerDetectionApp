@@ -7,7 +7,9 @@ import {
   Platform,
   View,
 } from "react-native";
-import AsyncStorage from "react-native";
+//import AsyncStorage from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
+
 // galio component
 import { Block, Button, Input, NavBar, Text } from "galio-framework";
 
@@ -40,22 +42,28 @@ function Login() {
       password: state.password,
     };
 
+     var id;
+   
+    // AsyncStorage.setItem("access_token", JSON.stringify(id));
+
     axios
       .post("http://192.168.1.75:8080/login", user)
       .then((res) => {
-        console.log(res.data);
-        if (res.data.patient === true) {
+        console.log(res.data.patient._id);
+         id = res.data.patient._id;
+         AsyncStorage.setItem("access_token", JSON.stringify(id));
+        if (res.data.result === true) {
           alert("Login Successed! ");
-          console.log(res.data);
-        } else if (res.data.patient === false) {
+          //console.log(res.data);
+        } else if (res.data === false) {
           alert("Login Failed! Wrong password");
-        } else if (res.data.patient === "Email not found") {
+        } else if (res.data === "Email not found") {
           alert("Email not found");
         }
       })
       .catch((err) => console.log("err"));
-      var id = res.data.patient._id;
-      AsyncStorage.setItem('access_token', id);
+    //  console.log("hi");
+    //  console.log(id);
   };
 
   return (

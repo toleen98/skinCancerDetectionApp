@@ -81,14 +81,21 @@ export default class PatientApmnt extends React.Component {
   };
 
   componentDidMount() {
-    AsyncStorage.getItem("access_token").then(function (data) {
+    
+  AsyncStorage.getItem("access_token").then(function (data) {
+      console.log("hi from apmn");
       console.log(data);
+      this.state.userId = data
     });
+console.log("hi")
+console.log(this.state.userId)
+   
+   
     axios
       .get("http://192.168.1.75:8080/patient/appointments")
       .then((response) => {
         this.setState({ apntInfo: response.data });
-        console.log(response.data);
+        //console.log(response.data);
         // console.log(this.state.userId);
       })
       .catch((err) => {

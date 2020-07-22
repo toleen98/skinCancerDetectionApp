@@ -27,7 +27,7 @@ import PatientApmnt from "./src/components/screens/patientApmnt";
 const DrawerNavigator = createDrawerNavigator(
   {
     HomeScreen: {
-      screen: Login,
+      screen: Signup,
       navigationOptions: ({ navigation }) => ({
         title: "Home",
         drawerIcon: ({ tintColor }) => (
@@ -36,7 +36,7 @@ const DrawerNavigator = createDrawerNavigator(
       }),
     },
     ProfileScreen: {
-      screen: ProfileScreen,
+      screen: Login,
       navigationOptions: {
         title: "Profile",
         drawerIcon: ({ tintColor }) => (
