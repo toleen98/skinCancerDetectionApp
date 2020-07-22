@@ -12,6 +12,7 @@
     "@hapi/joi": "^15.0.3",
     "@react-native-community/datetimepicker": "^2.4.0",
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/native": "^5.7.1",
     "@react-navigation/stack": "^5.7.0",
     "axios": "^0.19.2",
     "bcrypt": "^5.0.0",
@@ -37,11 +38,14 @@
     "react-native-modal-datetime-picker": "^8.7.1",
     "react-native-paper": "^4.0.0",
     "react-native-reanimated": "^1.9.0",
+    "react-native-router-flux": "^4.2.0",
     "react-native-screens": "^2.9.0",
     "react-native-simple-time-picker": "^0.2.0",
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.4.0",
-    "react-navigation-drawer": "^2.5.0"
+    "react-navigation-drawer": "^2.5.0",
+    "react-navigation-stack": "^2.8.2",
+    "react-router-native": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

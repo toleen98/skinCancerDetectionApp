@@ -10,20 +10,22 @@ import {
 } from 'galio-framework';
 import theme from '../../theme';
 import axios from 'axios';
+import MyDatePicker from './bookAppointment.js'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Scene, Router, Actions, Stack } from 'react-native-router-flux'; // 4.0.0-beta.28
 
 
 const { width } = Dimensions.get('screen');
 
 export default class Cards extends React.Component {
     state = {
-        doctors:[],
-        status: ""
-        
+        doctors:[],        
     }
 
     async componentDidMount() {
         
-        var url = 'http://192.168.127.67:8080/api/users/doctors';
+        var url = 'http://172.16.0.191:8080/api/users/doctors';
         var that = this
         await axios.get(url)
             .then(function (res) {
@@ -42,8 +44,7 @@ export default class Cards extends React.Component {
           {
             text: "Book Apponintment",
             onPress: async () => {
-              console.log(1)
-
+            Actions.push('MyDatePicker')
             },
           },
           {
@@ -55,20 +56,20 @@ export default class Cards extends React.Component {
     }
   render() {
     const cards = this.state.doctors;
-    console.log(cards)
+    const { navigation } = this.props;
+
 
     return (
      
-      <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE,  marginTop: theme.SIZES.BASE * 7  }}>
+      <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE,  marginTop: theme.SIZES.BASE * 3 }}>
        
         <ScrollView contentContainerStyle={styles.cards}>
           <Block flex space="between" >
             {cards && cards.map((card) => (
                 
-              < TouchableNativeFeedback onPress = {this.bookAppont.bind(this, card._id, card.phoneNumber, card.email)}>
+              < TouchableNativeFeedback key= {`card-${card._id}`} onPress = {this.bookAppont.bind(this, card._id, card.phoneNumber, card.email)}>
               <Card 
-                key= {`card-${card._id}`}
-                flex 
+                flex = {5}
                 borderless
                 shadowColor={theme.COLORS.BLUE}
                 titleColor={card.full ? theme.COLORS.BLUE : null}

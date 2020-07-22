@@ -13,7 +13,8 @@ import Header from "../common/header";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import TimePicker from "react-native-simple-time-picker";
-export default class MyDatePicker extends React.Component {
+
+class MyDatePicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -121,6 +122,7 @@ export default class MyDatePicker extends React.Component {
   }
 }
 
+export default  MyDatePicker;
 const styles = StyleSheet.create({
   container: {
     flex: -5,
