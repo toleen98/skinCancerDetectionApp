@@ -23,6 +23,7 @@ import Signup from "./src/components/screens/signupPa";
 import PatientUpdate from "./src/components/screens/patientUpdate";
 import Login from "./src/components/screens/login";
 import PatientApmnt from "./src/components/screens/patientApmnt";
+import PatientRep from "./src/components/screens/patientRep";
 
 const DrawerNavigator = createDrawerNavigator(
   {
@@ -54,7 +55,7 @@ const DrawerNavigator = createDrawerNavigator(
       },
     },
     ReportScreen: {
-      screen: ReportScreen,
+      screen: PatientRep,
       navigationOptions: {
         title: "My Report",
         drawerIcon: ({ tintColor }) => (

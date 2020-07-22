@@ -75,20 +75,24 @@ const cards = [
 ];
 
 export default class PatientApmnt extends React.Component {
-  state = {
+  constructor(props) {
+    super(props);
+ this.state = {
     apntInfo: [],
     userId: "",
-  };
-
+  }
+  }
   componentDidMount() {
     
   AsyncStorage.getItem("access_token").then(function (data) {
       console.log("hi from apmn");
       console.log(data);
-      this.state.userId = data
+      // this.setState({userId : data})
+      // this.state.userId = data
     });
+
 console.log("hi")
-console.log(this.state.userId)
+// console.log(this.state.userId)
    
    
     axios
