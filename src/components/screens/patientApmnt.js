@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
-//import AsyncStorage from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
+// import AsyncStorage from "react-native";
 // Galio components
 import { Card, Block, NavBar, Icon } from "galio-framework";
 import theme from "../../theme";
@@ -81,53 +81,13 @@ export default class PatientApmnt extends React.Component {
   };
 
   componentDidMount() {
-    // getUserId = async () => {
-    //   try {
-    //  localStorageId =  AsyncStorage.getItem("userId") || "none";
-    //   } catch (error) {
-    //     // Error retrieving data
-    //     console.log("hi from err")
-    //     console.log(error.message);
-    //   }
-    //   console.log("yasmeen")
-    //    console.log(localStorageId);
-    //   return localStorageId;
-    // };
-    // console.log(localStorageId)
-
-    getData = () => {
-      AsyncStorage.getItem("userId")
-        .then((id) => {
-          console.log("h");
-          console.log(id);
-        })
-        .catch((e) => console.log(e));
-    };
-    var x = getData();
-
-    //  retrieveData =  async () => {
-    //       try {
-    //         const id = await AsyncStorage.getItem("userId")
-
-    //         if (id !== null) {
-    //           this.state.userId = id
-    //           console.log(id)
-    //           return id
-    //         }
-    //       } catch (e) {
-    //         alert('Failed to load name.')
-    //         console.log(e)
-    //         return id
-    //       }
-    //     }
-    //     var x =  retrieveData()
-    //     console.log(x)
-    console.log("before");
+    AsyncStorage.getItem("access_token").then(function (data) {
+      console.log(data);
+    });
     axios
       .get("http://192.168.1.75:8080/patient/appointments")
       .then((response) => {
         this.setState({ apntInfo: response.data });
-        console.log("axios");
         console.log(response.data);
         // console.log(this.state.userId);
       })
