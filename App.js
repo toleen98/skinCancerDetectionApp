@@ -1,11 +1,12 @@
-
-
 import React from "react";
 import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { Dimensions } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from '@expo/vector-icons'; 
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Test from "./src/components/test"
 
 import {
   HomeScreen,
@@ -15,17 +16,20 @@ import {
   AboutUsScreen,
   HelpScreen,
   SettingsScreen,
-  LogoutScreen
+  LogoutScreen,
 } from "./src/components/screens";
 import HomePatient from './src/components/screens/homePatient'
 import Sidebar from './src/components/common/sideBar';
 import Header from './src/components/common/header';
-
+import MyDatePicker from './src/components/screens/bookAppointment';
+import Signup from './src/components/screens/signupPa';
+import Cards from './src/components/screens/viewDoctors'
+import PatientUpdate from './src/components/screens/patientUpdate';
 
 
 const DrawerNavigator = createDrawerNavigator({
   HomeScreen :{
-      screen:HomePatient,
+      screen:Test,
       navigationOptions: ({ navigation }) => ({     
         title :'Home',
         drawerIcon :({tintColor}) =><Feather name='home' size={16} color={tintColor}/>
@@ -41,7 +45,7 @@ const DrawerNavigator = createDrawerNavigator({
     }
   },
   AppointmentsScreen :{
-    screen:AppointmentsScreen,
+    screen:MyDatePicker,
     navigationOptions : {
       title :'Appointments',
       drawerIcon :({tintColor}) =><MaterialIcons name="date-range" size={16} color={tintColor} />
@@ -76,7 +80,7 @@ const DrawerNavigator = createDrawerNavigator({
     }
   },
   LogoutScreen :{
-      screen:LogoutScreen,
+      screen:Test,
     navigationOptions : {
       title :'Logout',
       drawerIcon :({tintColor}) =><MaterialIcons name="exit-to-app" size={16} color={tintColor} />
@@ -85,5 +89,6 @@ const DrawerNavigator = createDrawerNavigator({
 },{
   contentComponent: props => <Sidebar {...props}/>
 });
+
 
 export default createAppContainer(DrawerNavigator);

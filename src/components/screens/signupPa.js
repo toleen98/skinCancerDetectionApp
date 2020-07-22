@@ -33,7 +33,7 @@ class Signup extends React.Component {
   }
 
   submit = () => {
-    var url = 'http://192.168.1.108:8080/api/user/patient/signup';
+    var url = 'http:// 192.168.127.67:8080/api/user/patient/signup';
     axios.post(url,this.state)
     .then(function (response) {
       console.log(response);
@@ -50,7 +50,10 @@ class Signup extends React.Component {
 
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
-      
+        <Block>
+          
+          
+        </Block>
       <KeyboardAvoidingView style={styles.container} behavior="height" enabled>
         <Block
           flex
