@@ -8,22 +8,25 @@ import { Card, Block, NavBar, Icon } from "galio-framework";
 import theme from "../../theme";
 import AsyncStorage from "@react-native-community/async-storage";
 const { width } = Dimensions.get("screen");
-const card = {
+
+const card= {
   id: 1,
   avatar: "http://i.pravatar.cc/100",
 };
+
+var report = {
+  "firstName" : "yaso",
+  "lastName" : "",
+}
 function Report() {
-  // const { navigation } = this.props;
-  // blood: '',
-  // height: '',
-  // weigh : '',
+  
 
   const state = {
-    reports: [],
     userId: "",
   };
-
-  useEffect(() => {
+    
+  
+useEffect(() => {
     AsyncStorage.getItem("access_token")
       .then(function (data) {
         console.log("hi from apmn");
@@ -37,17 +40,15 @@ function Report() {
               data: { id: state.userId },
             },
           })
-          .then(function () {
-              axios
-            .get("http://192.168.1.75:8080/patientReport")
-            .then((response) => {
-              this.setState({ reports: response.data });
-              console.log("back")
-              console.log(response.data)
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          .then((res) => {
+            console.log("hi")
+            console.log(res.data)
+             //card.report.push(res.data)
+            // console.log(card.report[0])
+              report["firstName"] = res.data.firstName
+              report["lastName"] = res.data.lastName
+              console.log(report.firstName)
+
           })
           .catch((err) => console.log("err"));
       });
@@ -55,42 +56,27 @@ function Report() {
 
   return (
     <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
-      {/* <NavBar
-      title="Cards"
-      left={(
-        <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <Icon 
-            name="menu"
-            family="feather"
-            size={theme.SIZES.BASE}
-            color={theme.COLORS.ICON}
-          />
-        </TouchableOpacity>
-      )}
-      style={Platform.OS === 'android' ? { marginTop: theme.SIZES.BASE } : null}
-    /> */}
       <ScrollView contentContainerStyle={styles.cards}>
         <Block flex space="between">
           {/* {cards && cards.map((card, id) => ( */}
           <Card
-            flex
+            flex 
             borderless
             shadowColor={theme.COLORS.BLACK}
-            titleColor={card.full ? theme.COLORS.WHITE : null}
             style={styles.card}
-            // title={reports.firstName + " " + reports.lastName}
-            name
+            //title={card.report[0].firstName + " " + card.report[0].lastName}
+            title = {JSON.stringify(report.firstName)}
             caption={
-              //   "\n" +
-              //   "Blood type  " +
-              //   reports.blood +
-              //   "\n" +
-              //   "Height  " +
-              //   reports.height +
-              //   "\n" +
-              //   "Weight  " +
-              //   reports.weight
-              "Blood : A"
+                // "\n" +    
+                // "Blood type  " +
+                // state.report[0].blood +
+                // "\n" +
+                // "Height  " +
+                // state.report[0].height +
+                // "\n" +
+                // "Weight  " +
+                // rstate.report[0].weight
+                "blood"
             }
             avatar={`${card.avatar}`}
             footerStyle={card.full ? styles.full : null}
@@ -102,12 +88,12 @@ function Report() {
               />
             ) : null}
           </Card>
-          {/* ))} */}
+         {/* ))}   */}
         </Block>
       </ScrollView>
     </Block>
   );
-}
+}   
 const styles = StyleSheet.create({
   cards: {
     width,
