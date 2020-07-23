@@ -51,6 +51,7 @@ class MyDatePicker extends React.Component {
   };
 
   render() {
+    console.log(this.props.id)
     return (
       <View>
         <Header drawer={this.props} />

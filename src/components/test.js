@@ -10,8 +10,8 @@ import Cards from './screens/viewDoctors'
 export default class Test extends Component {
   render() {
     return (
-      <Router>
-        <Stack>
+      <Router >
+        <Stack  hideNavBar={true}>
           <Scene key="Cards" component={Cards} />
           <Scene key="MyDatePicker" component={MyDatePicker} />
         </Stack>
