@@ -18,7 +18,7 @@ import { set } from "mongoose";
 import MyDatePicker from "./bookAppointment";
 const { height, width } = Dimensions.get("window");
 import { NavigationActions } from "react-navigation";
-//import { createStackNavigator } from "@react-navigation/stack";
+// import { createStackNavigator } from "@react-navigation/stack";
 
 import Header from "../common/header";
 function Login(props) {
@@ -65,15 +65,15 @@ function Login(props) {
 
   // 	action: NavigationActions.navigate({ routeName: 'MyDatePicker' }),
   //   });
-//   const MapsStack = createStackNavigator({
-//     MyDatePicker: {
-//       screen: MyDatePicker,
-//       navigationOptions: ({ navigation }) => ({
-//         header: <Header navigation={navigation} />,
-//         headerTransparent: true,
-//       }),
-//     },
-//   });
+  //   const MapsStack = createStackNavigator({
+  //     MyDatePicker: {
+  //       screen: MyDatePicker,
+  //       navigationOptions: ({ navigation }) => ({
+  //         header: <Header navigation={navigation} />,
+  //         headerTransparent: true,
+  //       }),
+  //     },
+  //   });
 
   return (
     <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
@@ -132,8 +132,8 @@ function Login(props) {
               color={"#18DCFF"}
               style={{ width: width * 0.9 }}
               //onPress={() => navigation.navigate.push("MyDatePicker")}
-
-              // onPress={() => this.props.navigation.navigate({compnent:MyDatePicker})}
+							
+              //   onPress={() => props.navigation.navigate('MyDatePicker')}
             >
               Sign in
             </Button>

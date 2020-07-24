@@ -1,12 +1,14 @@
+import 'react-native-gesture-handler';
 import React from "react";
 import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { Dimensions } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from '@expo/vector-icons'; 
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Test from "./src/components/test"
+import { Fontisto } from '@expo/vector-icons';
+//import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
+
 
 import {
   HomeScreen,
@@ -23,16 +25,16 @@ import Sidebar from './src/components/common/sideBar';
 import Header from './src/components/common/header';
 import MyDatePicker from './src/components/screens/bookAppointment';
 import Signup from './src/components/screens/signupPa';
-import Cards from './src/components/screens/viewDoctors'
+import Cards from './src/components/screens/viewDoctorsCards'
 import PatientUpdate from './src/components/screens/patientUpdate';
 import Login from './src/components/screens/login';
+import ViewDoctor from './src/components/screens/viewDoctor';
 
+// DrawerNavigatorExample
 
-
-
-const DrawerNavigator = createDrawerNavigator({
+const DrawerNavigatorExample = createDrawerNavigator({
   HomeScreen :{
-      screen:Test,
+      screen:HomePatient,
       navigationOptions: ({ navigation }) => ({     
         title :'Home',
         drawerIcon :({tintColor}) =><Feather name='home' size={16} color={tintColor}/>
@@ -47,6 +49,15 @@ const DrawerNavigator = createDrawerNavigator({
       drawerIcon :({tintColor}) =><Feather name='user' size={16} color={tintColor}/>
     }
   },
+  DoctorsScreen :{
+    screen:ViewDoctor,
+    navigationOptions: ({ navigation }) => ({     
+      title :'Doctors',
+      drawerIcon :({tintColor}) =><Fontisto name="doctor" size={16} color={tintColor} />
+    })
+ 
+    
+},
   AppointmentsScreen :{
     screen:AppointmentsScreen,
     navigationOptions : {
@@ -83,7 +94,7 @@ const DrawerNavigator = createDrawerNavigator({
     }
   },
   LogoutScreen :{
-      screen:Test,
+      screen:LogoutScreen,
     navigationOptions : {
       title :'Logout',
       drawerIcon :({tintColor}) =><MaterialIcons name="exit-to-app" size={16} color={tintColor} />
@@ -94,4 +105,5 @@ const DrawerNavigator = createDrawerNavigator({
 });
 
 
-export default createAppContainer(DrawerNavigator);
+// export default createAppContainer(DrawerNavigator);
+export default createAppContainer(DrawerNavigatorExample)
