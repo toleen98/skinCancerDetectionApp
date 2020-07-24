@@ -7,8 +7,17 @@ import {
   Platform,
   View,
 } from "react-native";
-// galio component
-import { Block, Button, Input, NavBar, Text } from "galio-framework";
+import {
+  Block, Button, Input, NavBar, Text,
+} from 'galio-framework';
+
+import theme from '../../theme';
+import {Image} from 'react-native';
+import axios from 'axios';
+import  { useState } from 'react';
+import { set } from 'mongoose';
+
+const { height, width } = Dimensions.get('window');
 
 import theme from "../../theme";
 import { Image } from "react-native";
