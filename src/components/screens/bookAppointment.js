@@ -1,5 +1,7 @@
 import React from "react";
 import DatePicker from "react-native-datepicker";
+import AsyncStorage from '@react-native-community/async-storage';
+
 import {
   AppRegistry,
   StyleSheet,
@@ -24,11 +26,26 @@ class MyDatePicker extends React.Component {
       selectedHours: 0,
       selectedMinutes: 0,
       text: " ",
+      Dr_id:""
     };
     this.showDatePicker = this.showDatePicker.bind(this);
     this.hideDatePicker = this.hideDatePicker.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
   }
+
+  async componentDidMount() {
+        
+   var that = this;
+      try {
+        const jsonValue = await AsyncStorage.getItem('Dr_id')
+        console.log(jsonValue)
+        that.setState({Dr_id :jsonValue }) 
+      } catch(e) {
+        // error reading value
+      }
+  
+}
+
 
   showDatePicker = () => {
     this.setState({
@@ -51,6 +68,8 @@ class MyDatePicker extends React.Component {
   };
 
   render() {
+    console.log(this.state.Dr_id)
+
     return (
       <View>
         <Header drawer={this.props} />

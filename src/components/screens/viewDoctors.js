@@ -3,6 +3,8 @@ import {
     Alert,ScrollView, StyleSheet, Dimensions, Platform, TouchableOpacity, TouchableNativeFeedback
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import AsyncStorage from '@react-native-community/async-storage';
+
 
 // Galio components
 import {
@@ -25,7 +27,7 @@ export default class Cards extends React.Component {
 
     async componentDidMount() {
         
-        var url = 'http://172.16.0.191:8080/api/users/doctors';
+        var url = 'http://192.168.1.114:8080/api/users/doctors';
         var that = this
         await axios.get(url)
             .then(function (res) {
@@ -37,9 +39,18 @@ export default class Cards extends React.Component {
             });
     }
 
-    bookAppont = (id, phoneNumber, email) => {
+    bookAppont = async (id) => {
+     
+        try {
+          const jsonValue = JSON.stringify(id)
+          await AsyncStorage.setItem('Dr_id', jsonValue)
+        } catch (e) {
+          console.log(e)
+        }
+      
+     
         Alert.alert("Details",
-        "Phone number: " + phoneNumber +"\n" +"email: " + email ,
+        "Do you want to book an apponintment ?" ,
         [
           {
             text: "Book Apponintment",
@@ -61,8 +72,7 @@ export default class Cards extends React.Component {
 
     return (
      
-      <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE,  marginTop: theme.SIZES.BASE * 3 }}>
-       
+      <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE,  marginTop: theme.SIZES.BASE * 5}}>
         <ScrollView contentContainerStyle={styles.cards}>
           <Block flex space="between" >
             {cards && cards.map((card) => (
@@ -71,11 +81,12 @@ export default class Cards extends React.Component {
               <Card 
                 flex = {5}
                 borderless
-                shadowColor={theme.COLORS.BLUE}
-                titleColor={card.full ? theme.COLORS.BLUE : null}
+                shadowColor={theme.COLORS.TWITTER}
+                titleColor={theme.COLORS.WHITE}
                 style={styles.card}
-                title={card.firstName + " " +card.lastName}
-                caption={"Working hours: " +card.workingFrom +" To " + card.workingTo+"\n Location: " + card.clinicLocation}
+                title={(card.firstName + " " +card.lastName).toUpperCase()}
+                caption={"Email: "+card.email+"\n"+"Phone Number:"+card.phoneNumber+"\n"+"Working hours: " +card.workingFrom +" To " + card.workingTo+"\nLocation: " + card.clinicLocation}
+                captionColor ={theme.COLORS.WHITE}
                 avatar={`${card.profileImage}?${card._id}`}
                 imageStyle={[card.padded ? styles.rounded : null]}
                 imageBlockStyle={[

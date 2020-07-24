@@ -6,7 +6,8 @@ import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Test from "./src/components/test"
+import Test from "./src/components/test";
+import Logout from "./src/components/screens/logOut";
 
 import {
   HomeScreen,
@@ -80,7 +81,7 @@ const DrawerNavigator = createDrawerNavigator({
     }
   },
   LogoutScreen :{
-      screen:Test,
+      screen:Logout,
     navigationOptions : {
       title :'Logout',
       drawerIcon :({tintColor}) =><MaterialIcons name="exit-to-app" size={16} color={tintColor} />
