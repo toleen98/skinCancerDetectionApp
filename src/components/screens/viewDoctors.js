@@ -3,7 +3,8 @@ import {
     Alert,ScrollView, StyleSheet, Dimensions, Platform, TouchableOpacity, TouchableNativeFeedback
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Fontisto } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-community/async-storage';
+
 
 // Galio components
 import {
@@ -26,7 +27,7 @@ export default class Cards extends React.Component {
 
     async componentDidMount() {
         
-        var url = 'http://192.168.127.67:8080/api/users/doctors';
+        var url = 'http://192.168.1.114:8080/api/users/doctors';
         var that = this
         await axios.get(url)
             .then(function (res) {
@@ -38,7 +39,15 @@ export default class Cards extends React.Component {
             });
     }
 
-    bookAppont = (id) => {
+    bookAppont = async (id) => {
+     
+        try {
+          const jsonValue = JSON.stringify(id)
+          await AsyncStorage.setItem('Dr_id', jsonValue)
+        } catch (e) {
+          console.log(e)
+        }
+      
      
         Alert.alert("Details",
         "Do you want to book an apponintment ?" ,
