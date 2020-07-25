@@ -11,14 +11,12 @@ router.post('/patient/signup', (req, res) =>{
     // const {error} = regesterVaidationP(req.body)
     // console.log(error)
     // if(error) return res.status(400).send(error.details[0].message);
-    console.log(req.body)
+  
     User.Patient.findOne({ email: req.body.email }).then(user => {
         if (user) {
             return res.status(422).send( "Email already exists" );
         }
-    });
-    
-       // Hash password before saving in database
+        // Hash password before saving in database
        bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(req.body.password, salt, (err, hash) => {
           if (err) throw err;
@@ -29,8 +27,8 @@ router.post('/patient/signup', (req, res) =>{
             email: req.body.email,
             password: hash,
             phoneNumber: req.body.phoneNumber,
-            bloodType: req.body.bloodType,
-            height: req.body.hight,
+            blood: req.body.bloodType,
+            height: req.body.height,
             weight: req.body.weight  
           });
           console.log(newUser);
@@ -41,15 +39,18 @@ router.post('/patient/signup', (req, res) =>{
 
         });
       });
+    });
+    
+       
 })
 
 
 //doctors regestration
 router.post('/doctors/signup', (req, res) =>{
     //validation errors
-    const {error} = regesterVaidationP(req.body)
+    // const {error} = regesterVaidationP(req.body)
 
-    if(error) return res.status(400).send(error.details[0].message);
+    // if(error) return res.status(400).send(error.details[0].message);
 
     User.Doctor.findOne({ email: req.body.email }).then(user => {
         if (user) {
@@ -75,7 +76,7 @@ router.post('/doctors/signup', (req, res) =>{
 
           newUser
             .save()
-            .then(() =>{ return res.status(201).send({user: user._id});})
+            // .then(() =>{ return res.status(201).send({user: user._id});})
             .catch(err => res.send(err));
 
         });
