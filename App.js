@@ -8,7 +8,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 //import { NavigationContainer } from '@react-navigation/native';
 // import { createStackNavigator } from '@react-navigation/stack';
-import Test from "./src/components/test";
+
 import Logout from "./src/components/screens/logOut";
 
 import {
@@ -30,10 +30,19 @@ import Cards from './src/components/screens/viewDoctorsCards'
 import PatientUpdate from './src/components/screens/patientUpdate';
 import Login from './src/components/screens/login';
 import ViewDoctor from './src/components/screens/viewDoctor';
-
+import LoginContainerPatient from './src/components/screens/loginContainerPatient';
 // DrawerNavigatorExample
 
 const DrawerNavigatorExample = createDrawerNavigator({
+  LoginScreen :{
+    screen:LoginContainerPatient,
+    navigationOptions: ({ navigation }) => ({     
+      title :'Login',
+      drawerIcon :({tintColor}) =><Feather name='home' size={16} color={tintColor}/>
+    })
+ 
+    
+},
   HomeScreen :{
       screen:HomePatient,
       navigationOptions: ({ navigation }) => ({     
@@ -44,7 +53,7 @@ const DrawerNavigatorExample = createDrawerNavigator({
       
   },
   ProfileScreen:{
-    screen:Login,
+    screen:PatientUpdate,
     navigationOptions : {
       title :'Profile',
       drawerIcon :({tintColor}) =><Feather name='user' size={16} color={tintColor}/>
@@ -88,9 +97,9 @@ const DrawerNavigatorExample = createDrawerNavigator({
     }
   },
   SettingsScreen :{
-    screen:SettingsScreen,
+    screen:Signup,
     navigationOptions : {
-      title :'Settings',
+      title :'SignUp',
       drawerIcon :({tintColor}) =><MaterialIcons name="settings" size={16} color={tintColor} />
     }
   },

@@ -13,19 +13,13 @@ import {
 
 import theme from '../../theme';
 import {Image} from 'react-native';
-import axios from 'axios';
-import  { useState } from 'react';
-import { set } from 'mongoose';
+import { Scene, Router, Actions, Stack } from 'react-native-router-flux';
 
 const { height, width } = Dimensions.get('window');
 
-import theme from "../../theme";
-import { Image } from "react-native";
 import axios from "axios";
 import { useState } from "react";
 import { set } from "mongoose";
-import MyDatePicker from "./bookAppointment";
-const { height, width } = Dimensions.get("window");
 import { NavigationActions } from "react-navigation";
 // import { createStackNavigator } from "@react-navigation/stack";
 
@@ -53,19 +47,20 @@ function Login(props) {
 
     console.log(props);
 
-    // axios
-    //   .post("http://172.16.0.147:8080/login", user)
-    //   .then((res) => {
-    //     if (res.data === true) {
-    //       alert("Login Successed! ");
-    //     } else if (res.data === false) {
-    //       alert("Login Failed! Wrong password")
-    //     } else if (res.data === "Email not found") {
-    //       alert("Email not found")
-    //     }
-    //   })
-    //   .catch((err) => {throw err}
-    //   );
+    axios
+      .post("http://192.168.127.36:8080/login", user)
+      .then((res) => {
+        if (res.data === true) {
+          alert("Login Successed! ");
+          Actions.push('HomePatient')
+        } else if (res.data === false) {
+          alert("Login Failed! Wrong password")
+        } else if (res.data === "Email not found") {
+          alert("Email not found")
+        }
+      })
+      .catch((err) => {throw err}
+      );
   };
   //   const navigateAction = NavigationActions.navigate({
   // 	routeName: 'MyDatePicker',
@@ -143,6 +138,7 @@ function Login(props) {
               //onPress={() => navigation.navigate.push("MyDatePicker")}
 							
               //   onPress={() => props.navigation.navigate('MyDatePicker')}
+              onPress={onSubmit}
             >
               Sign in
             </Button>
