@@ -7,7 +7,7 @@ import {
   Block, Button, Input, NavBar, Text,
 } from 'galio-framework';
 
-import theme from '../theme';
+import theme from '../../theme';
 import {Image} from 'react-native';
 import axios from 'axios';
 import  { useState } from 'react';
