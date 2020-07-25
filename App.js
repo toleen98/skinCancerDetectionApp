@@ -68,20 +68,20 @@ const DrawerNavigatorExample = createDrawerNavigator({
  
     
 },
-  AppointmentsScreen :{
-    screen:AppointmentsScreen,
-    navigationOptions : {
-      title :'Appointments',
-      drawerIcon :({tintColor}) =><MaterialIcons name="date-range" size={16} color={tintColor} />
-    }
-  },
-  ReportScreen :{
-    screen:ReportScreen,
-    navigationOptions : {
-      title :'My Report',
-      drawerIcon :({tintColor}) =><MaterialIcons name="report" size={16} color={tintColor} />
-    }
-  },
+  // AppointmentsScreen :{
+  //   screen:AppointmentsScreen,
+  //   navigationOptions : {
+  //     title :'Appointments',
+  //     drawerIcon :({tintColor}) =><MaterialIcons name="date-range" size={16} color={tintColor} />
+  //   }
+  // },
+  // ReportScreen :{
+  //   screen:ReportScreen,
+  //   navigationOptions : {
+  //     title :'My Report',
+  //     drawerIcon :({tintColor}) =><MaterialIcons name="report" size={16} color={tintColor} />
+  //   }
+  // },
   AboutUsScreen :{
     screen:AboutUsScreen,
     navigationOptions : {

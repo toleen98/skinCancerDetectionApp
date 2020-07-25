@@ -7,15 +7,13 @@ import {
   Platform,
   View,
 } from "react-native";
-import {
-  Block, Button, Input, NavBar, Text,
-} from 'galio-framework';
+import { Block, Button, Input, NavBar, Text } from "galio-framework";
 
-import theme from '../../theme';
-import {Image} from 'react-native';
-import { Scene, Router, Actions, Stack } from 'react-native-router-flux';
-
-const { height, width } = Dimensions.get('window');
+import theme from "../../theme";
+import { Image } from "react-native";
+import { Scene, Router, Actions, Stack } from "react-native-router-flux";
+import AsyncStorage from "@react-native-community/async-storage";
+const { height, width } = Dimensions.get("window");
 
 import axios from "axios";
 import { useState } from "react";
@@ -45,22 +43,26 @@ function Login(props) {
       password: state.password,
     };
 
-    console.log(props);
+    //console.log(props);
+
+    var id;
 
     axios
       .post("http://192.168.127.36:8080/login", user)
       .then((res) => {
-        if (res.data === true) {
+        console.log(res.data.patient._id);
+        id = res.data.patient._id;
+        AsyncStorage.setItem("access_token", JSON.stringify(id));
+        if (res.data.result === true) {
           alert("Login Successed! ");
-          Actions.push('HomePatient')
+          Actions.push("HomePatient");
         } else if (res.data === false) {
-          alert("Login Failed! Wrong password")
+          alert("Login Failed! Wrong password");
         } else if (res.data === "Email not found") {
-          alert("Email not found")
+          alert("Email not found");
         }
       })
-      .catch((err) => {throw err}
-      );
+      .catch((err) => console.log(err));
   };
   //   const navigateAction = NavigationActions.navigate({
   // 	routeName: 'MyDatePicker',
@@ -136,7 +138,7 @@ function Login(props) {
               color={"#18DCFF"}
               style={{ width: width * 0.9 }}
               //onPress={() => navigation.navigate.push("MyDatePicker")}
-							
+
               //   onPress={() => props.navigation.navigate('MyDatePicker')}
               onPress={onSubmit}
             >
