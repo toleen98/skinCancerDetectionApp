@@ -25,7 +25,7 @@ function Login() {
     state.email = e.nativeEvent.text
 }
 
-  const [password, setPassword] = React.useState('');
+  
 
   function handlePasswordChange(e) {
     state.password = e.nativeEvent.text
@@ -38,13 +38,17 @@ function Login() {
       password: state.password,
     };
 
-    // console.log(user)
-
     
+
+	var id;
+	 
     axios
       .post("http://192.168.1.140:8080/login", user)
       .then((res) => {
-        if (res.data === true) {
+		console.log(res.data.patient._id);
+		id = res.data.patient._id;
+		AsyncStorage.setItem("access_token", JSON.stringify(id));
+        if (res.data.result === true) {
           alert("Login Successed! ");
         } else if (res.data === false) {
           alert("Login Failed! Wrong password")
@@ -52,10 +56,10 @@ function Login() {
           alert("Email not found")
         }
       })
-      .catch((err) => {throw err}
+      .catch((err) => console.log("error!")
       );
   };
-    
+	
 
     return (
         <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
