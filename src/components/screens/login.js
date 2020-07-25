@@ -6,7 +6,7 @@ import {
 import {
   Block, Button, Input, NavBar, Text,
 } from 'galio-framework';
-
+import AsyncStorage from "@react-native-community/async-storage";
 import theme from '../../theme';
 import {Image} from 'react-native';
 import axios from 'axios';
