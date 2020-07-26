@@ -43,6 +43,36 @@ router.post('/doctor/signup', (req, res) =>{
 
         });
       });
-})
+});
 
+//login
+router.post("/doctor/login", function (req, res) {
+    const email = req.body.email;
+    const password = req.body.password;
+    console.log(password)
+    User.Doctor.findOne({ email: email }).then((dr) => {
+      console.log(dr)
+      if (!dr) {
+        return res.send("Email not found");
+      }
+      bcrypt.compare(password, dr.password, function (err, result) {
+        
+        if (err) {
+          return res.send(err);
+        }else if (result === true) {
+     
+          var doctor = {
+            doctor: dr,
+            result: result,
+          };
+          
+          return res.send(doctor);
+        }else if (result === false) {
+        
+          return res.send(result);
+        }
+      });
+    });
+  });
+  
 module.exports = router;
