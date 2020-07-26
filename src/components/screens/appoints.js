@@ -85,7 +85,7 @@ class Appointments extends React.Component {
                 {this.state.appoints &&
                     this.state.appoints.map((appoint, id) => (
                     <Card
-                      key={`card-${appoint._id}`}
+                    //   key={`card-${appoint._id}`}
                       flex
                       borderless
                       shadowColor={theme.COLORS.BLACK}
