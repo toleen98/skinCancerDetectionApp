@@ -8,6 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Test from "./src/components/test";
 import Logout from "./src/components/screens/logOut";
+import Login from "./src/components/screens/login"
 
 import {
   HomeScreen,
@@ -23,9 +24,12 @@ import HomePatient from './src/components/screens/homePatient'
 import Sidebar from './src/components/common/sideBar';
 import Header from './src/components/common/header';
 import MyDatePicker from './src/components/screens/bookAppointment';
-import Signup from './src/components/screens/signupPa';
+// import Signup from './src/components/screens/signupPa';
 import Cards from './src/components/screens/viewDoctors'
 import PatientUpdate from './src/components/screens/patientUpdate';
+import Appointments from './src/components/screens/appoints'
+import Signup from './src/components/Dr_screens/signup'
+
 
 
 const DrawerNavigator = createDrawerNavigator({
