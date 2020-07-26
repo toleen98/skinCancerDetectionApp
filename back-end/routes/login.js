@@ -14,7 +14,11 @@ router.post("/login", function (req, res) {
         if (err) {
           return res.send(err);
         }else if (result === true) {
-          return res.send(result);
+          var pat = {
+            patient: patient,
+            result: result,
+          };
+          return res.send(pat);
         }else if (result === false) {
           return res.send(result);
         }
@@ -22,3 +26,16 @@ router.post("/login", function (req, res) {
     });
   });
   module.exports = router;
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
