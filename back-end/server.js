@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
   res.send("Welcome!");
 });
 
-app.use("/api/users/", doctors);
+app.use("/api/user/", doctors);
 app.use("/api/user", auth);
 app.use("", appoints);
 // app.use("/api/profile", patientupdate)
