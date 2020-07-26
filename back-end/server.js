@@ -15,7 +15,7 @@ const port = process.env.PORT || 8080;
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  console.log('I am here')
+  console.log("I am here");
   res.send("Welcome!");
 });
 
