@@ -1,19 +1,5 @@
 import React from "react";
 import {
-<<<<<<< HEAD
-  Alert, Dimensions, KeyboardAvoidingView, StyleSheet, Platform, View,
-} from 'react-native';
-// galio component
-import {
-  Block, Button, Input, NavBar, Text,
-} from 'galio-framework';
-import AsyncStorage from "@react-native-community/async-storage";
-import theme from '../../theme';
-import {Image} from 'react-native';
-import axios from 'axios';
-import  { useState } from 'react';
-import { set } from 'mongoose';
-=======
   Alert,
   Dimensions,
   KeyboardAvoidingView,
@@ -22,7 +8,6 @@ import { set } from 'mongoose';
   View,
 } from "react-native";
 import { Block, Button, Input, NavBar, Text } from "galio-framework";
->>>>>>> 09af3863ce94521265809bba41e4764f8befff9d
 
 import theme from "../../theme";
 import { Image } from "react-native";
