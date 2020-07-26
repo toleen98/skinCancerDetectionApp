@@ -22,8 +22,8 @@ import Header from "./src/components/common/header";
 import Signup from "./src/components/screens/signupPa";
 import PatientUpdate from "./src/components/screens/patientUpdate";
 import Login from "./src/components/screens/login";
-import PatientApmnt from "./src/components/screens/patientApmnt";
-import PatientRep from "./src/components/screens/patientRep";
+// import Appointments from "./src/components/screens/patientApmnt";
+import AboutUs from "./src/components/screens/aboutUs";
 
 const DrawerNavigator = createDrawerNavigator(
   {
@@ -46,7 +46,7 @@ const DrawerNavigator = createDrawerNavigator(
       },
     },
     AppointmentsScreen: {
-      screen: PatientApmnt,
+      screen: AppointmentsScreen,
       navigationOptions: {
         title: "Appointments",
         drawerIcon: ({ tintColor }) => (
@@ -55,7 +55,7 @@ const DrawerNavigator = createDrawerNavigator(
       },
     },
     ReportScreen: {
-      screen: PatientRep,
+      screen: ReportScreen,
       navigationOptions: {
         title: "My Report",
         drawerIcon: ({ tintColor }) => (
@@ -64,7 +64,7 @@ const DrawerNavigator = createDrawerNavigator(
       },
     },
     AboutUsScreen: {
-      screen: AboutUsScreen,
+      screen: AboutUs,
       navigationOptions: {
         title: "About Us",
         drawerIcon: ({ tintColor }) => (
