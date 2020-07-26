@@ -7,21 +7,22 @@ import {
   Platform,
   View,
 } from "react-native";
-//import AsyncStorage from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
-
-// galio component
 import { Block, Button, Input, NavBar, Text } from "galio-framework";
 
 import theme from "../../theme";
 import { Image } from "react-native";
+import { Scene, Router, Actions, Stack } from "react-native-router-flux";
+import AsyncStorage from "@react-native-community/async-storage";
+const { height, width } = Dimensions.get("window");
+
 import axios from "axios";
 import { useState } from "react";
 import { set } from "mongoose";
+import { NavigationActions } from "react-navigation";
+// import { createStackNavigator } from "@react-navigation/stack";
 
-const { height, width } = Dimensions.get("window");
-
-function Login() {
+import Header from "../common/header";
+function Login(props) {
   const state = {
     email: "",
     password: "",
@@ -42,29 +43,43 @@ function Login() {
       password: state.password,
     };
 
-     var id;
-   
-    // AsyncStorage.setItem("access_token", JSON.stringify(id));
+    //console.log(props);
+
+    var id;
 
     axios
-      .post("http://192.168.1.75:8080/login", user)
+      .post("http://192.168.127.36:8080/login", user)
       .then((res) => {
         console.log(res.data.patient._id);
-         id = res.data.patient._id;
-         AsyncStorage.setItem("access_token", JSON.stringify(id));
+        id = res.data.patient._id;
+        AsyncStorage.setItem("access_token", JSON.stringify(id));
         if (res.data.result === true) {
           alert("Login Successed! ");
-          //console.log(res.data);
+          Actions.push("HomePatient");
         } else if (res.data === false) {
           alert("Login Failed! Wrong password");
         } else if (res.data === "Email not found") {
           alert("Email not found");
         }
       })
-      .catch((err) => console.log("err"));
-    //  console.log("hi");
-    //  console.log(id);
+      .catch((err) => console.log(err));
   };
+  //   const navigateAction = NavigationActions.navigate({
+  // 	routeName: 'MyDatePicker',
+
+  // 	params: {},
+
+  // 	action: NavigationActions.navigate({ routeName: 'MyDatePicker' }),
+  //   });
+  //   const MapsStack = createStackNavigator({
+  //     MyDatePicker: {
+  //       screen: MyDatePicker,
+  //       navigationOptions: ({ navigation }) => ({
+  //         header: <Header navigation={navigation} />,
+  //         headerTransparent: true,
+  //       }),
+  //     },
+  //   });
 
   return (
     <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
@@ -122,6 +137,9 @@ function Login() {
               round
               color={"#18DCFF"}
               style={{ width: width * 0.9 }}
+              //onPress={() => navigation.navigate.push("MyDatePicker")}
+
+              //   onPress={() => props.navigation.navigate('MyDatePicker')}
               onPress={onSubmit}
             >
               Sign in

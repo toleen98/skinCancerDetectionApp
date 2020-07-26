@@ -22,7 +22,20 @@ router.post("/login", function (req, res) {
       } else if (result === false) {
         return res.send(result);
       }
+      bcrypt.compare(password, patient.password, function (err, result) {
+        if (err) {
+          return res.send(err);
+        }else if (result === true) {
+          var pat = {
+            patient: patient,
+            result: result,
+          };
+          return res.send(pat);
+        }else if (result === false) {
+          return res.send(result);
+        }
+      });
     });
   });
 });
-module.exports = router;
+  module.exports = router;
