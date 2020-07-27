@@ -4,8 +4,6 @@ import {
   ScrollView,
   StyleSheet,
   Dimensions,
-  Platform,
-  TouchableOpacity,
   TouchableNativeFeedback,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -13,11 +11,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { Card, Block, NavBar, Icon, Text } from "galio-framework";
 import theme from "../../theme";
 import axios from "axios";
-import MyDatePicker from "./bookAppointment.js";
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createStackNavigator } from '@react-navigation/stack';
-import { Scene, Router, Actions, Stack } from "react-native-router-flux"; // 4.0.0-beta.28
-import Header from "../common/header";
+import { Actions } from "react-native-router-flux";
 
 const { width } = Dimensions.get("screen");
 
@@ -65,10 +59,10 @@ export default class Cards extends React.Component {
   render() {
     const cards = this.state.doctors;
     const { navigation } = this.props;
+  
 
     return (
       <Block>
-        {/* <Header drawer={this.props.nav} /> */}
         <Block
           safe
           style={{

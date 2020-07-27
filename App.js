@@ -31,7 +31,8 @@ import PatientUpdate from "./src/components/screens/patientUpdate";
 import Login from "./src/components/screens/login";
 import ViewDoctor from "./src/components/screens/viewDoctor";
 import LoginContainerPatient from "./src/components/screens/loginContainerPatient";
-import Appointments from "./src/components/screens/patientApmnt";
+import Appointments from "./src/components/screens/patientApmnt"; 
+import AboutUs from "./src/components/screens/aboutUs";
 // DrawerNavigatorExample
 
 const DrawerNavigatorExample = createDrawerNavigator(
@@ -89,7 +90,7 @@ const DrawerNavigatorExample = createDrawerNavigator(
     //   }
     // },
     AboutUsScreen: {
-      screen: AboutUsScreen,
+      screen: AboutUs,
       navigationOptions: {
         title: "About Us",
         drawerIcon: ({ tintColor }) => (
@@ -98,7 +99,7 @@ const DrawerNavigatorExample = createDrawerNavigator(
       },
     },
     HelpScreen: {
-      screen: HelpScreen,
+      screen: Cards,
       navigationOptions: {
         title: "Help",
         drawerIcon: ({ tintColor }) => (
