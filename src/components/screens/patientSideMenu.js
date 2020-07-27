@@ -14,7 +14,8 @@ import HomePatient from "./homePatient";
 import PatientUpdate from "./patientUpdate";
 import ViewDoctor from "./viewDoctor"
 import Logout from "./logOut";
-/// the new code for the navigation 
+import AboutUs from "./aboutUs";
+import Help from "./help";
 
 const DrwerNavigator = createDrawerNavigator()
 const Stack = createStackNavigator();
@@ -28,8 +29,8 @@ function Drwer (props) {
        <DrwerNavigator.Screen  name="Doctors" component={ViewDoctor}/>
        <DrwerNavigator.Screen  name="Appointments" component={HomePatient}/>
        <DrwerNavigator.Screen  name="My Report" component={HomePatient}/>
-       <DrwerNavigator.Screen  name="Help" component={HomePatient}/>
-       <DrwerNavigator.Screen  name="AboutUs" component={HomePatient}/>
+       <DrwerNavigator.Screen  name="Help" component={Help}/>
+       <DrwerNavigator.Screen  name="AboutUs" component={AboutUs}/>
        <DrwerNavigator.Screen  name="Logout" component={Logout}/>
      </DrwerNavigator.Navigator>
    </NavigationContainer>

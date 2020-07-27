@@ -7,8 +7,8 @@ router.post("/bookappointment", (req, res) => {
     date: req.body.date,
     time: req.body.time,
     discription: req.body.discription,
-    doctorId: "5f1acb00dc35660d70861fda",
-    patientId: "5f16ac53082a493570770a1d",
+    doctorId: req.body.doctorId,
+    patientId: req.body.patientId,
   });
   newApointment
     .save()

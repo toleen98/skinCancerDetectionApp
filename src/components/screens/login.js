@@ -44,26 +44,25 @@ function Login(props) {
     };
 
     console.log(props);
-       alert("Login Successed! ");
-          Actions.push("Home");
+      
     // var id;
 
-    // axios
-    //   .post("http://192.168.127.36:8080/login", user)
-    //   .then((res) => {
-    //     console.log(res.data.patient._id);
-    //     id = res.data.patient._id;
-    //     AsyncStorage.setItem("access_token", JSON.stringify(id));
-    //     if (res.data.result === true) {
-    //       alert("Login Successed! ");
-    //       Actions.push("HomePatient");
-    //     } else if (res.data === false) {
-    //       alert("Login Failed! Wrong password");
-    //     } else if (res.data === "Email not found") {
-    //       alert("Email not found");
-    //     }
-    //   })
-    //   .catch((err) => console.log(err));
+    axios
+      .post("http://192.168.127.36:8080/login", user)
+      .then((res) => {
+        console.log(res.data.patient._id);
+        id = res.data.patient._id;
+        AsyncStorage.setItem("access_token", JSON.stringify(id));
+        if (res.data.result === true) {
+          alert("Login Successed! ");
+          Actions.push("Home");
+        } else if (res.data === false) {
+          alert("Login Failed! Wrong password");
+        } else if (res.data === "Email not found") {
+          alert("Email not found");
+        }
+      })
+      .catch((err) => console.log(err));
   };
   //   const navigateAction = NavigationActions.navigate({
   // 	routeName: 'MyDatePicker',

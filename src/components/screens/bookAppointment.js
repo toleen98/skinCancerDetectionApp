@@ -26,8 +26,8 @@ class MyDatePicker extends React.Component {
       selectedHours: 0,
       selectedMinutes: 0,
       text: " ",
-      Dr_id: "",
-      patientId:""
+      dr_id: " ",
+      patientId:" ",
     };
     this.showDatePicker = this.showDatePicker.bind(this);
     this.hideDatePicker = this.hideDatePicker.bind(this);
@@ -40,10 +40,12 @@ class MyDatePicker extends React.Component {
     try {
       const jsonValue = await AsyncStorage.getItem("Dr_id");
       const userId = await AsyncStorage.getItem("access_token");
-      console.log(userId)
-      console.log(jsonValue);
-      that.setState({ Dr_id: jsonValue, patientId: userId});
+      // console.log(userId)
+      // console.log(typeof jsonValue);
+      await that.setState({ dr_id: JSON.parse(jsonValue),patientId:JSON.parse(userId)});
+      console.log(that.state)
     } catch (e) {
+      console.log(e)
       console.log("error !!");
     }
   }
@@ -54,20 +56,21 @@ class MyDatePicker extends React.Component {
       date: this.state.date,
       time: `${this.state.selectedHours} : ${this.state.selectedMinutes}`,
       discription: this.state.text,
-      doctorId: this.state.Dr_id,
+      doctorId: this.state.dr_id,
       patientId: this.state.patientId,
     };
+    
     axios
       .post(url, appointment)
       .then(function (response) {
-        alert("Appointment booked! Wait the doctor response.");
-        Actions.push('Cards')
+        // alert("Appointment booked! Wait the doctor response.");
+        
         console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
-    //console.log(appointment)
+    console.log(appointment)
   };
 
   showDatePicker = () => {
@@ -91,7 +94,7 @@ class MyDatePicker extends React.Component {
   };
 
   render() {
-    console.log(this.state.Dr_id);
+    // console.log(this.state)
 
     return (
       <View>
