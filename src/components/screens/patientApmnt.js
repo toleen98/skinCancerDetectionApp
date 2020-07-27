@@ -22,7 +22,8 @@ class Appointments extends React.Component {
   async componentDidMount() {
     var pointer = this;
     try {
-      const value = "5f16ac53082a493570770a1d";
+      //const value = "5f16ac53082a493570770a1d";
+      const value = await AsyncStorage.getItem("access_token");
       console.log("hi from appoints");
       await pointer.setState({ userId: value });
       console.log(pointer.state);
