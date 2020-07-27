@@ -1,5 +1,7 @@
 import React from "react";
 import DatePicker from "react-native-datepicker";
+import AsyncStorage from "@react-native-community/async-storage";
+import axios from "axios";
 import {
   AppRegistry,
   StyleSheet,
@@ -13,7 +15,8 @@ import Header from "../common/header";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import TimePicker from "react-native-simple-time-picker";
-export default class MyDatePicker extends React.Component {
+import { Actions } from "react-native-router-flux";
+class MyDatePicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,11 +26,52 @@ export default class MyDatePicker extends React.Component {
       selectedHours: 0,
       selectedMinutes: 0,
       text: " ",
+      dr_id: " ",
+      patientId:" ",
     };
     this.showDatePicker = this.showDatePicker.bind(this);
     this.hideDatePicker = this.hideDatePicker.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
+    this.book = this.book.bind(this);
   }
+
+  async componentDidMount() {
+    var that = this;
+    try {
+      const jsonValue = await AsyncStorage.getItem("Dr_id");
+      const userId = await AsyncStorage.getItem("access_token");
+      // console.log(userId)
+      // console.log(typeof jsonValue);
+      await that.setState({ dr_id: JSON.parse(jsonValue),patientId:JSON.parse(userId)});
+      console.log(that.state)
+    } catch (e) {
+      console.log(e)
+      console.log("error !!");
+    }
+  }
+
+  book = () => {
+    var url = `http://192.168.127.36:8080/bookappointment`;
+    const appointment = {
+      date: this.state.date,
+      time: `${this.state.selectedHours} : ${this.state.selectedMinutes}`,
+      discription: this.state.text,
+      doctorId: this.state.dr_id,
+      patientId: this.state.patientId,
+    };
+    
+    axios
+      .post(url, appointment)
+      .then(function (response) {
+        // alert("Appointment booked! Wait the doctor response.");
+        
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    console.log(appointment)
+  };
 
   showDatePicker = () => {
     this.setState({
@@ -50,15 +94,17 @@ export default class MyDatePicker extends React.Component {
   };
 
   render() {
+    // console.log(this.state)
+
     return (
       <View>
-        <Header drawer={this.props} />
-        <View>
+        
+        
           <Text style={styles.descreption}>
             Choose a date and time to book your appointment.. {"\n"}
             {"\n"}
           </Text>
-        </View>
+        
         <View style={styles.container}>
           <Text style={styles.label}>Date</Text>
           <DatePicker
@@ -114,13 +160,16 @@ export default class MyDatePicker extends React.Component {
             value={this.state.text}
           />
           <Text>{"\n"}</Text>
-          <Button style={styles.buttonStyle}> Book </Button>
+          <Button style={styles.buttonStyle} onPress={this.book}>
+            Book
+          </Button>
         </View>
       </View>
     );
   }
 }
 
+export default MyDatePicker;
 const styles = StyleSheet.create({
   container: {
     flex: -5,

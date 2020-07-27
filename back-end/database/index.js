@@ -1,21 +1,18 @@
 const mongoose = require("mongoose");
-const url = "mongodb://localhost/skinCancerUsers";
+const url = "mongodb+srv://yasmeen:1996292yaso@cluster0-l9jkx.mongodb.net/skinCancer?retryWrites=true&w=majority";
 const { MongoClient } = require("mongodb");
-
-mongoose.connect(url, {
+const uri = "mongodb+srv://yasmeen:1996292yaso@cluster0-l9jkx.mongodb.net/skinCancer?retryWrites=true&w=majority";
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
-
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
 db.once("open", () => {
   console.log("We are connected");
 });
-
 module.exports = db;
-
 // //Atlas connection
 // const uri =
 //   "mongodb+srv://smunawer:smunawer@skincancerdata.vymhw.gcp.mongodb.net/skinCancerData?retryWrites=true&w=majority";
