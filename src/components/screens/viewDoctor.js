@@ -10,8 +10,8 @@ export default class ViewDoctor extends Component {
   render() {
     return (
       <Router >
-        <Stack  hideNavBar={true}>
-          <Scene key="Cards" component={Cards} nav={this.props}/>
+        <Stack>
+          <Scene key="Cards" component={Cards} nav={this.props} hideNavBar={true}/>
           <Scene key="MyDatePicker" component={MyDatePicker} />
         </Stack>
       </Router>

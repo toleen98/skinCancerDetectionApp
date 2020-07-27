@@ -5,7 +5,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import Header from "../common/header";
-import { NavigationActions } from "react-navigation";
+import { NavigationActions } from "@react-navigation/native";
 export default class HomePatient extends React.Component {
   constructor(props){
     super()
