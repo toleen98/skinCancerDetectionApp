@@ -15,7 +15,7 @@ import Header from "../common/header";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import TimePicker from "react-native-simple-time-picker";
-
+import { Actions } from "react-native-router-flux";
 class MyDatePicker extends React.Component {
   constructor(props) {
     super(props);
@@ -27,6 +27,7 @@ class MyDatePicker extends React.Component {
       selectedMinutes: 0,
       text: " ",
       Dr_id: "",
+      patientId:""
     };
     this.showDatePicker = this.showDatePicker.bind(this);
     this.hideDatePicker = this.hideDatePicker.bind(this);
@@ -38,8 +39,10 @@ class MyDatePicker extends React.Component {
     var that = this;
     try {
       const jsonValue = await AsyncStorage.getItem("Dr_id");
+      const userId = await AsyncStorage.getItem("access_token");
+      console.log(userId)
       console.log(jsonValue);
-      that.setState({ Dr_id: jsonValue });
+      that.setState({ Dr_id: jsonValue, patientId: userId});
     } catch (e) {
       console.log("error !!");
     }
@@ -52,12 +55,13 @@ class MyDatePicker extends React.Component {
       time: `${this.state.selectedHours} : ${this.state.selectedMinutes}`,
       discription: this.state.text,
       doctorId: this.state.Dr_id,
-      patientId: "5f1bdfedd7eb9d347c6cb370",
+      patientId: this.state.patientId,
     };
     axios
       .post(url, appointment)
       .then(function (response) {
         alert("Appointment booked! Wait the doctor response.");
+        Actions.push('Cards')
         console.log(response);
       })
       .catch(function (error) {
@@ -91,7 +95,7 @@ class MyDatePicker extends React.Component {
 
     return (
       <View>
-        <Header drawer={this.props} />
+        
         
           <Text style={styles.descreption}>
             Choose a date and time to book your appointment.. {"\n"}
