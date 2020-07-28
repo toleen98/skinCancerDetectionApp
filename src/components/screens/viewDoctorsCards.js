@@ -4,19 +4,16 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import AsyncStorage from '@react-native-community/async-storage';
-
-
-// Galio components
 import {
   Card, Block, NavBar, Icon,Text, 
 } from 'galio-framework';
 import theme from '../../theme';
 import axios from 'axios';
 import MyDatePicker from './bookAppointment.js'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
 import { Scene, Router, Actions, Stack } from 'react-native-router-flux'; // 4.0.0-beta.28
-
+import Header from '../common/header';
 
 const { width } = Dimensions.get('screen');
 
@@ -27,7 +24,7 @@ export default class Cards extends React.Component {
 
     async componentDidMount() {
         
-        var url = 'http://192.168.1.114:8080/api/users/doctors';
+        var url = 'http://192.168.127.67:8080/api/users/doctors';
         var that = this
         await axios.get(url)
             .then(function (res) {
@@ -72,7 +69,10 @@ export default class Cards extends React.Component {
 
     return (
      
-      <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE,  marginTop: theme.SIZES.BASE * 5}}>
+      <Block>
+        <Header drawer={this.props.nav} />
+        <Block safe style={{ backgroundColor: theme.COLORS.WHITE,  marginTop: theme.SIZES.BASE * 1}}>
+        
         <ScrollView contentContainerStyle={styles.cards}>
           <Block flex space="between" >
             {cards && cards.map((card) => (
@@ -102,6 +102,7 @@ export default class Cards extends React.Component {
             ))}
           </Block>
         </ScrollView>
+      </Block>
       </Block>
     );
   }

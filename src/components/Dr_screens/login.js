@@ -43,19 +43,17 @@ function Login(props) {
       password: state.password,
     };
 
-    //console.log(props);
 
     var id;
 
     axios
-      .post("http://192.168.127.67:8080/login", user)
+      .post("http://192.168.127.67:8080/api/user/doctor/login", user)
       .then((res) => {
-        console.log(res.data.patient._id);
-        id = res.data.patient._id;
+        console.log(res.data.doctor._id);
+        id = res.data.doctor._id;
         AsyncStorage.setItem("access_token", JSON.stringify(id));
         if (res.data.result === true) {
           alert("Login Successed! ");
-          Actions.push("HomePatient");
         } else if (res.data === false) {
           alert("Login Failed! Wrong password");
         } else if (res.data === "Email not found") {
@@ -64,22 +62,6 @@ function Login(props) {
       })
       .catch((err) => console.log(err));
   };
-  //   const navigateAction = NavigationActions.navigate({
-  // 	routeName: 'MyDatePicker',
-
-  // 	params: {},
-
-  // 	action: NavigationActions.navigate({ routeName: 'MyDatePicker' }),
-  //   });
-  //   const MapsStack = createStackNavigator({
-  //     MyDatePicker: {
-  //       screen: MyDatePicker,
-  //       navigationOptions: ({ navigation }) => ({
-  //         header: <Header navigation={navigation} />,
-  //         headerTransparent: true,
-  //       }),
-  //     },
-  //   });
 
   return (
     <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>

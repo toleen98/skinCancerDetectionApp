@@ -11,6 +11,7 @@ import {
 // galio component
 import { Block, Button, Input, Text, NavBar } from "galio-framework";
 import theme from "../../theme";
+import Header from '../common/header';
 
 const { height, width } = Dimensions.get("window");
 
@@ -35,14 +36,14 @@ class PatientProfile extends React.Component {
       blood: this.state.blood,
     };
     console.log(patient);
-    var url = 'http://192.168.1.75:8080/api/profile/patient/updatepatient';
+    var url = 'http://192.168.127.67:8080/api/profile/patient/updatepatient';
     axios
       .post(url, patient)
       .then((response) => {
-        response.send("account updated");
+        // response.send("account updated");
         console.log("then")
       })
-      .catch((error) => res.send("please try again") , console.log(error));
+      // .catch((error) => res.send("please try again") , console.log(error));
     //alert to check
     // Alert.alert("patient updated");
   };
@@ -54,6 +55,7 @@ class PatientProfile extends React.Component {
 
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
+         <Header drawer={this.props} />
         <KeyboardAvoidingView
           style={styles.container}
           behavior="height"
@@ -68,7 +70,11 @@ class PatientProfile extends React.Component {
             }}
           >
             {/* here logo */}
-            <Image source={"../../../assets/plashImage.png"} />
+            <Image source={require("../../../assets/splash.png")} />
+            <Text muted center size={theme.SIZES.FONT * 1.5} color={"#18DCFF"}>
+            {" "}
+            Update Your Profile{" "}
+          </Text>
             <Block
               row
               center
