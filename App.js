@@ -31,11 +31,13 @@ import PatientUpdate from './src/components/screens/patientUpdate';
 import Login from './src/components/Dr_screens/login';
 import ViewDoctor from './src/components/screens/viewDoctor';
 import LoginContainerPatient from './src/components/screens/loginContainerPatient';
+import Appointments from "./src/components/screens/appoints"
 // DrawerNavigatorExample
+
 
 const DrawerNavigatorExample = createDrawerNavigator({
   LoginScreen :{
-    screen:Login,
+    screen:LoginContainerPatient,
     navigationOptions: ({ navigation }) => ({     
       title :'Login',
       drawerIcon :({tintColor}) =><Feather name='home' size={16} color={tintColor}/>
