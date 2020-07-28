@@ -10,7 +10,7 @@ const login = require("./routes/login");
 const doctors = require("./routes/doctor");
 const book = require("./routes/book");
 const appoint = require("./routes/patientApmnt");
-
+const pendding = require("./routes/pendding");
 app.use(cors());
 app.use(bodyParser.json());
 const port = process.env.PORT || 8080;
@@ -27,6 +27,7 @@ app.use("", login);
 app.use("/api/users/", doctors);
 app.use("", book);
 app.use("", appoint);
+app.use("", pendding);
 // app.use("/api/profile", patientupdate)
 
 app.listen(port, () => console.log(`Server started on port: ${port}`));
