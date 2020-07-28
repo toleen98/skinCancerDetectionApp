@@ -27,6 +27,7 @@ import Logout from "./logOut";
 import AboutUs from "./aboutUs";
 import Help from "./help";
 
+import Appointments from "./patientApmnt";
 const DrwerNavigator = createDrawerNavigator();
 const Stack = createStackNavigator();
 function Drwer(props) {
@@ -62,7 +63,7 @@ function Drwer(props) {
         />
         <DrwerNavigator.Screen
           name="Appointments"
-          component={HomePatient}
+          component={Appointments}
           options={{
             drawerIcon: ({ tintColor }) => (
               <MaterialIcons name="date-range" size={16} color={tintColor} />
