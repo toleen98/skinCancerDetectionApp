@@ -5,11 +5,13 @@ const { statusBarHeight } = Constants;
 // galio components
 import { Block, Text } from "galio-framework";
 import theme from "../../theme";
+import Header from "../common/header";
 const { width, height } = Dimensions.get("screen");
 const AboutUs = (props) => (
-  <Block style={styles.background}>
+  <Block >
+    <Header drawer={props} />
     <Text style={styles.title}>
-      Skin Cancer Detiction Application Mission ?
+      Skin Cancer Detection {'\n'}Application Mission ?
     </Text>
     <Text style={styles.text}>
       Health Care is one of the most important aspects of the technological
@@ -31,25 +33,21 @@ const styles = StyleSheet.create({
     paddingLeft: theme.SIZES.BASE / 2,
     color: "#18DCFF",
     alignItems: "center",
-    textAlign: "justify",
-    position: "absolute",
-    top: 85,
-    left: 60,
-    right: 43,
-    bottom: 0,
-    justifyContent: "center",
+    textAlign: "center",
+    paddingTop:5,
+    marginTop:40
+   
+  
   },
   text: {
-    fontSize: theme.SIZES.FONT * 0.955,
-    lineHeight: theme.SIZES.FONT * 1.25,
+    fontSize: theme.SIZES.FONT * 1,
+    justifyContent: "center",
     color: theme.COLORS.BLACK,
-    textAlign: "justify",
-    lineHeight: 22,
-    position: "absolute",
-    top: 190,
-    left: 43,
-    right: 50,
-    bottom: 0,
+    textAlign: "center",
+    lineHeight: 45,
+    alignItems: "center",
+    marginTop:35
+  
   },
   background: {
     flex: 2,

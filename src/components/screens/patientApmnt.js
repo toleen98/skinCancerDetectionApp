@@ -6,7 +6,6 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import AsyncStorage from "@react-native-community/async-storage";
 // Galio components
 import { Card, Block, NavBar, Icon } from "galio-framework";

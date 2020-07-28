@@ -7,7 +7,7 @@ import {
   ImageBackground,
   Image,
 } from "react-native";
-import { DrawerNavigatorItems } from "react-navigation-drawer";
+ import { DrawerNavigatorItems,DrawerNavigator } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 
 export default Sidebar = (props) => (

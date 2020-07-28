@@ -9,6 +9,9 @@ router.post("/patient/appoints", function (req, res) {
     console.log(req.body);
     console.log(appoints);
     res.json(appoints);
-  })
+  });
 });
+
+
+
 module.exports = router;

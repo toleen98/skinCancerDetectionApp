@@ -2,10 +2,14 @@ import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import { Text } from "galio-framework";
 import theme from "../../theme";
+import Header from "../common/header";
+import { ScrollView } from "react-native-gesture-handler";
 const { height, width } = Dimensions.get("window");
-function Help() {
+const Help = (props) => {
   return (
-    <View>
+    <ScrollView>
+      <Header drawer={props} />
+      
       <Text muted center size={theme.SIZES.FONT * 2} color="black">
         {"\n"} Step 1
       </Text>
@@ -36,7 +40,9 @@ function Help() {
         {"\n"} Book appointment by clicking in book button, your appointment
         will confirmed or rejected by the doctor after a while. {"\n"}
       </Text>
-    </View>
+    
+      
+    </ScrollView>
   );
 }
 export default Help;
