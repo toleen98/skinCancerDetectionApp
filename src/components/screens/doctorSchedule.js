@@ -82,7 +82,7 @@ export default class patientsAppo extends React.Component {
           </Block>
         </ScrollView>
       </Block>
-    );
+    )
   }
 }
 const styles = StyleSheet.create({
