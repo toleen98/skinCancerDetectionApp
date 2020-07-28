@@ -10,6 +10,7 @@ const login = require("./routes/login");
 const doctors = require("./routes/doctor");
 const book = require("./routes/book");
 const appoint = require("./routes/patientApmnt");
+
 app.use(cors());
 app.use(bodyParser.json());
 const port = process.env.PORT || 8080;
