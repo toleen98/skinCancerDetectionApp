@@ -11,7 +11,7 @@ router.post("/getAppointments", (req, res) => {
     });
 router.post("/getPatientsName", function (req, res) {
     models.Patient.findOne({_id : req.body.params.value.pId}, function (err, patient) {
-        // console.log("Hi from the server222"); 
+        //console.log("Hi from the server222"); 
         // console.log(req.body.params.value.pId);
         // console.log(patient);
         res.json(patient);
