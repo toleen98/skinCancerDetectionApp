@@ -36,14 +36,14 @@ class PatientProfile extends React.Component {
       blood: this.state.blood,
     };
     console.log(patient);
-    var url = 'http://192.168.127.36:8080/api/profile/patient/updatepatient';
+    var url = 'http://192.168.127.67:8080/api/profile/patient/updatepatient';
     axios
       .post(url, patient)
       .then((response) => {
-        response.send("account updated");
+        // response.send("account updated");
         console.log("then")
       })
-      .catch((error) => res.send("please try again") , console.log(error));
+      // .catch((error) => res.send("please try again") , console.log(error));
     //alert to check
     // Alert.alert("patient updated");
   };
