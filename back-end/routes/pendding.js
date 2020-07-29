@@ -1,7 +1,8 @@
+const { json } = require("body-parser");
 const express = require("express");
 const router = express.Router();
 const models = require("../database/models");
-router.post("/getAppointments", (req, res) => {
+router.post("/getPending", (req, res) => {
   //models.Appointment.find({ doctorId : JSON.parse(req.body.params.value.id)}, function (err, appointment) {
   models.Appointment.find(
     {
@@ -19,7 +20,7 @@ router.post("/getAppointments", (req, res) => {
   );
 });
 
-router.post("/getPatientsName", function (req, res) {
+router.post("/getPatients", function (req, res) {
   models.Patient.findOne({ _id: req.body.params.value.pId }, function (
     err,
     patient
@@ -31,13 +32,24 @@ router.post("/getPatientsName", function (req, res) {
   });
 });
 
-// router.post("/approve", function (req, res) {
-//   models.Appointment.findOneAndUpdate(
-//     ({ _id: req.body.id }, { status: "approved" }),
-//     function (err, appointment) {
-//       console.log(req.body.id);
-//     }
-//   );
-// });
+router.post("/approve", function (req, res) {
+  models.Appointment.findOneAndUpdate(
+    { _id: req.body.id },
+    { status: "approved" },
+    function (err, appointment) {
+      console.log(appointment);
+    }
+  );
+});
+
+router.post("/rejected", function (req, res) {
+  models.Appointment.findOneAndUpdate(
+    { _id: req.body.id },
+    { status: "rejected" },
+    function (err, appointment) {
+      console.log(appointment);
+    }
+  );
+});
 
 module.exports = router;

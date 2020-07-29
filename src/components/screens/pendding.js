@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { AntDesign } from "@expo/vector-icons";
 import axios from "axios";
 const { width } = Dimensions.get("screen");
-export default class patientsAppo extends React.Component {
+export default class PatientsAppo extends React.Component {
   state = {
     userId: "",
     appointment: [],
@@ -30,7 +30,7 @@ export default class patientsAppo extends React.Component {
       console.log(pointer.state.userId);
       await axios
         //192.168.1.80
-        .post("http://192.168.1.75:8080/getAppointments", {
+        .post("http://192.168.127.67:8080/getPending", {
           params: {
             value: { id: pointer.state.userId },
           },
@@ -44,7 +44,7 @@ export default class patientsAppo extends React.Component {
         .then(async () => {
           pointer.state.appointment.map(async (element) => {
             await axios
-              .post("http://192.168.1.75:8080/getPatientsName", {
+              .post("http://192.168.127.67:8080/getPatients", {
                 params: {
                   value: { pId: element.patientId[0] },
                 },
@@ -59,23 +59,37 @@ export default class patientsAppo extends React.Component {
           });
         });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   }
 
-  // approved = (apId) => {
-  //   var url = `http://192.168.1.75:8080/approve`;
-  //   axios
-  //     .post(url, { id: apId })
-  //     .then(function (response) {
-  //       alert("Appointment Approved");
+  approved = (apId) => {
+    console.log(apId);
+    var url = `http://192.168.127.67:8080/approve`;
+    axios
+      .post(url, { id: apId })
+      .then(function (response) {
+        alert("Appointment Approved");
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
+  rejected = (apId) => {
+    console.log(apId);
+    var url = `http://192.168.127.67:8080/rejected`;
+    axios
+      .post(url, { id: apId })
+      .then(function (response) {
+        alert("Appointment Discarded");
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   render() {
     return (
@@ -119,14 +133,14 @@ export default class patientsAppo extends React.Component {
                     size={25}
                     color="black"
                     style={styles.iconStyleCheck}
-                    // onPress={this.approved.bind(this, card._id)}
+                    onPress={this.approved.bind(this, card._id)}
                   />
                   <AntDesign
                     name="closecircle"
                     size={25}
                     color="black"
                     style={styles.iconStyleCircle}
-                    // onPress={this.rejected}
+                    onPress={this.rejected.bind(this, card._id)}
                   />
                 </View>
               </Card>
