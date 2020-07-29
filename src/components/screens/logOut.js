@@ -1,10 +1,10 @@
 import React from "react";
-import Login from "./login"
+import Esraa from "../../../App"
 
 export default class Logout extends React.Component {
     render() {
         return (
-            <Login />
+            <Esraa />
         )
     }
 }
