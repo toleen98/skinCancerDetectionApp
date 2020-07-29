@@ -22,11 +22,11 @@ export default class patientsAppo extends React.Component {
         try {
           //AsyncStorage.setItem("access_token", JSON.stringify("5f15cd72286d1c6d109639e7"));
           const value = await AsyncStorage.getItem("access_token");
-          console.log("hi from appointment");
-          console.log(value);
+          // console.log("hi from appointment");
+          // console.log(value);
           pointer.setState({ userId: value });
-          console.log(".......")
-          console.log(pointer.state.userId);
+          // console.log(".......")
+          // console.log(pointer.state.userId);
           await axios
             .post("http://192.168.1.80:8080/getAppointments", {
               params: {
