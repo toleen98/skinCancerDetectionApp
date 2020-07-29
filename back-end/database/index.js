@@ -7,15 +7,12 @@ mongoose.connect(uri, {
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
-
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
 db.once("open", () => {
   console.log("We are connected");
 });
-
 module.exports = db;
-
 // //Atlas connection
 // const uri =
 //   "mongodb+srv://smunawer:smunawer@skincancerdata.vymhw.gcp.mongodb.net/skinCancerData?retryWrites=true&w=majority";
