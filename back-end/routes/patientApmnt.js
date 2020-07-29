@@ -11,14 +11,4 @@ router.post("/patient/appoints", function (req, res) {
     res.json(appoints);
   });
 });
-
-router.post("patient/pending", (req, res) => {
-  console.log("hi from patient");
-  console.log(req.body);
-  User.Patient.findOne({ _id: req.body.patid }).then((user) => {
-    console.log(user);
-    res.json(user);
-  });
-});
-
 module.exports = router;

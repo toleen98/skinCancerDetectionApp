@@ -1,14 +1,43 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 const models = require("../database/models");
-router.post("/pendingap", function (req, res) {
-  models.Appointment.find({ doctorId: req.body.params.value.id }, function (
+router.post("/getAppointments", (req, res) => {
+  //models.Appointment.find({ doctorId : JSON.parse(req.body.params.value.id)}, function (err, appointment) {
+  models.Appointment.find(
+    {
+      $and: [
+        { doctorId: JSON.parse(req.body.params.value.id) },
+        { status: "pending" },
+      ],
+    },
+    function (err, appointment) {
+      console.log("Hi from the server");
+      console.log(req.body);
+      console.log(appointment);
+      res.json(appointment);
+    }
+  );
+});
+
+router.post("/getPatientsName", function (req, res) {
+  models.Patient.findOne({ _id: req.body.params.value.pId }, function (
     err,
-    appoints
+    patient
   ) {
-    console.log(req.body);
-    console.log(appoints);
-    console.log("hi from back", req.body.params.value.id);
-    res.json(appoints);
+    console.log("Hi from the server222");
+    console.log(req.body.params.value.pId);
+    console.log(patient);
+    res.json(patient);
   });
 });
+
+// router.post("/approve", function (req, res) {
+//   models.Appointment.findOneAndUpdate(
+//     ({ _id: req.body.id }, { status: "approved" }),
+//     function (err, appointment) {
+//       console.log(req.body.id);
+//     }
+//   );
+// });
+
 module.exports = router;

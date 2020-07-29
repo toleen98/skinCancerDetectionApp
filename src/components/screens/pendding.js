@@ -1,104 +1,138 @@
 import React from "react";
-import { ScrollView, StyleSheet, Dimensions } from "react-native";
+import { ScrollView, StyleSheet, Dimensions, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import AsyncStorage from "@react-native-community/async-storage";
-import { Card, Block } from "galio-framework";
+// Galio components
+import { Card, Block, NavBar, Icon } from "galio-framework";
 import theme from "../../theme";
-import axios from "axios";
+import AsyncStorage from "@react-native-community/async-storage";
 import { AntDesign } from "@expo/vector-icons";
+import axios from "axios";
 const { width } = Dimensions.get("screen");
-export default class PendingAp extends React.Component {
+export default class patientsAppo extends React.Component {
   state = {
-    docId: "",
-    pending: [],
-    patName: [],
+    userId: "",
+    appointment: [],
+    patientName: "",
+    patientLastName: "",
   };
-  //await AsyncStorage.setItem("Dr_id", jsonValue);
   async componentDidMount() {
     var pointer = this;
     try {
-      //const value = "5f16ac53082a493570770a1d";
-      const value = await AsyncStorage.getItem("Dr_id");
-      await pointer.setState({ docId: JSON.parse(value) });
+      AsyncStorage.setItem(
+        "access_token",
+        JSON.stringify("5f15cd72286d1c6d109639e7")
+      );
+      const value = await AsyncStorage.getItem("access_token");
+      console.log("hi from appointment");
+      console.log(value);
+      pointer.setState({ userId: value });
+      console.log(".......");
+      console.log(pointer.state.userId);
       await axios
-        .post("http://192.168.1.75:8080/pendingap", {
+        //192.168.1.80
+        .post("http://192.168.1.75:8080/getAppointments", {
           params: {
-            value: { id: pointer.state.docId },
+            value: { id: pointer.state.userId },
           },
         })
-        .then(async (res) => {
-          await pointer.setState({ pending: res.data });
+        .then((res) => {
+          console.log("hi axios 1");
+          console.log(res.data);
+          pointer.setState({ appointment: res.data });
+          console.log(pointer.state.appointment[0].time);
         })
         .then(async () => {
-          await pointer.state.pending.map(async (element) => {
+          pointer.state.appointment.map(async (element) => {
             await axios
-              .post("http://192.168.1.75:8080/patient/pending", {
-                patid: element.patientId[0],
+              .post("http://192.168.1.75:8080/getPatientsName", {
+                params: {
+                  value: { pId: element.patientId[0] },
+                },
               })
-              .then(async (res) => {
-                let array = [];
-                array.push(res.data.firstName + " " + res.data.lastName);
-                await pointer.setState({ patName: array });
+              .then((res) => {
+                console.log("hi axios 2");
+                console.log(res.data.firstName);
+                pointer.setState({ patientName: res.data.firstName });
+                pointer.setState({ patientLastName: res.data.lastName });
+                console.log(pointer.state.patientName);
               });
           });
         });
     } catch (error) {
-      console.log(error);
+      console.log("error");
     }
   }
+
+  // approved = (apId) => {
+  //   var url = `http://192.168.1.75:8080/approve`;
+  //   axios
+  //     .post(url, { id: apId })
+  //     .then(function (response) {
+  //       alert("Appointment Approved");
+
+  //       console.log(response);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
+
   render() {
-    const cards = this.state.pending;
-    const { navigation } = this.props;
-    const patient = this.state.patName;
-    console.log("render here", patient);
     return (
-      <Block>
-        <Block
-          safe
-          style={{
-            backgroundColor: theme.COLORS.WHITE,
-            marginTop: theme.SIZES.BASE * 1,
-          }}
-        >
-          <ScrollView contentContainerStyle={styles.cards}>
-            <Block flex space="between">
-              {cards &&
-                cards.map((card, i) => (
-                  <Card
-                    key={i}
-                    flex={5}
-                    borderless
-                    shadowColor={theme.COLORS.TWITTER}
-                    titleColor={theme.COLORS.WHITE}
-                    style={styles.card}
-                    title={patient[0]}
-                    caption={
-                      "Date: " +
-                      card.date.slice(0, 11) +
-                      "\n" +
-                      "Time: " +
-                      card.time
-                    }
-                    captionColor={theme.COLORS.WHITE}
-                    imageStyle={[card.padded ? styles.rounded : null]}
-                    imageBlockStyle={[
-                      card.padded ? { padding: theme.SIZES.BASE / 2 } : null,
-                      card.full ? null : styles.noRadius,
-                    ]}
-                  >
-                    {card.full ? (
-                      <LinearGradient
-                        colors={["transparent", "rgba(0,0,0, 0.8)"]}
-                        style={styles.gradient}
-                      />
-                    ) : null}
-                    <AntDesign name="checkcircle" size={22} color="black" />
-                    <AntDesign name="closecircle" size={22} color="black" />
-                  </Card>
-                ))}
-            </Block>
-          </ScrollView>
-        </Block>
+      <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
+        <ScrollView contentContainerStyle={styles.cards}>
+          <Block flex space="between">
+            {this.state.appointment.map((card, id) => (
+              <Card
+                key={id}
+                flex
+                borderless
+                shadowColor={theme.COLORS.BLACK}
+                titleColor={card.full ? theme.COLORS.WHITE : null}
+                style={styles.card}
+                title={
+                  this.state.patientName + " " + this.state.patientLastName
+                }
+                caption={
+                  "Date : " +
+                  card.date.slice(0, 10) +
+                  "\n" +
+                  "Time : " +
+                  card.time +
+                  " pm"
+                }
+              >
+                {card.full ? (
+                  <LinearGradient
+                    colors={["transparent", "rgba(0,0,0, 0.8)"]}
+                    style={styles.gradient}
+                  />
+                ) : null}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <AntDesign
+                    name="checkcircle"
+                    size={25}
+                    color="black"
+                    style={styles.iconStyleCheck}
+                    // onPress={this.approved.bind(this, card._id)}
+                  />
+                  <AntDesign
+                    name="closecircle"
+                    size={25}
+                    color="black"
+                    style={styles.iconStyleCircle}
+                    // onPress={this.rejected}
+                  />
+                </View>
+              </Card>
+            ))}
+          </Block>
+        </ScrollView>
       </Block>
     );
   }
@@ -111,7 +145,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   card: {
-    backgroundColor: theme.COLORS.BLUE,
+    backgroundColor: "#18DCFF",
     width: width - theme.SIZES.BASE * 2,
     marginVertical: theme.SIZES.BASE * 0.875,
     elevation: theme.SIZES.BASE / 2,
@@ -138,5 +172,13 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderBottomRightRadius: theme.SIZES.BASE * 0.5,
     borderBottomLeftRadius: theme.SIZES.BASE * 0.5,
+  },
+  iconStyleCheck: {
+    alignItems: "center",
+    left: 200,
+  },
+  iconStyleCircle: {
+    alignItems: "center",
+    right: 60,
   },
 });
