@@ -17,11 +17,11 @@ export default class PatientsAppo extends React.Component {
   };
   async componentDidMount() {
     var pointer = this;
-    try {
-      AsyncStorage.setItem(
-        "access_token",
-        JSON.stringify("5f15cd72286d1c6d109639e7")
-      );
+    // try {
+    //   AsyncStorage.setItem(
+    //     "access_token",
+    //     JSON.stringify("5f15cd72286d1c6d109639e7")
+    //   );
       const value = await AsyncStorage.getItem("access_token");
       console.log("hi from appointment");
       console.log(value);
