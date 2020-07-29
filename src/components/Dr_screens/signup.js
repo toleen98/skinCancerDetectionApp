@@ -24,9 +24,10 @@ class Signup extends React.Component {
     email:"",
     password: "",
     phoneNumber:"",
-    bloodType:"",
-    height:"",
-    weight:""
+    Clinic_Location:"",
+    workingFrom:"",
+    workingTo:"",
+    notes:""
   }
 
   handleChange = (name, value) => {
@@ -34,7 +35,8 @@ class Signup extends React.Component {
   }
 
   submit = () => {
-    var url = `http://172.16.0.147:8080/api/user/patient/signup`;
+    var url = 'http://192.168.127.67:8080/api/user/doctor/signup';
+    
     axios.post(url,this.state)
     .then(function (response) {
       Alert.alert("User created sucessfully")
@@ -68,7 +70,7 @@ class Signup extends React.Component {
           
         </Block>
 
-        <Block flex={3} center space="between">
+        <Block flex={3.5} center space="between">
           <Block flex={2}  >
             <Input
               rounded
@@ -88,7 +90,7 @@ class Signup extends React.Component {
             />
             <Input
               rounded
-              type="Email-address"
+              // type="Email-address"
               placeholder="Email"
               placeholderTextColor="#18DCFF" 
               autoCapitalize="none"
@@ -104,6 +106,7 @@ class Signup extends React.Component {
               style={{ width: width * 0.9 }}
               onChangeText={text => this.handleChange('password', text)}
             />
+          
             <Input
               rounded
               placeholder= "Phone_number"
@@ -114,28 +117,34 @@ class Signup extends React.Component {
             />
             <Input
               rounded
-              placeholder="Blood Type"
+              placeholder="Clinic Location"
               placeholderTextColor="#18DCFF" 
               style={{ width: width * 0.9 }}
-              onChangeText={text => this.handleChange('bloodType', text)}
+              onChangeText={text => this.handleChange('clinicLocation', text)}
             />
             <Input
               rounded
-              placeholder="Height"
+              placeholder="Working From"
               placeholderTextColor="#18DCFF" 
               style={{ width: width * 0.9 }}
-              onChangeText={text => this.handleChange('height', text)}
+              onChangeText={text => this.handleChange('workingFrom', text)}
             />
             <Input
               rounded
-              placeholder="Weight"
+              placeholder="Working To"
               placeholderTextColor="#18DCFF" 
               style={{ width: width * 0.9 }}
-              onChangeText={text => this.handleChange('weight', text)}
+              onChangeText={text => this.handleChange('workingTo', text)}
+            />
+            <Input
+              rounded
+              placeholder="Notes"
+              placeholderTextColor="#18DCFF" 
+              style={{ width: width * 0.9 }}
+              onChangeText={text => this.handleChange('notes', text)}
             />
           </Block>
           <Block flex = {0.5} middle>
-            <Text>{'\n'}</Text>
             <Button
               round
               color="#18DCFF"
