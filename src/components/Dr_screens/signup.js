@@ -13,11 +13,13 @@ import {
 } from 'galio-framework';
 import theme from '../../theme';
 import axios from 'axios';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Actions } from 'react-native-router-flux';
 
 
 const { height, width } = Dimensions.get('window');
 
-class Signup extends React.Component {
+class SignupDr extends React.Component {
   state = {
     firstName:"",
     lastName:"",
@@ -35,11 +37,12 @@ class Signup extends React.Component {
   }
 
   submit = () => {
-    var url = 'http://192.168.127.67:8080/api/user/doctor/signup';
+    var url = 'http://192.168.1.123:8080/api/user/doctor/signup';
     
     axios.post(url,this.state)
     .then(function (response) {
-      Alert.alert("User created sucessfully")
+      Alert.alert("User created sucessfully");
+      Actions.push("LoginDr");
     })
     .catch(function (error) {
       Alert.alert("Email already exists")
@@ -53,6 +56,9 @@ class Signup extends React.Component {
     const { firstName, lastName, email, password, phoneNumber,bloodType,height,weight} = this.state;
 
     return (
+      <ScrollView>
+
+      
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
         <Block>
           
@@ -144,7 +150,8 @@ class Signup extends React.Component {
               onChangeText={text => this.handleChange('notes', text)}
             />
           </Block>
-          <Block flex = {0.5} middle>
+          <Block flex={0.2} middle>
+         
             <Button
               round
               color="#18DCFF"
@@ -157,6 +164,7 @@ class Signup extends React.Component {
         </Block>
       </KeyboardAvoidingView>
     </Block>
+    </ScrollView>
     );
   }
 }
@@ -173,4 +181,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default Signup;
+export default SignupDr;

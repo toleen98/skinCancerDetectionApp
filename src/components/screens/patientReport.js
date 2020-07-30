@@ -23,7 +23,7 @@ class Report extends React.Component {
       console.log(value);
       pointer.setState({ userId: value });
       await axios
-        .post("http://192.168.1.75:8080/patientReport", {
+        .post("http://192.168.127.36:8080/patientReport", {
           params: {
             value: { id: pointer.state.userId },
           },
@@ -35,7 +35,7 @@ class Report extends React.Component {
           console.log(pointer.state.report.firstName);
         });
     } catch (error) {
-      console.log("err");
+      console.log(error);
     }
   }
   render() {
