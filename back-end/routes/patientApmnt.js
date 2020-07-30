@@ -11,7 +11,4 @@ router.post("/patient/appoints", function (req, res) {
     res.json(appoints);
   });
 });
-
-
-
 module.exports = router;

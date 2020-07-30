@@ -10,7 +10,7 @@ import theme from '../../theme';
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from "axios";
 const { width } = Dimensions.get('screen');
-export default class patientsAppo extends React.Component {
+export default class DoctorAppointments extends React.Component {
     state = {
         userId: "",
         appointment: [],

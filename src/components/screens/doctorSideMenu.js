@@ -26,7 +26,8 @@ import ViewDoctor from "./viewDoctor";
 import Logout from "./logOut";
 import AboutUs from "./aboutUs";
 import Help from "./help";
-
+import DoctorAppointments from "../Dr_screens/doctorSchedule";
+import DoctorPendingApp from "../Dr_screens/pendding";
 const DrwerNavigator = createDrawerNavigator();
 const Stack = createStackNavigator();
 function DrwerDoctor(props) {
@@ -35,7 +36,7 @@ function DrwerDoctor(props) {
       <DrwerNavigator.Navigator>
       <DrwerNavigator.Screen
           name="Appointments"
-          component={HomePatient}
+          component={DoctorAppointments}
           options={{
             drawerIcon: ({ tintColor }) => (
               <MaterialIcons name="date-range" size={16} color={tintColor} />
@@ -44,7 +45,7 @@ function DrwerDoctor(props) {
         />
         <DrwerNavigator.Screen
           name="Pendindg Appointments"
-          component={HomePatient}
+          component={DoctorPendingApp}
           options={{
             drawerIcon: ({ tintColor }) => (
               <Feather name="home" size={16} color={tintColor} />
