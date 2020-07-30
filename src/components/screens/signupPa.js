@@ -34,7 +34,7 @@ class Signup extends React.Component {
   }
 
   submit = () => {
-    var url = `http://172.16.0.147:8080/api/user/patient/signup`;
+    var url = `http://192.168.1.123:8080/api/user/patient/signup`;
     axios.post(url,this.state)
     .then(function (response) {
       Alert.alert("User created sucessfully")
@@ -88,7 +88,7 @@ class Signup extends React.Component {
             />
             <Input
               rounded
-              type="Email-address"
+              type="email-address"
               placeholder="Email"
               placeholderTextColor="#18DCFF" 
               autoCapitalize="none"

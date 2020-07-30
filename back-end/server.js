@@ -13,6 +13,8 @@ const appoints = require("./routes/appoints")
 
 const book = require("./routes/book");
 const appoint = require("./routes/patientApmnt");
+const reportPatient = require("./routes/patientReport");
+const scheduleDoctor = require("./routes/doctorSchedule");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -31,7 +33,8 @@ app.use("", login);
 app.use("/api/users/", doctors);
 app.use("", book);
 app.use("", appoint);
-// app.use("/api/profile", patientupdate)
+app.use("",reportPatient);
+app.use("", scheduleDoctor);
 
 
 app.listen(port, () => console.log(`Server started on port: ${port}`));

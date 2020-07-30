@@ -26,7 +26,7 @@ import ViewDoctor from "./viewDoctor";
 import Logout from "./logOut";
 import AboutUs from "./aboutUs";
 import Help from "./help";
-
+import Report from "./patientReport";
 import Appointments from "./patientApmnt";
 const DrwerNavigator = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -72,7 +72,7 @@ function Drwer(props) {
         />
         <DrwerNavigator.Screen
           name="My Report"
-          component={HomePatient}
+          component={Report}
           options={{
             drawerIcon: ({ tintColor }) => (
               <MaterialIcons name="report" size={16} color={tintColor} />

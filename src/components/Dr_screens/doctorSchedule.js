@@ -28,7 +28,7 @@ export default class patientsAppo extends React.Component {
           // console.log(".......")
           // console.log(pointer.state.userId);
           await axios
-            .post("http://192.168.1.80:8080/getAppointments", {
+            .post("http://192.168.127.36:8080/getAppointments", {
               params: {
                 value: { id: pointer.state.userId },
               },
