@@ -26,6 +26,7 @@ import ViewDoctor from "./viewDoctor";
 import Logout from "./logOut";
 import AboutUs from "./aboutUs";
 import PendingAp from "./pendding";
+import DoctorProfile from "../Dr_screens/doctorProfile";
 
 const DrwerNavigator = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -80,7 +81,7 @@ function Drwer(props) {
         />
         <DrwerNavigator.Screen
           name="Help"
-          component={PendingAp}
+          component={DoctorProfile}
           options={{
             drawerIcon: ({ tintColor }) => (
               <MaterialIcons name="help" size={16} color={tintColor} />

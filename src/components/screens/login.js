@@ -48,7 +48,7 @@ function Login(props) {
     // var id;
 
     axios
-      .post("http://192.168.127.67:8080/login", user)
+      .post("http://192.168.1.149:8080/login", user)
       .then((res) => {
         console.log(res.data.patient._id);
         id = res.data.patient._id;
