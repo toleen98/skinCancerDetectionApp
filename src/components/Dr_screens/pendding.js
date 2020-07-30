@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { AntDesign } from "@expo/vector-icons";
 import axios from "axios";
 const { width } = Dimensions.get("screen");
-export default class PatientsAppo extends React.Component {
+export default class DoctorPendingApp extends React.Component {
   state = {
     userId: "",
     appointment: [],
