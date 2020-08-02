@@ -46,14 +46,21 @@ function Login(props) {
     console.log(props);
     
       
-    // var id;
+    var id;
 
     axios
-      .post("http://192.168.1.123:8080/login", user)
+
+
+      .post("http://192.168.127.67:8080/login", user)
+
+
       .then((res) => {
-        console.log(res.data.patient._id);
+        const token = res.data.token
         id = res.data.patient._id;
+
         AsyncStorage.setItem("access_token", JSON.stringify(id));
+        AsyncStorage.setItem("token", JSON.stringify(token));
+
         if (res.data.result === true) {
           alert("Login Successed! ");
           Actions.push("Home");
