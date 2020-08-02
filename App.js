@@ -20,7 +20,6 @@ import LoginContainerPatient from "./src/components/screens/loginContainerPatien
 
 /// the new code for the navigation
 
-
 export default Esraa = () => {
 
  

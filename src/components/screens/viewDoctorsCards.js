@@ -24,7 +24,9 @@ export default class Cards extends React.Component {
 
     async componentDidMount() {
         
-        var url = 'http://192.168.127.67:8080/api/users/doctors';
+
+        var url = 'http://192.168.127.67:8080/api/user/doctors';
+
         var that = this
         await axios.get(url)
             .then(function (res) {

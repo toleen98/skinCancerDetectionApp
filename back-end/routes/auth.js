@@ -45,7 +45,7 @@ router.post('/patient/signup', (req, res) =>{
 })
 
 
-//doctors regestration
+
 
 
 
