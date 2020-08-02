@@ -81,7 +81,7 @@ function Drwer(props) {
         />
         <DrwerNavigator.Screen
           name="Help"
-          component={PendingAp}
+          component={DoctorProfile}
           options={{
             drawerIcon: ({ tintColor }) => (
               <MaterialIcons name="help" size={16} color={tintColor} />

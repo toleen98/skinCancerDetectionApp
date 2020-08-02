@@ -8,8 +8,9 @@ const auth = require("./routes/auth");
 const patientupdate = require("./routes/patientUpdate");
 const login = require("./routes/login");
 
-const doctors = require("./routes/doctor")
-const appoints = require("./routes/appoints")
+const doctors = require("./routes/doctor");
+const appoints = require("./routes/appoints");
+const docprf = require("./routes/doctorProfile");
 
 const book = require("./routes/book");
 const appoint = require("./routes/patientApmnt");
@@ -28,7 +29,9 @@ app.get("/", (req, res) => {
 });
 
 
+
 app.use("/api/user/", doctors);
+
 
 app.use("/api/user", auth);
 app.use("", appoints);
@@ -40,8 +43,8 @@ app.use("", appoint);
 app.use("",reportPatient);
 app.use("", scheduleDoctor);
 app.use("", pendding);
+app.use("", docprf);
 // app.use("/api/profile", patientupdate)
-
 
 
 app.listen(port, () => console.log(`Server started on port: ${port}`));
