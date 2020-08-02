@@ -9,6 +9,15 @@ router.get("/doctors",(req,res) => {
         res.json(users);
     })
 })
+router.post("/doctor",(req,res) => {
+    console.log(req.body)
+    User.Doctor.findOne({_id: req.body.id}).then(user=>{
+        console.log(user)
+        res.json(user);
+    })
+})
+
+
 
 //creat new doctor 
 router.post('/doctor/signup', (req, res) =>{
@@ -44,6 +53,7 @@ router.post('/doctor/signup', (req, res) =>{
         });
       });
 });
+
 
 //login
 router.post("/doctor/login", function (req, res) {
