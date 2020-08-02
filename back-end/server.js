@@ -13,7 +13,10 @@ const appoints = require("./routes/appoints")
 
 const book = require("./routes/book");
 const appoint = require("./routes/patientApmnt");
+const reportPatient = require("./routes/patientReport");
+const scheduleDoctor = require("./routes/doctorSchedule");
 
+const pendding = require("./routes/pendding");
 app.use(cors());
 app.use(bodyParser.json());
 const port = process.env.PORT || 8080;
@@ -33,6 +36,11 @@ app.use("/api/profile", patientupdate)
 app.use("",login);
 app.use("",book);
 app.use("", appoint);
+
+app.use("",reportPatient);
+app.use("", scheduleDoctor);
+app.use("", pendding);
+// app.use("/api/profile", patientupdate)
 
 
 

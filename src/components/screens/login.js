@@ -44,12 +44,15 @@ function Login(props) {
     };
 
     console.log(props);
+    
       
     var id;
 
     axios
 
+
       .post("http://192.168.127.67:8080/login", user)
+
 
       .then((res) => {
         const token = res.data.token
@@ -69,22 +72,7 @@ function Login(props) {
       })
       .catch((err) => console.log(err));
   };
-  //   const navigateAction = NavigationActions.navigate({
-  // 	routeName: 'MyDatePicker',
 
-  // 	params: {},
-
-  // 	action: NavigationActions.navigate({ routeName: 'MyDatePicker' }),
-  //   });
-  //   const MapsStack = createStackNavigator({
-  //     MyDatePicker: {
-  //       screen: MyDatePicker,
-  //       navigationOptions: ({ navigation }) => ({
-  //         header: <Header navigation={navigation} />,
-  //         headerTransparent: true,
-  //       }),
-  //     },
-  //   });
 
   return (
     <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
