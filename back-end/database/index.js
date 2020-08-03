@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 const url = "mongodb+srv://yasmeen:1996292yaso@cluster0-l9jkx.mongodb.net/skinCancer?retryWrites=true&w=majority";
 const { MongoClient } = require("mongodb");
-const uri = "mongodb+srv://yasmeen:1996292yaso@cluster0-l9jkx.mongodb.net/skinCancer?retryWrites=true&w=majority";
+const dotenv = require('dotenv');
+
+dotenv.config();
+const uri = process.env.MONGO;
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
