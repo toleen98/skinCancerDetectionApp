@@ -21,19 +21,24 @@ it("Should save user to database", async (done) => {
   });
 
   const pat = await dataB.Patient.findOne({ email: "smunawer@gmail.com" });
+  console.log(pat);
+  expect(pat.name).toBeTruthy();
+  expect(pat.email).toBeTruthy();
 
+  expect(res.body.name).toBeTruthy();
+  expect(res.body.email).toBeTruthy();
   done();
 });
 
 //clean all collections and data from database
-// async function removeAllCollections() {
-//   const collections = Object.keys(mongoose.connection.collections);
-//   for (const collectionName of collections) {
-//     const collection = mongoose.connection.collections[collectionName];
-//     await collection.deleteMany();
-//   }
-// }
+async function removeAllCollections() {
+  const collections = Object.keys(mongoose.connection.collections);
+  for (const collectionName of collections) {
+    const collection = mongoose.connection.collections[collectionName];
+    await collection.deleteMany();
+  }
+}
 
-// afterEach(async () => {
-//   await removeAllCollections();
-// });
+afterEach(async () => {
+  await removeAllCollections();
+});
