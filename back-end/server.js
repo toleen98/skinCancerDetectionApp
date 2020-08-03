@@ -28,16 +28,11 @@ app.get("/", (req, res) => {
 });
 
 
-
 app.use("/api/user/", doctors);
-
-
 app.use("/api/user", auth);
 app.use("/api/profile", patientupdate)
 app.use("",login);
 app.use("",book);
-app.use("", appoint);
-
 app.use("",reportPatient);
 app.use("", scheduleDoctor);
 app.use("", pendding);

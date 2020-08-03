@@ -8,9 +8,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { AntDesign } from "@expo/vector-icons";
 import axios from "axios";
 import * as MailComposer from "expo-mail-composer"
-
 const { width } = Dimensions.get("screen");
-
 export default class DoctorPendingApp extends React.Component {
   state = {
     userId: "",
