@@ -168,7 +168,7 @@ export default class DoctorPendingApp extends React.Component {
                     size={25}
                     color="black"
                     style={styles.iconStyleCircle}
-                    onPress={this.rejected.bind(this, card._id)}
+                    onPress={this.rejected.bind(this, card._id, this.state.patientEmail[id])}
                   />
                 </View>
               </Card>
