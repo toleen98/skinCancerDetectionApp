@@ -43,11 +43,16 @@ function Login(props) {
     };
 
     console.log(props);
+    
       
     var id;
 
     axios
+
+
       .post("http://192.168.127.67:8080/login", user)
+
+
       .then((res) => {
         const token_pa = res.data.token
         id = res.data.patient._id;
@@ -65,9 +70,8 @@ function Login(props) {
         }
       })
       .catch((err) => console.log(err));
-
-      
   };
+
 
   return (
     <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>

@@ -63,7 +63,7 @@ class MyDatePicker extends React.Component {
     axios
       .post(url, appointment)
       .then(function (response) {
-        // alert("Appointment booked! Wait the doctor response.");
+        alert("Appointment booked! Wait the doctor response.");
         
         console.log(response);
       })
