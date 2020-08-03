@@ -7,13 +7,15 @@ import theme from "../../theme";
 import AsyncStorage from "@react-native-community/async-storage";
 import { AntDesign } from "@expo/vector-icons";
 import axios from "axios";
+import * as MailComposer from "expo-mail-composer"
 const { width } = Dimensions.get("screen");
 export default class DoctorPendingApp extends React.Component {
   state = {
     userId: "",
     appointment: [],
-    patientName: "",
-    patientLastName: "",
+    patientName: [],
+    patientLastName: [],
+    patientEmail:[],
   };
   async componentDidMount() {
     var pointer = this;
@@ -42,19 +44,31 @@ export default class DoctorPendingApp extends React.Component {
           console.log(pointer.state.appointment[0].time);
         })
         .then(async () => {
-          pointer.state.appointment.map(async (element) => {
+          pointer.state.appointment.map(async (element, i) => {
             await axios
               .post("http://192.168.127.67:8080/getPatients", {
                 params: {
-                  value: { pId: element.patientId[0] },
+                  value: { pId: element.patientId[i] },
                 },
               })
-              .then((res) => {
+              .then(async (res) => {
                 console.log("hi axios 2");
-                console.log(res.data.firstName);
-                pointer.setState({ patientName: res.data.firstName });
-                pointer.setState({ patientLastName: res.data.lastName });
-                console.log(pointer.state.patientName);
+                console.log(res.data.email);
+
+                pointer.state.patientName.push(res.data.firstName);
+                pointer.state.patientLastName.push( res.data.lastName);
+                pointer.state.patientEmail.push( res.data.email  );
+
+                let patientName = pointer.state.patientName
+                let patientLastName = pointer.state.patientLastName;
+                let patientEmail = pointer.state.patientEmail;
+              
+                await pointer.setState({ 
+                  patientName: patientName,
+                  patientLastName: patientLastName,
+                  patientEmail: patientEmail  
+                });
+                console.log(pointer.state)
               });
           });
         });
@@ -63,9 +77,15 @@ export default class DoctorPendingApp extends React.Component {
     }
   }
 
-  approved = (apId) => {
-    console.log(apId);
+  approved = (apId,pEmail) => {
+   
     var url = `http://192.168.127.67:8080/approve`;
+    // Opens prefilled email
+    MailComposer.composeAsync({
+    recipients: [pEmail], // array of email addresses
+    subject: "Skin Cancer Appointment",
+    body: "Your appointment is approved."
+    })
     axios
       .post(url, { id: apId })
       .then(function (response) {
@@ -77,8 +97,13 @@ export default class DoctorPendingApp extends React.Component {
       });
   };
 
-  rejected = (apId) => {
-    console.log(apId);
+  rejected = (apId, pEmail) => {
+    MailComposer.composeAsync({
+      recipients: [pEmail], // array of email addresses
+      subject: "Skin Cancer Appointment",
+      body: "Your appointment is rejected, choose another time."
+    })
+
     var url = `http://192.168.127.67:8080/rejected`;
     axios
       .post(url, { id: apId })
@@ -92,6 +117,7 @@ export default class DoctorPendingApp extends React.Component {
   };
 
   render() {
+    console.log(this.state.appointment)
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
         <ScrollView contentContainerStyle={styles.cards}>
@@ -105,7 +131,7 @@ export default class DoctorPendingApp extends React.Component {
                 titleColor={card.full ? theme.COLORS.WHITE : null}
                 style={styles.card}
                 title={
-                  this.state.patientName + " " + this.state.patientLastName
+                  this.state.patientName[id] + " " + this.state.patientLastName[id]
                 }
                 caption={
                   "Date : " +
@@ -133,14 +159,14 @@ export default class DoctorPendingApp extends React.Component {
                     size={25}
                     color="black"
                     style={styles.iconStyleCheck}
-                    onPress={this.approved.bind(this, card._id)}
+                    onPress={this.approved.bind(this, card._id, this.state.patientEmail[id])}
                   />
                   <AntDesign
                     name="closecircle"
                     size={25}
                     color="black"
                     style={styles.iconStyleCircle}
-                    onPress={this.rejected.bind(this, card._id)}
+                    onPress={this.rejected.bind(this, card._id, this.state.patientEmail[id])}
                   />
                 </View>
               </Card>

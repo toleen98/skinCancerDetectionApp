@@ -8,8 +8,8 @@ const auth = require("./routes/auth");
 const patientupdate = require("./routes/patientUpdate");
 const login = require("./routes/login");
 
-const doctors = require("./routes/doctor")
-const appoints = require("./routes/appoints")
+const doctors = require("./routes/doctor");
+const docprf = require("./routes/doctorProfile");
 
 const book = require("./routes/book");
 const appoint = require("./routes/patientApmnt");
@@ -28,15 +28,15 @@ app.get("/", (req, res) => {
 });
 
 
+app.use("/api/user/", doctors);
 app.use("/api/user", auth);
-app.use("/api/profile", patientupdate);
-app.use("", login);
-app.use("/api/users/", doctors);
-app.use("", book);
-app.use("", appoint);
+app.use("/api/profile", patientupdate)
+app.use("",login);
+app.use("",book);
 app.use("",reportPatient);
 app.use("", scheduleDoctor);
 app.use("", pendding);
+app.use("", docprf);
 // app.use("/api/profile", patientupdate)
 
 
