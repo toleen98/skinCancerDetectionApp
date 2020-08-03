@@ -18,7 +18,6 @@ const { height, width } = Dimensions.get("window");
 import axios from "axios";
 import { useState } from "react";
 import { set } from "mongoose";
-import { NavigationActions } from "@react-navigation/native";
 // import { createStackNavigator } from "@react-navigation/stack";
 
 import Header from "../common/header";
@@ -48,13 +47,13 @@ function Login(props) {
     var id;
 
     axios
-      .post("http://192.168.1.8:8080/login", user)
+      .post("http://192.168.127.67:8080/login", user)
       .then((res) => {
-        const token = res.data.token
+        const token_pa = res.data.token
         id = res.data.patient._id;
 
         AsyncStorage.setItem("access_token", JSON.stringify(id));
-        AsyncStorage.setItem("token", JSON.stringify(token));
+        AsyncStorage.setItem("token_pa", JSON.stringify(token_pa));
 
         if (res.data.result === true) {
           alert("Login Successed! ");
@@ -66,23 +65,9 @@ function Login(props) {
         }
       })
       .catch((err) => console.log(err));
+
+      
   };
-  //   const navigateAction = NavigationActions.navigate({
-  // 	routeName: 'MyDatePicker',
-
-  // 	params: {},
-
-  // 	action: NavigationActions.navigate({ routeName: 'MyDatePicker' }),
-  //   });
-  //   const MapsStack = createStackNavigator({
-  //     MyDatePicker: {
-  //       screen: MyDatePicker,
-  //       navigationOptions: ({ navigation }) => ({
-  //         header: <Header navigation={navigation} />,
-  //         headerTransparent: true,
-  //       }),
-  //     },
-  //   });
 
   return (
     <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>

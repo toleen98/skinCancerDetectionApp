@@ -26,6 +26,7 @@ import ViewDoctor from "./viewDoctor";
 import Logout from "./logOut";
 import AboutUs from "./aboutUs";
 import Help from "./help";
+import App from './notTest'
 
 const DrwerNavigator = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -35,7 +36,7 @@ function Drwer(props) {
       <DrwerNavigator.Navigator>
         <DrwerNavigator.Screen
           name="Home"
-          component={HomePatient}
+          component={App}
           options={{
             drawerIcon: ({ tintColor }) => (
               <Feather name="home" size={16} color={tintColor} />

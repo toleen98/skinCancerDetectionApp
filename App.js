@@ -12,16 +12,11 @@ import {
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-community/async-storage";
-
-
-
 import LoginContainerPatient from "./src/components/screens/loginContainerPatient";
 
 /// the new code for the navigation
-
 export default Esraa = () => {
- 
-  
+
   return <LoginContainerPatient/>
 };
 

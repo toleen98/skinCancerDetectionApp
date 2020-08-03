@@ -1,8 +1,7 @@
 import React from "react";
 import { ScrollView, StyleSheet, Dimensions } from "react-native";
 import axios from "axios";
-// Galio components
-import { Card, Block, NavBar, Icon, Text, Button } from "galio-framework";
+import { Card, Block, Text, Button } from "galio-framework";
 import theme from "../../theme";
 import AsyncStorage from "@react-native-community/async-storage";
 const { width } = Dimensions.get("screen");
@@ -40,7 +39,6 @@ class Report extends React.Component {
     }
   }
   render() {
-    const repo = this.state.report;
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
         <Text></Text>
@@ -49,14 +47,14 @@ class Report extends React.Component {
             <Card
               flex
               style={styles.card}
-              title={"\n" + "    " + repo.firstName + " " + repo.lastName}
+              title={"\n" + "    " + this.state.report.firstName + " " + this.state.report.lastName}
               avatar={`${card.avatar}`}
             >
               <Card style={styles.Text1}>
                 <Text style={styles.Text1}>
-                  Weight : {repo.weight} Kg {"\n"}
-                  Height : {repo.height} cm {"\n"}
-                  Blood Type : {repo.blood} {"\n"}
+                  Weight : {this.state.report.weight} Kg {"\n"}
+                  Height : {this.state.report.height} cm {"\n"}
+                  Blood Type : {this.state.report.blood} {"\n"}
                 </Text>
               </Card>
             </Card>
