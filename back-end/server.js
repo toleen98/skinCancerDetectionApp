@@ -9,7 +9,6 @@ const patientupdate = require("./routes/patientUpdate");
 const login = require("./routes/login");
 
 const doctors = require("./routes/doctor");
-const appoints = require("./routes/appoints");
 const docprf = require("./routes/doctorProfile");
 
 const book = require("./routes/book");
@@ -29,17 +28,11 @@ app.get("/", (req, res) => {
 });
 
 
-
 app.use("/api/user/", doctors);
-
-
 app.use("/api/user", auth);
-app.use("", appoints);
 app.use("/api/profile", patientupdate)
 app.use("",login);
 app.use("",book);
-app.use("", appoint);
-
 app.use("",reportPatient);
 app.use("", scheduleDoctor);
 app.use("", pendding);
