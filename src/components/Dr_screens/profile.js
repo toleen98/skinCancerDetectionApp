@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { Block, Button, Input, Text } from "galio-framework";
 import theme from "../../theme";
 import Header from "../common/header";
+import { AntDesign, MaterialCommunityIcons, EvilIcons } from '@expo/vector-icons'; 
 
 const { height, width } = Dimensions.get("window");
 
@@ -90,26 +91,33 @@ class Profile extends React.Component {
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.BLACK }}>
         <Header drawer={this.props} />
-        <Block flex ={1}  style={styles.profileCard} >
+        <Block flex  style={styles.profileCard} >
         <Block flex middle style={styles.avatarContainer}>
         <Image
             source={{uri:dr.profileImage}}        
             style={styles.avatar}
 
         />
-         <Text>{ (dr.firstName +" " + dr.lastName).toUpperCase()}</Text>
+         <Text size={theme.SIZES.FONT * 1.3} color={"#18DCFF"}>{ (dr.firstName +" " + dr.lastName).toUpperCase()}</Text>
         </Block>
         
-        <Block flex>
-       
-        <Text>{"Phone Number: "+ dr.phoneNumber}</Text>
-        <Text>{"Email: "+ dr.email}</Text>
-        <Text>{"Working Hours: "+ dr.workingFrom +" To "+ dr.workingTo}</Text>
-        <Text>{"Clinic Location: " +dr.clinicLocation}</Text>
+        <Block flex={1.1}>
+        <Text  size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}><AntDesign name="phone" size={20} color={theme.COLORS.GREY} />{" Phone Number: "}</Text>
+        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      "+dr.phoneNumber+"\n"}</Text>
+        <Text size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}><MaterialCommunityIcons name="email-outline" size={20} color={theme.COLORS.GREY} />{" Email: "}</Text>
+        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      " + dr.email+"\n"}</Text>
+        <Text size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}> <AntDesign name="clockcircleo" size={19} color={theme.COLORS.GREY} />{" Working Hours: "}</Text>
+        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      " + dr.workingFrom +" To "+ dr.workingTo+"\n"}</Text>
+        <Text size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}><EvilIcons name="location" size={24} color={theme.COLORS.GREY} />{"Clinic Location: " }</Text>
+        <Text size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      " + dr.clinicLocation+'\n'}</Text>
+        <Block middle>
         <Button 
             round
             color={"#18DCFF"}
-            style={{ width: 100 }}> Update</Button>
+            
+            style={{ width: 150 }}> UPDATE</Button>
+        </Block>
+       
         </Block>
         </Block>
       </Block>
@@ -146,7 +154,7 @@ const styles = StyleSheet.create({
     padding: theme.SIZES.BASE,
     marginHorizontal: theme.SIZES.BASE,
     marginTop: 65,
-    marginBottom:65,
+    marginBottom:60,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
     backgroundColor: theme.COLORS.WHITE,
