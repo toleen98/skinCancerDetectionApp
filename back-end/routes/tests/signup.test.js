@@ -1,44 +1,33 @@
-const app = require("../../server.js");
-app.listen(8080);
-const supertest = require("supertest");
-const request = supertest(app);
-const mongoose = require("mongoose");
-const databaseName = "signBase";
-const dataB = require("../../database/models.js");
+// const app = require("../../server.js");
+// app.listen(8888);
+// const supertest = require("supertest");
+// const request = supertest(app);
+// const mongoose = require("mongoose");
+// const databaseName = "signBase";
+// const dataB = require("../../database/models.js");
 
-beforeAll(async () => {
-  const url = `mongodb://127.0.0.1/${databaseName}`;
-  await mongoose.connect(url, { useNewUrlParser: true });
-});
+// beforeAll(async () => {
+//   const url = `mongodb://127.0.0.1/${databaseName}`;
+//   await mongoose.connect(url, { useNewUrlParser: true });
+// });
 
-jest.useFakeTimers();
+// jest.useFakeTimers();
+// it("Should save user to database", async (done) => {
+//   const res = await request.post("/api/user/patient/signup").send({
+//     name: "smunawer",
+//     email: "smunawer@gmail.com",
+//     password: "HELLooo!!!",
+//   });
 
-it("Should save user to database", async (done) => {
-  const res = await request.post("/api/user/patient/signup").send({
-    name: "smunawer",
-    email: "smunawer@gmail.com",
-    password: "HELLooo!!!",
-  });
+//   const son = await dataB.Patient.findOne({ email: "smunawer@gmail.com" });
+//   console.log(son);
+//   console.log(res.body);
+//   jest.useFakeTimers();
+//   expect(res.body.name).toHaveProperty("email");
+//   expect(res.body.email).toBe("smunawer@gmail.com");
+//   done();
+// });
 
-  const pat = await dataB.Patient.findOne({ email: "smunawer@gmail.com" });
-  console.log(pat);
-  expect(pat.name).toBeTruthy();
-  expect(pat.email).toBeTruthy();
-
-  expect(res.body.name).toBeTruthy();
-  expect(res.body.email).toBeTruthy();
-  done();
-});
-
-//clean all collections and data from database
-async function removeAllCollections() {
-  const collections = Object.keys(mongoose.connection.collections);
-  for (const collectionName of collections) {
-    const collection = mongoose.connection.collections[collectionName];
-    await collection.deleteMany();
-  }
-}
-
-afterEach(async () => {
-  await removeAllCollections();
-});
+// afterAll(async () => {
+//   await dataB.Patient.deleteMany();
+// });
