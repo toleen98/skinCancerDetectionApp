@@ -12,6 +12,8 @@ import { Block, Button, Input, Text } from "galio-framework";
 import theme from "../../theme";
 import Header from "../common/header";
 import { AntDesign, MaterialCommunityIcons, EvilIcons } from '@expo/vector-icons'; 
+import { Actions } from 'react-native-router-flux';
+
 
 const { height, width } = Dimensions.get("window");
 
@@ -50,38 +52,9 @@ class Profile extends React.Component {
     })
   }
 
-  handleChange = (name, value) => {
-    this.setState({ [name]: value });
-  };
+   
+  
 
-  handleSubmit =async () => {
-    const value = await AsyncStorage.getItem("access_token");
-    console.log("the value here");
-    console.log(value);
-    this.setState({userId: value})
-    console.log(this.state.userId);
-    const doctor = {
-      // profileImage: this.state.profileImage,
-      phoneNumber: this.state.phoneNumber,
-      clinicLocation: this.state.clinicLocation,
-      workingFrom: this.state.workingFrom,
-      workingTo: this.state.workingTo,
-    };
-    var param = {
-      doctor: doctor,
-      id: this.state.userId,
-    };
-    console.log(doctor);
-    console.log("params here");
-    console.log(param);
-    var url = "http://192.168.1.149:8080/doctor/update";
-    axios.post(url, param).then((response) => {
-      // response.send("account updated");
-      console.log("then");
-    });
-    //   .catch((error) => res.send("please try again"), console.log(error));
-    // Alert.alert("doctor updated");
-  };
 
   render() {
     const { navigation } = this.props;
@@ -114,8 +87,10 @@ class Profile extends React.Component {
         <Button 
             round
             color={"#18DCFF"}
-            
-            style={{ width: 150 }}> UPDATE</Button>
+            style={{ width: 150 }}
+            onPress={()=> {Actions.push('DoctorProfile')}}
+            > UPDATE</Button>
+           
         </Block>
        
         </Block>

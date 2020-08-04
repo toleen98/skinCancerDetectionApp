@@ -28,7 +28,7 @@ import AboutUs from "./aboutUs";
 import Help from "./help";
 import DoctorAppointments from "../Dr_screens/doctorSchedule";
 import DoctorPendingApp from "../Dr_screens/pendding";
-import Profile from "../Dr_screens/profile"
+import ProfileRout from "../Dr_screens/profileRout"
 const DrwerNavigator = createDrawerNavigator();
 const Stack = createStackNavigator();
 function DrwerDoctor(props) {
@@ -55,7 +55,7 @@ function DrwerDoctor(props) {
         />
         <DrwerNavigator.Screen
           name="Profile"
-          component={Profile}
+          component={ProfileRout}
           options={{
             drawerIcon: ({ tintColor }) => (
               <Feather name="user" size={16} color={tintColor} />
