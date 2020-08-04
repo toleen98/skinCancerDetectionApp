@@ -18,7 +18,6 @@ const { height, width } = Dimensions.get("window");
 import axios from "axios";
 import { useState } from "react";
 import { set } from "mongoose";
-import { NavigationActions } from "@react-navigation/native";
 // import { createStackNavigator } from "@react-navigation/stack";
 
 import Header from "../common/header";
@@ -46,14 +45,21 @@ function Login(props) {
     console.log(props);
     
       
-    // var id;
+    var id;
 
     axios
-      .post("http://192.168.1.123:8080/login", user)
+
+
+      .post("http://192.168.127.67:8080/login", user)
+
+
       .then((res) => {
-        console.log(res.data.patient._id);
+        const token_pa = res.data.token
         id = res.data.patient._id;
+
         AsyncStorage.setItem("access_token", JSON.stringify(id));
+        AsyncStorage.setItem("token_pa", JSON.stringify(token_pa));
+
         if (res.data.result === true) {
           alert("Login Successed! ");
           Actions.push("Home");

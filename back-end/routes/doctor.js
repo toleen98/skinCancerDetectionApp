@@ -17,6 +17,8 @@ router.post("/doctor",(req,res) => {
     })
 })
 
+
+
 //creat new doctor 
 router.post('/doctor/signup', (req, res) =>{
 
@@ -51,6 +53,7 @@ router.post('/doctor/signup', (req, res) =>{
         });
       });
 });
+
 
 //login
 router.post("/doctor/login", function (req, res) {

@@ -14,8 +14,8 @@ export default class DoctorAppointments extends React.Component {
     state = {
         userId: "",
         appointment: [],
-        patientName: "",
-        patientLastName : "",
+        patientName: [],
+        patientLastName : [],
       };
     async componentDidMount() {
         var pointer = this;
@@ -28,7 +28,7 @@ export default class DoctorAppointments extends React.Component {
           // console.log(".......")
           // console.log(pointer.state.userId);
           await axios
-            .post("http://192.168.127.36:8080/getAppointments", {
+            .post("http://192.168.127.67:8080/getAppointments", {
               params: {
                 value: { id: pointer.state.userId },
               },
@@ -42,7 +42,7 @@ export default class DoctorAppointments extends React.Component {
             .then (async () => {
               pointer.state.appointment.map(async(element) => {
                 await axios
-                .post("http://192.168.1.80:8080/getPatientsName", {
+                .post("http://192.168.127.67:8080/getPatientsName", {
                 params: {
                     value: { pId: element.patientId[0]},
                 },
@@ -50,9 +50,14 @@ export default class DoctorAppointments extends React.Component {
                 .then((res) => {
                 //console.log("hi axios 2");
                 //console.log(res.data.firstName);
-                pointer.setState({ patientName: res.data.firstName });
-                pointer.setState({ patientLastName: res.data.lastName});
-                //console.log(pointer.state.patientName);
+                pointer.state.patientName.push(res.data.firstName)
+                pointer.state.patientLastName.push(res.data.lastName)
+                pointer.setState({ 
+                  patientName: pointer.state.patientName,
+                  patientLastName: pointer.state.patientLastName
+                 });
+                
+               
                 })
               })
             })
@@ -74,7 +79,7 @@ export default class DoctorAppointments extends React.Component {
                 shadowColor={theme.COLORS.BLACK}
                 titleColor={card.full ? theme.COLORS.WHITE : null}
                 style={styles.card}
-                title={this.state.patientName + " "+ this.state.patientLastName + "\n"+ "\n" + "Date : " + (card.date).slice(0,10) + "\n" + "Time : " + card.time  +" pm"}
+                title={(this.state.patientName[id] + " "+ this.state.patientLastName[id]).toUpperCase() + "\n"+ "\n" + "Date : " + (card.date).slice(0,10) + "\n" + "Time : " + card.time  +" pm"}
               >
                 {card.full ? <LinearGradient colors={['transparent', 'rgba(0,0,0, 0.8)']} style={styles.gradient} /> : null}
               </Card>
