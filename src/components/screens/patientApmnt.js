@@ -29,7 +29,7 @@ class Appointments extends React.Component {
       console.log(pointer.state);
 
       await axios
-        .post("http://192.168.127.36:8080/patient/appoints", {
+        .post("http://192.168.127.67:8080/patient/appoints", {
           params: {
             value: { id: pointer.state.userId },
           },
@@ -42,13 +42,13 @@ class Appointments extends React.Component {
         .then(async () => {
           await pointer.state.appoints.map(async (element) => {
             await axios
-              .post("http://192.168.127.36:8080/api/users/doctor", {
+              .post("http://192.168.127.67:8080/api/user/doctor", {
                 id: element.doctorId[0],
               })
               .then(async (res) => {
                 let array = [];
-                array.push(res.data.firstName + " " + res.data.lastName);
-                await pointer.setState({ doctorName: array });
+                this.state.doctorName.push((res.data.firstName + " " + res.data.lastName).toUpperCase());
+                await pointer.setState({ doctorName: this.state.doctorName });
               });
           });
         });
@@ -88,7 +88,9 @@ class Appointments extends React.Component {
                 borderless
                 shadowColor={theme.COLORS.BLACK}
                 style={styles.card}
-                title={doctors[0]}
+                title={doctors[i]}
+                titleColor={theme.COLORS.WHITE}
+                captionColor={theme.COLORS.WHITE}
                 caption={
                   "Status: " +
                   appoint.status +
