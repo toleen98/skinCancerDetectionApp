@@ -3,6 +3,7 @@ import {
   ScrollView, StyleSheet, Dimensions
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import Header from "../common/header";
 import {
   Card, Block
 } from 'galio-framework';
@@ -63,13 +64,14 @@ export default class DoctorAppointments extends React.Component {
             })
         } 
         catch (error) {
-          console.log("error");
+          console.log(error);
         }
       }
   render() {
    
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
+      <Header drawer={this.props} />
         <ScrollView contentContainerStyle={styles.cards}>
           <Block flex space="between">
             {this.state.appointment.map((card, id) => (
@@ -77,9 +79,18 @@ export default class DoctorAppointments extends React.Component {
                 flex
                 borderless
                 shadowColor={theme.COLORS.BLACK}
-                titleColor={card.full ? theme.COLORS.WHITE : null}
+                titleColor={ theme.COLORS.WHITE }
+        
                 style={styles.card}
-                title={(this.state.patientName[id] + " "+ this.state.patientLastName[id]).toUpperCase() + "\n"+ "\n" + "Date : " + (card.date).slice(0,10) + "\n" + "Time : " + card.time  +" pm"}
+                title={(this.state.patientName[id] + " "+ this.state.patientLastName[id]).toUpperCase() }
+                captionColor={ theme.COLORS.WHITE}
+                caption ={"Date : " + (card.date).slice(0,10) + "\n" + "Time : " + card.time  +" pm"}
+                avatar="https://icons.iconarchive.com/icons/icons-land/medical/256/People-Patient-Male-icon.png"
+                imageStyle={[card.padded ? styles.rounded : null]}
+                imageBlockStyle={[
+                  card.padded ? { padding: theme.SIZES.BASE / 2 } : null,
+                  card.full ? null : styles.noRadius,
+                ]}
               >
                 {card.full ? <LinearGradient colors={['transparent', 'rgba(0,0,0, 0.8)']} style={styles.gradient} /> : null}
               </Card>
