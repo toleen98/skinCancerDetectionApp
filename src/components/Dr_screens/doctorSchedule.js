@@ -80,7 +80,7 @@ export default class DoctorAppointments extends React.Component {
                 borderless
                 shadowColor={theme.COLORS.BLACK}
                 titleColor={ theme.COLORS.WHITE }
-        
+                key = {id}
                 style={styles.card}
                 title={(this.state.patientName[id] + " "+ this.state.patientLastName[id]).toUpperCase() }
                 captionColor={ theme.COLORS.WHITE}
