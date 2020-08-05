@@ -21,13 +21,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-community/async-storage";
 
 import HomePatient from "./homePatient";
-import PatientUpdate from "./patientUpdate";
+import DoctorProfile from "../Dr_screens/doctorProfile";
 import ViewDoctor from "./viewDoctor";
 import Logout from "./logOut";
 import AboutUs from "./aboutUs";
 import Help from "./help";
 import DoctorAppointments from "../Dr_screens/doctorSchedule";
 import DoctorPendingApp from "../Dr_screens/pendding";
+import ProfileRout from "../Dr_screens/profileRout"
 const DrwerNavigator = createDrawerNavigator();
 const Stack = createStackNavigator();
 function DrwerDoctor(props) {
@@ -54,7 +55,7 @@ function DrwerDoctor(props) {
         />
         <DrwerNavigator.Screen
           name="Profile"
-          component={PatientUpdate}
+          component={ProfileRout}
           options={{
             drawerIcon: ({ tintColor }) => (
               <Feather name="user" size={16} color={tintColor} />

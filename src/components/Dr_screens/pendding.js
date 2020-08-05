@@ -4,6 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 // Galio components
 import { Card, Block, NavBar, Icon } from "galio-framework";
 import theme from "../../theme";
+import Header from "../common/header";
 import AsyncStorage from "@react-native-community/async-storage";
 import { AntDesign } from "@expo/vector-icons";
 import axios from "axios";
@@ -44,32 +45,34 @@ export default class DoctorPendingApp extends React.Component {
           console.log(pointer.state.appointment[0].time);
         })
         .then(async () => {
-          pointer.state.appointment.map(async (element, i) => {
-            await axios
+          pointer.state.appointment.map( (element, i) => {
+            console.log("hi",element)
+            console.log("i",i)
+             axios
               .post("http://192.168.127.67:8080/getPatients", {
                 params: {
-                  value: { pId: element.patientId[i] },
+                  value: { pId: element.patientId },
                 },
               })
               .then(async (res) => {
                 console.log("hi axios 2");
-                console.log(res.data.email);
 
                 pointer.state.patientName.push(res.data.firstName);
                 pointer.state.patientLastName.push( res.data.lastName);
                 pointer.state.patientEmail.push( res.data.email  );
-
+               
                 let patientName = pointer.state.patientName
                 let patientLastName = pointer.state.patientLastName;
                 let patientEmail = pointer.state.patientEmail;
-              
-                await pointer.setState({ 
+                
+                pointer.setState({ 
                   patientName: patientName,
                   patientLastName: patientLastName,
                   patientEmail: patientEmail  
                 });
-                console.log(pointer.state)
+               
               });
+              console.log(pointer.state.patientLastName)
           });
         });
     } catch (error) {
@@ -117,9 +120,9 @@ export default class DoctorPendingApp extends React.Component {
   };
 
   render() {
-    console.log(this.state.appointment)
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
+      <Header drawer={this.props} />
         <ScrollView contentContainerStyle={styles.cards}>
           <Block flex space="between">
             {this.state.appointment.map((card, id) => (
@@ -131,8 +134,9 @@ export default class DoctorPendingApp extends React.Component {
                 titleColor={card.full ? theme.COLORS.WHITE : null}
                 style={styles.card}
                 title={
-                  this.state.patientName[id] + " " + this.state.patientLastName[id]
+                 ( this.state.patientName[id] + " " + this.state.patientLastName[id]).toUpperCase()
                 }
+                titleColor={theme.COLORS.WHITE}
                 caption={
                   "Date : " +
                   card.date.slice(0, 10) +
@@ -141,6 +145,13 @@ export default class DoctorPendingApp extends React.Component {
                   card.time +
                   " pm"
                 }
+                captionColor={theme.COLORS.WHITE}
+                avatar="https://icons.iconarchive.com/icons/icons-land/medical/256/People-Patient-Male-icon.png"
+                imageStyle={[card.padded ? styles.rounded : null]}
+                imageBlockStyle={[
+                  card.padded ? { padding: theme.SIZES.BASE / 2 } : null,
+                  card.full ? null : styles.noRadius,
+                ]}
               >
                 {card.full ? (
                   <LinearGradient
@@ -155,6 +166,7 @@ export default class DoctorPendingApp extends React.Component {
                   }}
                 >
                   <AntDesign
+
                     name="checkcircle"
                     size={25}
                     color="black"
@@ -215,10 +227,13 @@ const styles = StyleSheet.create({
   },
   iconStyleCheck: {
     alignItems: "center",
-    left: 200,
+    left: 280,
+    bottom :10
+    
   },
   iconStyleCircle: {
     alignItems: "center",
-    right: 60,
+    right: 20,
+    bottom :10
   },
 });
