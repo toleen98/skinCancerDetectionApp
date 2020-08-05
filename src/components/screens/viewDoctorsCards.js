@@ -68,6 +68,7 @@ export default class Cards extends React.Component {
     const cards = this.state.doctors;
     const { navigation } = this.props;
 
+    console.log(cards)
 
     return (
      
@@ -122,6 +123,7 @@ const styles = StyleSheet.create({
     width: width - theme.SIZES.BASE * 2,
     marginVertical: theme.SIZES.BASE * 0.875,
     elevation: theme.SIZES.BASE / 2,
+    marginBottom:35
   },
   full: {
     position: 'absolute',

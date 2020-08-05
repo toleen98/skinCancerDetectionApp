@@ -86,6 +86,7 @@ function DrwerDoctor(props) {
         <DrwerNavigator.Screen
           name="Logout"
           component={Logout}
+          
           options={{
             drawerIcon: ({ tintColor }) => (
               <MaterialIcons name="exit-to-app" size={16} color={tintColor} />
