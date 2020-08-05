@@ -27,12 +27,20 @@ class DoctorProfile extends React.Component {
     this.setState({ [name]: value });
   };
 
+  async componentDidMount() {
+    var pointer = this;
+    try {
+      const value = await AsyncStorage.getItem("access_token");
+      console.log("hi from doctor update");
+      console.log(value);
+      pointer.setState({ userId: value });
+      console.log(pointer.state.userId);
+    } catch (error) {
+      console.log("err");
+    }
+  }
+
   handleSubmit = async () => {
-    const value = await AsyncStorage.getItem("access_token");
-    console.log("the value here");
-    console.log(value);
-    this.setState({ userId: value });
-    console.log(this.state.userId);
     const doctor = {
       // profileImage: this.state.profileImage,
       phoneNumber: this.state.phoneNumber,
