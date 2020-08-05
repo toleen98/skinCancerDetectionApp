@@ -8,7 +8,7 @@ import {
   Text,
   View,
   PanResponder,
-  TextInput,
+  TextInput, Alert
 } from "react-native";
 import { Button } from "galio-framework";
 import Header from "../common/header";
@@ -28,6 +28,9 @@ class MyDatePicker extends React.Component {
       text: " ",
       dr_id: " ",
       patientId:" ",
+      workingFrom:"",
+      workingTo:"",
+      workingHours:''
     };
     this.showDatePicker = this.showDatePicker.bind(this);
     this.hideDatePicker = this.hideDatePicker.bind(this);
@@ -38,12 +41,38 @@ class MyDatePicker extends React.Component {
   async componentDidMount() {
     var that = this;
     try {
-      const jsonValue = await AsyncStorage.getItem("Dr_id");
+      const id = await AsyncStorage.getItem("Dr_id");
       const userId = await AsyncStorage.getItem("access_token");
-      // console.log(userId)
-      // console.log(typeof jsonValue);
-      await that.setState({ dr_id: JSON.parse(jsonValue),patientId:JSON.parse(userId)});
-      console.log(that.state)
+      that.setState({ dr_id: JSON.parse(id),patientId:JSON.parse(userId)});
+
+
+      const url = "http://192.168.127.67:8080/api/user/doctor"
+      await axios
+      .post(url, {id: JSON.parse(id)})
+      .then( (res) => {
+        let from = '';
+        let to = '';
+
+        if (res.data.workingTo[1] === ":" || res.data.workingTo[1] === " ") {
+          to += res.data.workingTo[0]
+        }
+        else {
+          to += res.data.workingTo[0] + res.data.workingTo[1]
+        }
+        if (res.data.workingFrom[1] === ":" || res.data.workingFrom[1] === " ") {
+          from += res.data.workingFrom[0]
+        }
+        else {
+          from += res.data.workingFrom[0] + res.data.workingFrom[1]
+          to += res.data.workingTo[0] + res.data.workingTo[1]
+        }
+
+        that.setState({
+          workingTo: to ,
+          workingFrom: from,
+          workingHours: res.data.workingFrom +" To " + res.data.workingTo
+        })
+      })
     } catch (e) {
       console.log(e)
       console.log("error !!");
@@ -51,6 +80,12 @@ class MyDatePicker extends React.Component {
   }
 
   book = () => {
+    console.log(this.state.workingTo)
+   if (!(this.state.selectedHours >= Number(this.state.workingFrom) && this.state.selectedHours <= Number(this.state.workingTo)) ) {
+      Alert.alert('Book Appointment', 'Unvalied time, this doctor is not working at this hours.\n\nWorking hour: '+ this.state.workingHours);
+      return;
+    }
+
     var url = `http://192.168.127.36:8080/bookappointment`;
     const appointment = {
       date: this.state.date,
@@ -94,16 +129,17 @@ class MyDatePicker extends React.Component {
   };
 
   render() {
-    // console.log(this.state)
+    console.log(this.state)
 
     return (
       <View>
         
         
           <Text style={styles.descreption}>
-            Choose a date and time to book your appointment.. {"\n"}
-            {"\n"}
+            Choose a date and time to book your appointment.. 
+           
           </Text>
+          <Text>{"*Note: working hours from " + this.state.workingHours + "!" + "\n\n" }</Text>
         
         <View style={styles.container}>
           <Text style={styles.label}>Date</Text>
@@ -141,11 +177,12 @@ class MyDatePicker extends React.Component {
               style={styles.time}
               selectedHours={this.state.selectedHours}
               selectedMinutes={this.state.selectedMinutes}
-              onChange={(hours, minutes) =>
+              onChange={(hours, minutes) =>{
+               console.log(typeof hours )
                 this.setState({
                   selectedHours: hours,
                   selectedMinutes: minutes,
-                })
+                })}
               }
             />
           </View>
