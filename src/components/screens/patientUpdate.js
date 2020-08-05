@@ -11,7 +11,7 @@ import {
 // galio component
 import { Block, Button, Input, Text, NavBar } from "galio-framework";
 import theme from "../../theme";
-import Header from '../common/header';
+import Header from "../common/header";
 
 const { height, width } = Dimensions.get("window");
 
@@ -36,18 +36,15 @@ class PatientProfile extends React.Component {
       blood: this.state.blood,
     };
     console.log(patient);
-    var url = 'http://192.168.127.67:8080/api/profile/patient/updatepatient';
-    axios
-      .post(url, patient)
-      .then((response) => {
-        // response.send("account updated");
-        console.log("then")
-      })
-      // .catch((error) => res.send("please try again") , console.log(error));
+    var url = "http://192.168.1.149:8080/api/profile/patient/updatepatient";
+    axios.post(url, patient).then((response) => {
+      // response.send("account updated");
+      console.log("then");
+    });
+    // .catch((error) => res.send("please try again") , console.log(error));
     //alert to check
     // Alert.alert("patient updated");
   };
-
 
   render() {
     const { navigation } = this.props;
@@ -55,7 +52,7 @@ class PatientProfile extends React.Component {
 
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
-         <Header drawer={this.props} />
+        <Header drawer={this.props} />
         <KeyboardAvoidingView
           style={styles.container}
           behavior="height"
@@ -72,9 +69,9 @@ class PatientProfile extends React.Component {
             {/* here logo */}
             <Image source={require("../../../assets/splash.png")} />
             <Text muted center size={theme.SIZES.FONT * 1.5} color={"#18DCFF"}>
-            {" "}
-            Update Your Profile{" "}
-          </Text>
+              {" "}
+              Update Your Profile{" "}
+            </Text>
             <Block
               row
               center
@@ -90,6 +87,16 @@ class PatientProfile extends React.Component {
                 placeholder="Phone"
                 autoCapitalize="none"
                 style={{ width: width * 0.9 }}
+                onBlur={() => {
+                  var regPh = /^(1|2|3|4|5|6|7|8|9|0)/;
+                  if (this.state.phoneNumber.length === 0) {
+                    alert("should enter phone number");
+                  } else if (!regPh.test(this.state.phoneNumber)) {
+                    alert("not valid phone number");
+                  } else if (this.state.phoneNumber.length > 10) {
+                    alert("max number allowed 10");
+                  }
+                }}
                 onChangeText={(text) => this.handleChange("phoneNumber", text)}
               />
               <Input
@@ -97,6 +104,11 @@ class PatientProfile extends React.Component {
                 placeholder="Height"
                 autoCapitalize="none"
                 style={{ width: width * 0.9 }}
+                onBlur={() => {
+                  if (this.state.patientheight.length === 0) {
+                    alert("should enter your height");
+                  }
+                }}
                 onChangeText={(text) =>
                   this.handleChange("patientheight", text)
                 }
@@ -106,6 +118,11 @@ class PatientProfile extends React.Component {
                 placeholder="Weight"
                 autoCapitalize="none"
                 style={{ width: width * 0.9 }}
+                onBlur={() => {
+                  if (this.state.weight.length === 0) {
+                    alert("should enter your weight");
+                  }
+                }}
                 onChangeText={(text) => this.handleChange("weight", text)}
               />
               <Input
@@ -113,6 +130,15 @@ class PatientProfile extends React.Component {
                 placeholder="Blood"
                 autoCapitalize="none"
                 style={{ width: width * 0.9 }}
+                onBlur={() => {
+                  var regB = /^(A|B|AB|O)[-+]$/;
+                  if (this.state.bloodType.length === 0) {
+                    alert("should enter blood type");
+                  } else if (!regB.test(this.state.bloodType)) {
+                    console.log(typeof this.state.bloodType);
+                    alert("not valid blood type, example : A+ / O-");
+                  }
+                }}
                 onChangeText={(text) => this.handleChange("blood", text)}
               />
             </Block>

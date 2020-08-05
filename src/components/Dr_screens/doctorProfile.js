@@ -27,11 +27,11 @@ class DoctorProfile extends React.Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit =async () => {
+  handleSubmit = async () => {
     const value = await AsyncStorage.getItem("access_token");
     console.log("the value here");
     console.log(value);
-    this.setState({userId: value})
+    this.setState({ userId: value });
     console.log(this.state.userId);
     const doctor = {
       // profileImage: this.state.profileImage,
@@ -47,7 +47,7 @@ class DoctorProfile extends React.Component {
     console.log(doctor);
     console.log("params here");
     console.log(param);
-    var url = "http://192.168.127.36:8080/doctor/update";
+    var url = "http://192.168.1.149:8080/doctor/update";
     axios.post(url, param).then((response) => {
       // response.send("account updated");
       console.log("then");
@@ -97,6 +97,16 @@ class DoctorProfile extends React.Component {
                 placeholder="Phone"
                 autoCapitalize="none"
                 style={{ width: width * 0.9 }}
+                onBlur={() => {
+                  var regPh = /^(1|2|3|4|5|6|7|8|9|0)/;
+                  if (this.state.phoneNumber.length === 0) {
+                    alert("should enter phone number");
+                  } else if (!regPh.test(this.state.phoneNumber)) {
+                    alert("not valid phone number");
+                  } else if (this.state.phoneNumber.length > 10) {
+                    alert("max number allowed 10");
+                  }
+                }}
                 onChangeText={(text) => this.handleChange("phoneNumber", text)}
               />
               <Input
@@ -104,6 +114,11 @@ class DoctorProfile extends React.Component {
                 placeholder="Location"
                 autoCapitalize="none"
                 style={{ width: width * 0.9 }}
+                onBlur={() => {
+                  if (this.state.clinicLocation.length === 0) {
+                    alert("should enter clinic location");
+                  }
+                }}
                 onChangeText={(text) =>
                   this.handleChange("clinicLocation", text)
                 }
