@@ -8,12 +8,13 @@ router.post("/patient/updatepatient", ((req, res) =>{
   var height = req.body.height;
   var weight = req.body.weight;
   var blood = req.body.blood;
-  db.Patient.update(
-    {_id:'5f14544309f3b1538c7d4f1f'},{$set:{
+  db.Patient.updateOne(
+    {_id: JSON.parse(req.body.id)},
+    {$set: {
     phoneNumber: phoneNumber ,
      height: height ,
     weight: weight ,
-    blood: blood 
+    blood: blood ,
     }
     },{multi: true }
   )

@@ -4,6 +4,8 @@ import axios from "axios";
 import { Card, Block, Text, Button } from "galio-framework";
 import theme from "../../theme";
 import AsyncStorage from "@react-native-community/async-storage";
+import Header from "../common/header";
+
 const { width } = Dimensions.get("screen");
 const card = {
   id: 1,
@@ -23,7 +25,7 @@ class Report extends React.Component {
       console.log(value);
       pointer.setState({ userId: value });
       await axios
-        .post("http://192.168.1.75:8080/patientReport", {
+        .post("http://192.168.127.36:8080/patientReport", {
           params: {
             value: { id: pointer.state.userId },
           },
@@ -35,19 +37,20 @@ class Report extends React.Component {
           console.log(pointer.state.report.firstName);
         });
     } catch (error) {
-      console.log("err");
+      console.log(error);
     }
   }
   render() {
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
+      <Header drawer={this.props} />
         <Text></Text>
         <ScrollView contentContainerStyle={styles.cards}>
           <Block>
             <Card
               flex
               style={styles.card}
-              title={"\n" + "    " + this.state.report.firstName + " " + this.state.report.lastName}
+              title={("\n" + "    " + this.state.report.firstName + " " + this.state.report.lastName).toUpperCase()}
               avatar={`${card.avatar}`}
             >
               <Card style={styles.Text1}>
@@ -58,7 +61,7 @@ class Report extends React.Component {
                 </Text>
               </Card>
             </Card>
-            <Button style={styles.Button}>Close</Button>
+        
           </Block>
         </ScrollView>
       </Block>
@@ -80,14 +83,14 @@ const styles = StyleSheet.create({
     borderColor: "#18DCFF",
   },
   Text1: {
-    marginBottom: 50,
+    marginBottom: 70,
     marginLeft: 15,
     marginRight: 15,
     height: 150,
   },
   Button: {
     backgroundColor: "#18DCFF",
-    marginTop: 5,
+    marginTop: 2,
     alignSelf: "center",
   },
 });

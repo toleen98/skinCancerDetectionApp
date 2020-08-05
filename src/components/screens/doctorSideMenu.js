@@ -21,22 +21,32 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-community/async-storage";
 
 import HomePatient from "./homePatient";
-import PatientUpdate from "./patientUpdate";
+import DoctorProfile from "../Dr_screens/doctorProfile";
 import ViewDoctor from "./viewDoctor";
 import Logout from "./logOut";
 import AboutUs from "./aboutUs";
 import Help from "./help";
-import Report from "./patientReport";
-import Appointments from "./patientApmnt";
+import DoctorAppointments from "../Dr_screens/doctorSchedule";
+import DoctorPendingApp from "../Dr_screens/pendding";
+import ProfileRout from "../Dr_screens/profileRout"
 const DrwerNavigator = createDrawerNavigator();
 const Stack = createStackNavigator();
-function Drwer(props) {
+function DrwerDoctor(props) {
   return (
     <NavigationContainer>
       <DrwerNavigator.Navigator>
+      <DrwerNavigator.Screen
+          name="Appointments"
+          component={DoctorAppointments}
+          options={{
+            drawerIcon: ({ tintColor }) => (
+              <MaterialIcons name="date-range" size={16} color={tintColor} />
+            ),
+          }}
+        />
         <DrwerNavigator.Screen
-          name="Home"
-          component={HomePatient}
+          name="Pendindg Appointments"
+          component={DoctorPendingApp}
           options={{
             drawerIcon: ({ tintColor }) => (
               <Feather name="home" size={16} color={tintColor} />
@@ -45,40 +55,16 @@ function Drwer(props) {
         />
         <DrwerNavigator.Screen
           name="Profile"
-          component={PatientUpdate}
+          component={ProfileRout}
           options={{
             drawerIcon: ({ tintColor }) => (
               <Feather name="user" size={16} color={tintColor} />
             ),
           }}
         />
-        <DrwerNavigator.Screen
-          name="Doctors"
-          component={ViewDoctor}
-          options={{
-            drawerIcon: ({ tintColor }) => (
-              <Fontisto name="doctor" size={16} color={tintColor} />
-            ),
-          }}
-        />
-        <DrwerNavigator.Screen
-          name="Appointments"
-          component={Appointments}
-          options={{
-            drawerIcon: ({ tintColor }) => (
-              <MaterialIcons name="date-range" size={16} color={tintColor} />
-            ),
-          }}
-        />
-        <DrwerNavigator.Screen
-          name="My Report"
-          component={Report}
-          options={{
-            drawerIcon: ({ tintColor }) => (
-              <MaterialIcons name="report" size={16} color={tintColor} />
-            ),
-          }}
-        />
+     
+    
+    
         <DrwerNavigator.Screen
           name="Help"
           component={Help}
@@ -111,4 +97,4 @@ function Drwer(props) {
   );
 }
 
-export default Drwer;
+export default DrwerDoctor;

@@ -1,77 +1,68 @@
 import React from "react";
 import axios from "axios";
 import {
-  Alert,
   Dimensions,
   StyleSheet,
   KeyboardAvoidingView,
-  Platform,
   Image,
 } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 // galio component
-import { Block, Button, Input, Text, NavBar } from "galio-framework";
+import { Block, Button, Input, Text } from "galio-framework";
 import theme from "../../theme";
-import Header from '../common/header';
+import Header from "../common/header";
 
 const { height, width } = Dimensions.get("window");
 
-class PatientProfile extends React.Component {
+class DoctorProfile extends React.Component {
   state = {
     phoneNumber: "",
-    patientheight: "",
-    weight: "",
-    blood: "",
-    userId : "",
+    clinicLocation: "",
+    workingFrom: "",
+    workingTo: "",
+    userId: "",
   };
 
   handleChange = (name, value) => {
     this.setState({ [name]: value });
   };
 
-  async componentDidMount() {
-    var pointer = this;
-    try {
-      const value = await AsyncStorage.getItem("access_token");
-      console.log("hi from update");
-      console.log(value);
-      pointer.setState({ userId: value }); 
-      console.log(pointer.state.userId);
-    }
-    catch (error) {
-      console.log("err");
-    }
-  }
-
-  handleSubmit = () => {
-    const patient = {
+  handleSubmit =async () => {
+    const value = await AsyncStorage.getItem("access_token");
+    console.log("the value here");
+    console.log(value);
+    this.setState({userId: value})
+    console.log(this.state.userId);
+    const doctor = {
       // profileImage: this.state.profileImage,
       phoneNumber: this.state.phoneNumber,
-      patientheight: this.state.patientheight,
-      weight: this.state.weight,
-      blood: this.state.blood,
-      id : this.state.userId,
+      clinicLocation: this.state.clinicLocation,
+      workingFrom: this.state.workingFrom,
+      workingTo: this.state.workingTo,
     };
-    console.log(patient);
-    var url = 'http://192.168.127.67:8080/api/profile/patient/updatepatient';
-    axios
-      .post(url, patient)
-      .then((response) => {
-        // response.send("account updated");
-        console.log("then")
-      })
-      // .catch((error) => res.send("please try again") , console.log(error));
-    //alert to check
-    // Alert.alert("patient updated");
+    var param = {
+      doctor: doctor,
+      id: this.state.userId,
+    };
+    console.log(doctor);
+    console.log("params here");
+    console.log(param);
+    var url = "http://192.168.127.36:8080/doctor/update";
+    axios.post(url, param).then((response) => {
+      // response.send("account updated");
+      console.log("then");
+    });
+    //   .catch((error) => res.send("please try again"), console.log(error));
+    // Alert.alert("doctor updated");
   };
-
 
   render() {
     const { navigation } = this.props;
-    const { phoneNumber, patientheight, weight, blood } = this.state;
+    const { phoneNumber, clinicLocation, workingFrom, workingTo } = this.state;
 
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
-         <Header drawer={this.props} />
+        <Header drawer={this.props} />
         <KeyboardAvoidingView
           style={styles.container}
           behavior="height"
@@ -88,9 +79,9 @@ class PatientProfile extends React.Component {
             {/* here logo */}
             <Image source={require("../../../assets/splash.png")} />
             <Text muted center size={theme.SIZES.FONT * 1.5} color={"#18DCFF"}>
-            {" "}
-            Update Your Profile{" "}
-          </Text>
+              {" "}
+              Update Your Profile{" "}
+            </Text>
             <Block
               row
               center
@@ -110,26 +101,26 @@ class PatientProfile extends React.Component {
               />
               <Input
                 rounded
-                placeholder="Height"
+                placeholder="Location"
                 autoCapitalize="none"
                 style={{ width: width * 0.9 }}
                 onChangeText={(text) =>
-                  this.handleChange("patientheight", text)
+                  this.handleChange("clinicLocation", text)
                 }
               />
               <Input
                 rounded
-                placeholder="Weight"
+                placeholder="workingFrom"
                 autoCapitalize="none"
                 style={{ width: width * 0.9 }}
-                onChangeText={(text) => this.handleChange("weight", text)}
+                onChangeText={(text) => this.handleChange("workingFrom", text)}
               />
               <Input
                 rounded
-                placeholder="Blood"
+                placeholder="workingTo"
                 autoCapitalize="none"
                 style={{ width: width * 0.9 }}
-                onChangeText={(text) => this.handleChange("blood", text)}
+                onChangeText={(text) => this.handleChange("workingTo", text)}
               />
             </Block>
             <Block flex middle>
@@ -174,4 +165,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PatientProfile;
+export default DoctorProfile;

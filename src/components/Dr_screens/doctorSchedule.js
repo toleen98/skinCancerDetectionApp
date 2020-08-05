@@ -3,6 +3,7 @@ import {
   ScrollView, StyleSheet, Dimensions
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import Header from "../common/header";
 import {
   Card, Block
 } from 'galio-framework';
@@ -10,12 +11,12 @@ import theme from '../../theme';
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from "axios";
 const { width } = Dimensions.get('screen');
-export default class patientsAppo extends React.Component {
+export default class DoctorAppointments extends React.Component {
     state = {
         userId: "",
         appointment: [],
-        patientName: "",
-        patientLastName : "",
+        patientName: [],
+        patientLastName : [],
       };
     async componentDidMount() {
         var pointer = this;
@@ -28,7 +29,7 @@ export default class patientsAppo extends React.Component {
           // console.log(".......")
           // console.log(pointer.state.userId);
           await axios
-            .post("http://192.168.1.80:8080/getAppointments", {
+            .post("http://192.168.127.67:8080/getAppointments", {
               params: {
                 value: { id: pointer.state.userId },
               },
@@ -42,7 +43,7 @@ export default class patientsAppo extends React.Component {
             .then (async () => {
               pointer.state.appointment.map(async(element) => {
                 await axios
-                .post("http://192.168.1.80:8080/getPatientsName", {
+                .post("http://192.168.127.67:8080/getPatientsName", {
                 params: {
                     value: { pId: element.patientId[0]},
                 },
@@ -50,21 +51,27 @@ export default class patientsAppo extends React.Component {
                 .then((res) => {
                 //console.log("hi axios 2");
                 //console.log(res.data.firstName);
-                pointer.setState({ patientName: res.data.firstName });
-                pointer.setState({ patientLastName: res.data.lastName});
-                //console.log(pointer.state.patientName);
+                pointer.state.patientName.push(res.data.firstName)
+                pointer.state.patientLastName.push(res.data.lastName)
+                pointer.setState({ 
+                  patientName: pointer.state.patientName,
+                  patientLastName: pointer.state.patientLastName
+                 });
+                
+               
                 })
               })
             })
         } 
         catch (error) {
-          console.log("error");
+          console.log(error);
         }
       }
   render() {
    
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
+      <Header drawer={this.props} />
         <ScrollView contentContainerStyle={styles.cards}>
           <Block flex space="between">
             {this.state.appointment.map((card, id) => (
@@ -72,9 +79,18 @@ export default class patientsAppo extends React.Component {
                 flex
                 borderless
                 shadowColor={theme.COLORS.BLACK}
-                titleColor={card.full ? theme.COLORS.WHITE : null}
+                titleColor={ theme.COLORS.WHITE }
+                key = {id}
                 style={styles.card}
-                title={this.state.patientName + " "+ this.state.patientLastName + "\n"+ "\n" + "Date : " + (card.date).slice(0,10) + "\n" + "Time : " + card.time  +" pm"}
+                title={(this.state.patientName[id] + " "+ this.state.patientLastName[id]).toUpperCase() }
+                captionColor={ theme.COLORS.WHITE}
+                caption ={"Date : " + (card.date).slice(0,10) + "\n" + "Time : " + card.time  +" pm"}
+                avatar="https://icons.iconarchive.com/icons/icons-land/medical/256/People-Patient-Male-icon.png"
+                imageStyle={[card.padded ? styles.rounded : null]}
+                imageBlockStyle={[
+                  card.padded ? { padding: theme.SIZES.BASE / 2 } : null,
+                  card.full ? null : styles.noRadius,
+                ]}
               >
                 {card.full ? <LinearGradient colors={['transparent', 'rgba(0,0,0, 0.8)']} style={styles.gradient} /> : null}
               </Card>

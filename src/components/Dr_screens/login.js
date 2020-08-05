@@ -22,7 +22,7 @@ import { NavigationActions } from "react-navigation";
 // import { createStackNavigator } from "@react-navigation/stack";
 
 import Header from "../common/header";
-function Login(props) {
+function LoginDr(props) {
   const state = {
     email: "",
     password: "",
@@ -43,7 +43,7 @@ function Login(props) {
       password: state.password,
     };
 
-
+console.log(user)
     var id;
 
     axios
@@ -54,6 +54,7 @@ function Login(props) {
         AsyncStorage.setItem("access_token", JSON.stringify(id));
         if (res.data.result === true) {
           alert("Login Successed! ");
+          Actions.push("HomeDr");
         } else if (res.data === false) {
           alert("Login Failed! Wrong password");
         } else if (res.data === "Email not found") {
@@ -61,6 +62,7 @@ function Login(props) {
         }
       })
       .catch((err) => console.log(err));
+     
   };
 
   return (
@@ -148,6 +150,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.SIZES.BASE * 1.75,
     justifyContent: "center",
   },
+
 });
 
-export default Login;
+export default LoginDr;
