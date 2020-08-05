@@ -42,7 +42,8 @@ router.post('/doctor/signup', (req, res) =>{
             clinicLocation: req.body.clinicLocation,
             workingFrom: req.body.workingFrom,
             workingTo: req.body.workingTo,
-            notes: req.body.notes
+            notes: req.body.notes,
+            profileImage: req.body.profileImage || "https://bit.ly/3hxXixM"
           });
 
           newUser
