@@ -4,7 +4,11 @@ const mongoose = require("mongoose");
 let patientSchema = mongoose.Schema({
   firstName: String,
   lastName: String,
-  email: String,
+  email: {
+    type:String,
+    required: true,
+    unique: true,
+},
   password: String,
   phoneNumber: Number,
   profileImage: String,
@@ -19,7 +23,11 @@ let patientSchema = mongoose.Schema({
 let doctorSchema = mongoose.Schema({
   firstName: String,
   lastName: String,
-  email: String,
+  email: {
+    type:String,
+    required: true,
+    unique: true,
+},
   password: String,
   phoneNumber: Number,
   profileImage: String,
