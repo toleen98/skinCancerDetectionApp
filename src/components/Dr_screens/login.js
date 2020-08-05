@@ -47,7 +47,7 @@ function LoginDr(props) {
     var id;
 
     axios
-      .post("http://192.168.1.149:8080/api/user/doctor/login", user)
+      .post("http://192.168.1.75:8080/api/user/doctor/login", user)
       .then((res) => {
         console.log(res.data.doctor._id);
         id = res.data.doctor._id;
