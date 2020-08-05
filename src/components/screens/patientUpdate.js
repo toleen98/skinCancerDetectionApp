@@ -21,11 +21,26 @@ class PatientProfile extends React.Component {
     patientheight: "",
     weight: "",
     blood: "",
+    userId : "",
   };
 
   handleChange = (name, value) => {
     this.setState({ [name]: value });
   };
+
+  async componentDidMount() {
+    var pointer = this;
+    try {
+      const value = await AsyncStorage.getItem("access_token");
+      console.log("hi from update");
+      console.log(value);
+      pointer.setState({ userId: value }); 
+      console.log(pointer.state.userId);
+    }
+    catch (error) {
+      console.log("err");
+    }
+  }
 
   handleSubmit = () => {
     const patient = {
@@ -34,6 +49,7 @@ class PatientProfile extends React.Component {
       patientheight: this.state.patientheight,
       weight: this.state.weight,
       blood: this.state.blood,
+      id : this.state.userId,
     };
     console.log(patient);
     var url = 'http://192.168.127.67:8080/api/profile/patient/updatepatient';
