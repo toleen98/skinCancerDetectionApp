@@ -43,11 +43,11 @@ function LoginDr(props) {
       password: state.password,
     };
 
-console.log(user)
+    console.log(user);
     var id;
 
     axios
-      .post("http://192.168.127.67:8080/api/user/doctor/login", user)
+      .post("http://192.168.1.149:8080/api/user/doctor/login", user)
       .then((res) => {
         console.log(res.data.doctor._id);
         id = res.data.doctor._id;
@@ -62,7 +62,6 @@ console.log(user)
         }
       })
       .catch((err) => console.log(err));
-     
   };
 
   return (
@@ -150,7 +149,6 @@ const styles = StyleSheet.create({
     borderRadius: theme.SIZES.BASE * 1.75,
     justifyContent: "center",
   },
-
 });
 
 export default LoginDr;
