@@ -35,6 +35,7 @@ class Signup extends React.Component {
       this.state.bloodType === "" ||
       this.state.height === "" ||
       this.state.weight === "" ||
+      this.state.email === "" ||
       this.state.password === "" ||
       this.state.phoneNumber === "" ||
       this.state.firstName === "" ||
