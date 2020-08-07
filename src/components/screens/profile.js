@@ -94,7 +94,7 @@ class Profile extends React.Component {
             round
             color={"#5E72E4"}
             style={{ width: 150 }}
-            onPress={()=> {Actions.push('DoctorProfile')}}
+            onPress={()=> {Actions.push('PatientProfile')}}
             > UPDATE</Button>
            
         </Block>
