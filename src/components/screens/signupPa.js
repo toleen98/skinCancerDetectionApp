@@ -6,12 +6,17 @@ import {
   KeyboardAvoidingView,
   Platform,
   Image,
-} from "react-native";
+  ImageBackground
+} from 'react-native';
 // galio component
-import { Block, Button, Input, Text, NavBar } from "galio-framework";
-import theme from "../../theme";
-import axios from "axios";
-import { Actions } from "react-native-router-flux";
+import {
+  Block, Button, Input, Text, NavBar,Checkbox
+} from 'galio-framework';
+import theme from '../../theme';
+import axios from 'axios';
+import { Entypo, MaterialCommunityIcons, Ionicons, Fontisto,FontAwesome5 } from '@expo/vector-icons';
+import {  Actions} from 'react-native-router-flux'; // 4.0.0-beta.28
+import Login from './login'
 
 const { height, width } = Dimensions.get("window");
 
@@ -21,109 +26,95 @@ class Signup extends React.Component {
     lastName: "",
     email: "",
     password: "",
-    phoneNumber: "",
-    bloodType: "",
-    height: "",
-    weight: "",
-  };
+    phoneNumber:"",
+    bloodType:"",
+    heightP:"",
+    weight:""
+  }
 
   handleChange = (name, value) => {
     this.setState({ [name]: value });
   };
 
   submit = () => {
-    if (
-      this.state.bloodType === "" ||
-      this.state.height === "" ||
-      this.state.weight === "" ||
-      this.state.email === "" ||
-      this.state.password === "" ||
-      this.state.phoneNumber === "" ||
-      this.state.firstName === "" ||
-      this.state.lastName === ""
-    ) {
-      Alert.alert("Please fill all Data");
-    } else {
-      var url = `https://skincancerbackend.herokuapp.com/api/user/patient/signup`;
-      axios
-        .post(url, this.state)
-        .then(function (response) {
-          Alert.alert("User created sucessfully");
-          Actions.push("LoginPatient");
-        })
-        .catch(function (error) {
-          Alert.alert("Email already exists");
-          console.log(error);
-        });
-    }
-  };
+if (
+  this.state.bloodType === "" ||
+  this.state.height === "" ||
+  this.state.weight === "" ||
+  this.state.email === "" ||
+  this.state.password === "" ||
+  this.state.phoneNumber === "" ||
+  this.state.firstName === "" ||
+  this.state.lastName === ""
+) {
+  Alert.alert("Please fill all Data");
+} else {
+  var url = `https://skincancerbackend.herokuapp.com/api/user/patient/signup`;
+  axios
+    .post(url, this.state)
+    .then(function (response) {
+      Alert.alert("User created sucessfully")
+      Actions.push('LoginPatient');
+    })
+    .catch(function (error) {
+      Alert.alert("Email already exists");
+      console.log(error);
+    });
+    
+  }}
 
   render() {
     const { navigation } = this.props;
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      phoneNumber,
-      bloodType,
-      height,
-      weight,
-    } = this.state;
+    const { firstName, lastName, email, password, phoneNumber,bloodType,heightP,weight} = this.state;
 
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
-        <Block></Block>
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior="height"
-          enabled
-        >
-          <Block flex center style={{ marginTop: theme.SIZES.BASE }}>
-            <Text> {"\n"}</Text>
-            <Image source={require("../../../assets/splash.png")} />
-            <Text muted center size={theme.SIZES.FONT * 2} color={"#18DCFF"}>
-              {" "}
-              Sign Up{" "}
-            </Text>
-          </Block>
+       <ImageBackground 
+    source={require('../../../assets/register-bg.png')}
+    style={{width: width, height: height}} 
+>  
+      <KeyboardAvoidingView style={styles.container} behavior="height" enabled >
+          
+          <Text muted center size={theme.SIZES.FONT * 1} color={theme.COLORS.PRIMARY}>{'\n'} Sign Up </Text>
 
-          <Block flex={3} center space="between">
-            <Block flex={2}>
-              <Input
-                rounded
-                placeholder="First Name"
-                autoCapitalize="none"
-                placeholderTextColor="#18DCFF"
-                style={{ width: width * 0.9 }}
-                onBlur={() => {
+        <Block flex={3} center space="between">
+          <Block flex={2} middel width={width * 0.8} style={{ marginBottom: 15 }}>
+            <Input
+              borderless
+              placeholder="First Name"
+              autoCapitalize="none"
+              style={{ width: width * 0.8 }}
+              onChangeText={text => this.handleChange('firstName', text)}
+              onBlur={() => {
                   if (this.state.firstName.length === 0) {
                     alert("should enter your name");
                   }
                 }}
-                onChangeText={(text) => this.handleChange("firstName", text)}
-              />
-              <Input
-                rounded
-                placeholder="Last Name"
-                autoCapitalize="none"
-                placeholderTextColor="#18DCFF"
-                style={{ width: width * 0.9 }}
-                onBlur={() => {
+              iconContent={<Entypo name="user" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
+         
+            />
+            <Input
+              borderless
+              placeholder="Last Name"
+              autoCapitalize="none"
+              style={{ width: width * 0.8 }}
+              onChangeText={text => this.handleChange('lastName', text)}
+              onBlur={() => {
                   if (this.state.lastName.length === 0) {
                     alert("should enter your name");
                   }
                 }}
-                onChangeText={(text) => this.handleChange("lastName", text)}
-              />
-              <Input
-                rounded
-                type="email-address"
-                placeholder="Email"
-                placeholderTextColor="#18DCFF"
-                autoCapitalize="none"
-                style={{ width: width * 0.9 }}
-                onBlur={() => {
+              iconContent={<Entypo name="user" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
+
+            />
+            <Input
+              borderless
+              type="email-address"
+              placeholder="Email"
+              autoCapitalize="none"
+              style={{ width: width * 0.8 }}
+              onChangeText={text => this.handleChange('email', text)}
+              onBlur={() => {
                   var reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                   if (this.state.email.length === 0) {
                     alert("should enter email");
@@ -131,29 +122,28 @@ class Signup extends React.Component {
                     alert("not valid email");
                   }
                 }}
-                onChangeText={(text) => this.handleChange("email", text)}
-              />
-              <Input
-                rounded
-                password
-                viewPass
-                placeholder="Password"
-                placeholderTextColor="#18DCFF"
-                style={{ width: width * 0.9 }}
-                onBlur={() => {
+              iconContent={<MaterialCommunityIcons name="email" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
+            />
+            <Input
+              borderless
+              password
+              viewPass
+              placeholder="Password"
+              style={{ width: width * 0.8 }}
+              onChangeText={text => this.handleChange('password', text)}
+              onBlur={() => {
                   if (this.state.password.length === 0) {
                     alert("should enter password");
-                  }
-                }}
-                onChangeText={(text) => this.handleChange("password", text)}
-              />
-              <Input
-                rounded
-                placeholder="Phone_number"
-                placeholderTextColor="#18DCFF"
-                textContentType="telephoneNumber"
-                style={{ width: width * 0.9 }}
-                onBlur={() => {
+                  }}}
+              iconContent={<Ionicons name="ios-lock" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
+            />
+            <Input
+              borderless
+              placeholder= "Phone_number"
+              textContentType = "telephoneNumber"
+              style={{ width: width * 0.8 }}
+              onChangeText={text => this.handleChange('phoneNumber', text)}
+              onBlur={() => {
                   var regPh = /^(1|2|3|4|5|6|7|8|9|0)/;
                   if (this.state.phoneNumber.length === 0) {
                     alert("should enter phone number");
@@ -163,14 +153,15 @@ class Signup extends React.Component {
                     alert("max number allowed 10");
                   }
                 }}
-                onChangeText={(text) => this.handleChange("phoneNumber", text)}
-              />
-              <Input
-                rounded
-                placeholder="Blood Type"
-                placeholderTextColor="#18DCFF"
-                style={{ width: width * 0.9 }}
-                onBlur={() => {
+              iconContent={<Entypo name="phone" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
+
+            />
+            <Input
+              borderless
+              placeholder="Blood Type"
+              style={{ width: width * 0.8 }}
+              onChangeText={text => this.handleChange('bloodType', text)}
+              onBlur={() => {
                   var regB = /^(A|B|AB|O)[-+]$/;
                   if (this.state.bloodType.length === 0) {
                     alert("should enter blood type");
@@ -179,55 +170,103 @@ class Signup extends React.Component {
                     alert("not valid blood type, example : A+ / O-");
                   }
                 }}
-                onChangeText={(text) => this.handleChange("bloodType", text)}
-              />
-              <Input
-                rounded
-                placeholder="Height"
-                placeholderTextColor="#18DCFF"
-                style={{ width: width * 0.9 }}
-                onBlur={() => {
+              iconContent={<Fontisto name="blood-drop" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
+            />
+            <Input
+              borderless
+              placeholder="Height"
+              style={{ width: width * 0.8 }}
+              onChangeText={text => this.handleChange('heightP', text)}
+              onBlur={() => {
                   if (this.state.height.length === 0) {
                     alert("should enter your height");
                   }
                 }}
-                onChangeText={(text) => this.handleChange("height", text)}
-              />
-              <Input
-                rounded
-                placeholder="Weight"
-                placeholderTextColor="#18DCFF"
-                style={{ width: width * 0.9 }}
-                onBlur={() => {
+              iconContent={<MaterialCommunityIcons name="human-male-height" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
+            />
+            <Input
+              borderless
+              placeholder="Weight"
+              style={{ width: width * 0.8 }}
+              onChangeText={text => this.handleChange('weight', text)}
+              onBlur={() => {
                   if (this.state.weight.length === 0) {
                     alert("should enter your weight");
                   }
                 }}
-                onChangeText={(text) => this.handleChange("weight", text)}
-              />
-            </Block>
-            <Block flex={0.5} middle>
-              <Text>{"\n"}</Text>
-              <Button round color="#18DCFF" onPress={this.submit.bind(this)}>
-                Sign up
-              </Button>
-            </Block>
+              iconContent={<FontAwesome5 name="weight" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
+            />
+
+<Block row width={width * 0.75}>
+                      <Checkbox
+                        checkboxStyle={{
+                          borderWidth: 3
+                        }}
+                        color={theme.COLORS.PRIMARY}
+                        label="I agree with the"
+                      />
+                      <Button
+                        style={{ width: 100 }}
+                        color="transparent"
+                        textStyle={{
+                          color: theme.COLORS.PRIMARY,
+                          fontSize: 14
+                        }}
+                      >
+                        Privacy Policy
+                      </Button>
+                    </Block>
+
+                    <Block flex = {0.5} middle>
+            <Text>{'\n'}</Text>
+            <Button
+              
+              color={theme.COLORS.PRIMARY}
+              onPress={this.submit.bind(this)}
+              style={styles.createButton}
+            >
+              <Text bold size={14} color={theme.COLORS.WHITE}>Sign Up</Text>
+            </Button>
+            
           </Block>
-        </KeyboardAvoidingView>
-      </Block>
+          </Block>
+         
+       
+        </Block>
+      </KeyboardAvoidingView>
+      </ImageBackground>
+    </Block>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-around",
-    paddingTop: theme.SIZES.BASE * 0.3,
-    paddingHorizontal: theme.SIZES.BASE,
-    backgroundColor: theme.COLORS.WHITE,
+    marginTop:100,
+    margin:20,
+    width: width * 0.9,
+    height: height * 0.83,
+    backgroundColor: "#F4F5F7",
+    borderRadius: 4,
+    shadowColor: theme.COLORS.BLACK,
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowRadius: 8,
+    shadowOpacity: 0.1,
+    elevation: 1,
+    overflow: "hidden"
   },
+  inputIcons: {
+    marginRight: 12
+  },
+  createButton: {
+    width: width * 0.5,
+    marginTop: 25
+  }
+ 
+  
 });
 
 export default Signup;

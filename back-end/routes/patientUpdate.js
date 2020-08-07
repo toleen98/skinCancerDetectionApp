@@ -21,4 +21,12 @@ router.post("/patient/updatepatient", ((req, res) =>{
     .then(() => res.json("updated"))
     .catch((err) => res.status(400).json("Error: " + err));
 }));
+
+router.post('/user/paitent',(req,res) => {
+  console.log(req.body)
+  db.Patient.findOne({_id: req.body.id}).then(user=>{
+    console.log(user)
+    res.json(user);
+})
+})
 module.exports = router;
