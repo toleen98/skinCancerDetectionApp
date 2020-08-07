@@ -28,7 +28,8 @@ import AboutUs from "./aboutUs";
 import Help from "./help";
 import DoctorAppointments from "../Dr_screens/doctorSchedule";
 import DoctorPendingApp from "../Dr_screens/pendding";
-import ProfileRout from "../Dr_screens/profileRout"
+import ProfileRout from "../Dr_screens/profileRout";
+import LogoutDr from "../Dr_screens/logoutDr";
 const DrwerNavigator = createDrawerNavigator();
 const Stack = createStackNavigator();
 function DrwerDoctor(props) {
@@ -85,7 +86,7 @@ function DrwerDoctor(props) {
         />
         <DrwerNavigator.Screen
           name="Logout"
-          component={Logout}
+          component={LogoutDr}
           
           options={{
             drawerIcon: ({ tintColor }) => (

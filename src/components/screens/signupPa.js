@@ -11,6 +11,7 @@ import {
 import { Block, Button, Input, Text, NavBar } from "galio-framework";
 import theme from "../../theme";
 import axios from "axios";
+import { Actions } from "react-native-router-flux";
 
 const { height, width } = Dimensions.get("window");
 
@@ -48,6 +49,7 @@ class Signup extends React.Component {
         .post(url, this.state)
         .then(function (response) {
           Alert.alert("User created sucessfully");
+          Actions.push("LoginPatient");
         })
         .catch(function (error) {
           Alert.alert("Email already exists");
