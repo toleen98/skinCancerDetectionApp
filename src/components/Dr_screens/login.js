@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.SIZES.BASE * 1.75,
     justifyContent: "center",
   },
-
+  
 });
 
 export default LoginDr;

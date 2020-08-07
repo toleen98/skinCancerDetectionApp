@@ -28,7 +28,7 @@ router.post('/patient/signup', (req, res) =>{
             password: hash,
             phoneNumber: req.body.phoneNumber,
             blood: req.body.bloodType,
-            height: req.body.height,
+            height: req.body.heightP,
             weight: req.body.weight  
           });
           console.log(newUser);

@@ -10,7 +10,7 @@ import {
   PanResponder,
   TextInput, Alert
 } from "react-native";
-import { Button } from "galio-framework";
+import { Button, theme } from "galio-framework";
 import Header from "../common/header";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -139,7 +139,7 @@ class MyDatePicker extends React.Component {
             Choose a date and time to book your appointment.. 
            
           </Text>
-          <Text>{"*Note: working hours from " + this.state.workingHours + "!" + "\n\n" }</Text>
+          <Text style={styles.noteH}>{"*Note: working hours from " + this.state.workingHours + "!" + "\n\n" }</Text>
         
         <View style={styles.container}>
           <Text style={styles.label}>Date</Text>
@@ -221,6 +221,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 30,
     fontSize: 25,
+  },
+  noteH:{
+    textAlign: "center",
+    padding: 10,
+    color: theme.COLORS.INPUT,
+    fontSize: 16,
   },
   label: {
     fontSize: 25,

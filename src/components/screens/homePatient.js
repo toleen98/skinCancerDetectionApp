@@ -72,14 +72,14 @@ export default class HomePatient extends React.Component {
         <MaterialIcons
           name="photo-camera"
           size={45}
-          color="#18dcff"
+          color= "#F5AFC8"
           style={styles.camera}
           onPress={this.createTwoButtonAlert}
         />
         <MaterialIcons
           name="search"
           size={45}
-          color="#18dcff"
+          color="#F5AFC8"
           style={styles.predict}
           
         />
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
 
     borderWidth: 5,
-    borderColor: "#18dcff",
+    borderColor: "#F5AFC8",
   },
 
   container: {

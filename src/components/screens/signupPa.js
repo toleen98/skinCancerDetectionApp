@@ -6,15 +6,15 @@ import {
   KeyboardAvoidingView,
   Platform,
   Image,
+  ImageBackground
 } from 'react-native';
 // galio component
 import {
-  Block, Button, Input, Text, NavBar,
+  Block, Button, Input, Text, NavBar,Checkbox
 } from 'galio-framework';
 import theme from '../../theme';
 import axios from 'axios';
-
-
+import { Entypo, MaterialCommunityIcons, Ionicons, Fontisto,FontAwesome5 } from '@expo/vector-icons';
 const { height, width } = Dimensions.get('window');
 
 class Signup extends React.Component {
@@ -25,7 +25,7 @@ class Signup extends React.Component {
     password: "",
     phoneNumber:"",
     bloodType:"",
-    height:"",
+    heightP:"",
     weight:""
   }
 
@@ -34,7 +34,7 @@ class Signup extends React.Component {
   }
 
   submit = () => {
-    var url = `http://192.168.1.123:8080/api/user/patient/signup`;
+    var url = `http://192.168.127.67:8080/api/user/patient/signup`;
     axios.post(url,this.state)
     .then(function (response) {
       Alert.alert("User created sucessfully")
@@ -48,105 +48,125 @@ class Signup extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const { firstName, lastName, email, password, phoneNumber,bloodType,height,weight} = this.state;
+    const { firstName, lastName, email, password, phoneNumber,bloodType,heightP,weight} = this.state;
 
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
-        <Block>
+       <ImageBackground 
+    source={require('../../../assets/register-bg.png')}
+    style={{width: width, height: height}} 
+>  
+      <KeyboardAvoidingView style={styles.container} behavior="height" enabled >
           
-          
-        </Block>
-      <KeyboardAvoidingView style={styles.container} behavior="height" enabled>
-        <Block
-          flex
-          center
-          style={{ marginTop: theme.SIZES.BASE   }}
-        >
-          <Text> {"\n"}</Text> 
-           <Image source={require('../../../assets/splash.png')} />
-           <Text muted center size={theme.SIZES.FONT * 2} color={"#18DCFF"}> Sign Up </Text>
-          
-        </Block>
+          <Text muted center size={theme.SIZES.FONT * 1} color={theme.COLORS.PRIMARY}>{'\n'} Sign Up </Text>
 
         <Block flex={3} center space="between">
-          <Block flex={2}  >
+          <Block flex={2} middel width={width * 0.8} style={{ marginBottom: 15 }}>
             <Input
-              rounded
+              borderless
               placeholder="First Name"
               autoCapitalize="none"
-              placeholderTextColor="#18DCFF" 
-              style={{ width: width * 0.9 }}
+              style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('firstName', text)}
+              iconContent={<Entypo name="user" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
+         
             />
             <Input
-              rounded
+              borderless
               placeholder="Last Name"
               autoCapitalize="none"
-              placeholderTextColor="#18DCFF" 
-              style={{ width: width * 0.9 }}
+              style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('lastName', text)}
+              iconContent={<Entypo name="user" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
+
             />
             <Input
-              rounded
+              borderless
               type="email-address"
               placeholder="Email"
-              placeholderTextColor="#18DCFF" 
               autoCapitalize="none"
-              style={{ width: width * 0.9 }}
+              style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('email', text)}
+              iconContent={<MaterialCommunityIcons name="email" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
             />
             <Input
-              rounded
+              borderless
               password
               viewPass
               placeholder="Password"
-              placeholderTextColor="#18DCFF" 
-              style={{ width: width * 0.9 }}
+              style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('password', text)}
+              iconContent={<Ionicons name="ios-lock" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
             />
             <Input
-              rounded
+              borderless
               placeholder= "Phone_number"
-              placeholderTextColor="#18DCFF" 
               textContentType = "telephoneNumber"
-              style={{ width: width * 0.9 }}
+              style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('phoneNumber', text)}
+              iconContent={<Entypo name="phone" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
+
             />
             <Input
-              rounded
+              borderless
               placeholder="Blood Type"
-              placeholderTextColor="#18DCFF" 
-              style={{ width: width * 0.9 }}
+              style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('bloodType', text)}
+              iconContent={<Fontisto name="blood-drop" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
             />
             <Input
-              rounded
+              borderless
               placeholder="Height"
-              placeholderTextColor="#18DCFF" 
-              style={{ width: width * 0.9 }}
-              onChangeText={text => this.handleChange('height', text)}
+              style={{ width: width * 0.8 }}
+              onChangeText={text => this.handleChange('heightP', text)}
+              iconContent={<MaterialCommunityIcons name="human-male-height" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
             />
             <Input
-              rounded
+              borderless
               placeholder="Weight"
-              placeholderTextColor="#18DCFF" 
-              style={{ width: width * 0.9 }}
+              style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('weight', text)}
+              iconContent={<FontAwesome5 name="weight" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
             />
-          </Block>
-          <Block flex = {0.5} middle>
+
+<Block row width={width * 0.75}>
+                      <Checkbox
+                        checkboxStyle={{
+                          borderWidth: 3
+                        }}
+                        color={theme.COLORS.PRIMARY}
+                        label="I agree with the"
+                      />
+                      <Button
+                        style={{ width: 100 }}
+                        color="transparent"
+                        textStyle={{
+                          color: theme.COLORS.PRIMARY,
+                          fontSize: 14
+                        }}
+                      >
+                        Privacy Policy
+                      </Button>
+                    </Block>
+
+                    <Block flex = {0.5} middle>
             <Text>{'\n'}</Text>
             <Button
-              round
-              color="#18DCFF"
+              
+              color={theme.COLORS.PRIMARY}
               onPress={this.submit.bind(this)}
+              style={styles.createButton}
             >
-              Sign up
+              <Text bold size={14} color={theme.COLORS.WHITE}>Sign Up</Text>
             </Button>
             
           </Block>
+          </Block>
+         
+       
         </Block>
       </KeyboardAvoidingView>
+      </ImageBackground>
     </Block>
     );
   }
@@ -154,13 +174,30 @@ class Signup extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    paddingTop: theme.SIZES.BASE * 0.3,
-    paddingHorizontal: theme.SIZES.BASE,
-    backgroundColor: theme.COLORS.WHITE,
+    marginTop:100,
+    margin:20,
+    width: width * 0.9,
+    height: height * 0.83,
+    backgroundColor: "#F4F5F7",
+    borderRadius: 4,
+    shadowColor: theme.COLORS.BLACK,
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowRadius: 8,
+    shadowOpacity: 0.1,
+    elevation: 1,
+    overflow: "hidden"
   },
+  inputIcons: {
+    marginRight: 12
+  },
+  createButton: {
+    width: width * 0.5,
+    marginTop: 25
+  }
+ 
   
 });
 

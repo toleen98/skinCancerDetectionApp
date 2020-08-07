@@ -75,7 +75,7 @@ export default class Cards extends React.Component {
       <Block>
         <Header drawer={this.props.nav} />
         <Block safe style={{ backgroundColor: theme.COLORS.WHITE,  marginTop: theme.SIZES.BASE * 1}}>
-        
+
         <ScrollView contentContainerStyle={styles.cards}>
           <Block flex space="between" >
             {cards && cards.map((card) => (
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   card: {
-    backgroundColor: theme.COLORS.BLUE,
+    backgroundColor: theme.COLORS.PINK,
     width: width - theme.SIZES.BASE * 2,
     marginVertical: theme.SIZES.BASE * 0.875,
     elevation: theme.SIZES.BASE / 2,

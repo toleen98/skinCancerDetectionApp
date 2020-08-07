@@ -130,14 +130,14 @@ class SignupDr extends React.Component {
             />
             <Input
               rounded
-              placeholder="Working From"
+              placeholder="Ex: 10:00"
               placeholderTextColor="#18DCFF" 
               style={{ width: width * 0.9 }}
               onChangeText={text => this.handleChange('workingFrom', text)}
             />
             <Input
               rounded
-              placeholder="Working To"
+              placeholder="Ex: 18:00"
               placeholderTextColor="#18DCFF" 
               style={{ width: width * 0.9 }}
               onChangeText={text => this.handleChange('workingTo', text)}
