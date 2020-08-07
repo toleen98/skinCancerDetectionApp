@@ -8,7 +8,7 @@ const COLORS = {
   SUCCESS: '#2DCE89',
   WARNING: '#FB6340',
   /*not yet changed */
-  MUTED: '#ADB5BD',
+  MUTED: '#bDB5bD',
   INPUT: '#DCDCDC',
   INPUT_SUCCESS: '#7BDEB2',
   INPUT_ERROR: '#FCB3A4',

@@ -8,14 +8,19 @@ import {
   Text,
   View,
   PanResponder,
-  TextInput, Alert
+  TextInput, Alert,
+  ImageBackground,
+  Dimensions
 } from "react-native";
-import { Button, theme } from "galio-framework";
+import { Button, theme,Block } from "galio-framework";
 import Header from "../common/header";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import TimePicker from "react-native-simple-time-picker";
 import { Actions } from "react-native-router-flux";
+
+const { height, width } = Dimensions.get('window');
+ 
 class MyDatePicker extends React.Component {
   constructor(props) {
     super(props);
@@ -132,16 +137,21 @@ class MyDatePicker extends React.Component {
     console.log(this.state)
 
     return (
-      <View>
+      
+      <View  >
+        <ImageBackground 
+    source={require('../../../assets/register-bg.png')}
+    style={{width: width, height: height}} 
+>  
         
-        
-          <Text style={styles.descreption}>
+         
+        <View style={styles.container}>
+        <Text style={styles.descreption}>
             Choose a date and time to book your appointment.. 
            
           </Text>
           <Text style={styles.noteH}>{"*Note: working hours from " + this.state.workingHours + "!" + "\n\n" }</Text>
         
-        <View style={styles.container}>
           <Text style={styles.label}>Date</Text>
           <DatePicker
             style={{ width: 250, alignItems: "center" }}
@@ -188,6 +198,7 @@ class MyDatePicker extends React.Component {
           </View>
           <Text style={styles.label}>Note</Text>
           <TextInput
+            borderless
             placeholder="write a note for doctor"
             style={styles.note}
             width={260}
@@ -201,6 +212,7 @@ class MyDatePicker extends React.Component {
             Book
           </Button>
         </View>
+        </ImageBackground>
       </View>
     );
   }
@@ -209,18 +221,32 @@ class MyDatePicker extends React.Component {
 export default MyDatePicker;
 const styles = StyleSheet.create({
   container: {
-    flex: -5,
+    marginTop:70,
+    margin:20,
+    width: width * 0.9,
+    height: height * 0.80,
+    backgroundColor: "#F4F5F7",
+    borderRadius: 4,
+    shadowColor: theme.COLORS.BLACK,
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowRadius: 8,
+    shadowOpacity: 0.1,
+    elevation: 1,
+    overflow: "hidden",
+    alignItems: "center"
 
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
   },
   descreption: {
     textAlign: "center",
     margin: 0,
     fontWeight: "bold",
     justifyContent: "space-between",
-    padding: 30,
+    padding: 10,
     fontSize: 25,
+    
   },
   noteH:{
     textAlign: "center",
@@ -231,7 +257,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 25,
     textAlign: "center",
-    color: "#18DCFF",
+    color: '#5E72E4',
   },
   timeLabel: {
     fontSize: 25,
@@ -239,18 +265,18 @@ const styles = StyleSheet.create({
     color: "#000",
   },
   note: {
-    borderColor: "#18DCFF",
-    borderWidth: 3,
+    borderColor: "#bDB5bD",
+    borderWidth: 1,
     textAlign: "center",
   },
   time: {
-    borderColor: "#18DCFF",
+    borderColor: "#5E72E4",
     borderWidth: 3,
   },
   buttonStyle: {
-    backgroundColor: "#18DCFF",
+    backgroundColor: "#5E72E4",
     borderWidth: 2,
-    borderColor: "#18DCFF",
-    borderRadius: 25,
+    borderColor: "#5E72E4",
+   
   },
 });

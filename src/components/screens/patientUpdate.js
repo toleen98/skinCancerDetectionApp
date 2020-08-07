@@ -119,7 +119,7 @@ class PatientProfile extends React.Component {
             <Block flex middle>
               <Button
                 round
-                color="#18DCFF"
+                color={theme.COLORS.PRIMARY}
                 //                 onPress={() =>
                 //                   Alert.alert(
                 //                     "Sign up action",

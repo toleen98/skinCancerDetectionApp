@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, View, Image, Alert } from "react-native";
-import { Button, Icon, Text } from "galio-framework";
+import { Button, Icon, Text, theme } from "galio-framework";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
@@ -63,7 +63,7 @@ export default class HomePatient extends React.Component {
       <View>
         <Header drawer={this.props} />
         <View style={styles.container}>
-          <Text p style={styles.description}>
+          <Text p style={styles.description} color = {"#484a49"}>
             Upload or capture Image for your ubnormal skin ...
           </Text>
 
@@ -72,14 +72,14 @@ export default class HomePatient extends React.Component {
         <MaterialIcons
           name="photo-camera"
           size={45}
-          color= "#F5AFC8"
+          color= '#5E72E4'
           style={styles.camera}
           onPress={this.createTwoButtonAlert}
         />
         <MaterialIcons
           name="search"
           size={45}
-          color="#F5AFC8"
+          color='#5E72E4'
           style={styles.predict}
           
         />
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
 
     borderWidth: 5,
-    borderColor: "#F5AFC8",
+    borderColor:'#5E72E4',
   },
 
   container: {

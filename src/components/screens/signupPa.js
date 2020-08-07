@@ -15,6 +15,9 @@ import {
 import theme from '../../theme';
 import axios from 'axios';
 import { Entypo, MaterialCommunityIcons, Ionicons, Fontisto,FontAwesome5 } from '@expo/vector-icons';
+import {  Actions} from 'react-native-router-flux'; // 4.0.0-beta.28
+import Login from './login'
+
 const { height, width } = Dimensions.get('window');
 
 class Signup extends React.Component {
@@ -38,6 +41,7 @@ class Signup extends React.Component {
     axios.post(url,this.state)
     .then(function (response) {
       Alert.alert("User created sucessfully")
+      Actions.push('Home')
     })
     .catch(function (error) {
       Alert.alert("Email already exists")

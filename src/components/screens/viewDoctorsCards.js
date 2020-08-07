@@ -14,6 +14,7 @@ import MyDatePicker from './bookAppointment.js'
 // import { createStackNavigator } from '@react-navigation/stack';
 import { Scene, Router, Actions, Stack } from 'react-native-router-flux'; // 4.0.0-beta.28
 import Header from '../common/header';
+import { Entypo, MaterialCommunityIcons, Ionicons, Fontisto,FontAwesome5 } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('screen');
 
@@ -96,6 +97,7 @@ export default class Cards extends React.Component {
                   card.padded ? { padding: theme.SIZES.BASE / 2 } : null,
                   card.full ? null : styles.noRadius,
                 ]}
+
               >
                 {card.full ? <LinearGradient colors={['transparent', 'rgba(0,0,0, 0.8)']} style={styles.gradient} /> : null}
 
@@ -119,11 +121,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   card: {
-    backgroundColor: theme.COLORS.PINK,
+    backgroundColor: theme.COLORS.PRIMARY,
     width: width - theme.SIZES.BASE * 2,
     marginVertical: theme.SIZES.BASE * 0.875,
     elevation: theme.SIZES.BASE / 2,
-    marginBottom:35
+    marginBottom:35,
+
   },
   full: {
     position: 'absolute',
