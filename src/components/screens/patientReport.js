@@ -25,7 +25,7 @@ class Report extends React.Component {
       console.log(value);
       pointer.setState({ userId: value });
       await axios
-        .post("http://192.168.127.67:8080/patientReport", {
+        .post("https://skincancerbackend.herokuapp.com/patientReport", {
           params: {
             value: { id: pointer.state.userId },
           },

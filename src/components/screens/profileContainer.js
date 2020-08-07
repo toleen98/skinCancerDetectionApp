@@ -10,8 +10,8 @@ export default class ProfileContainer extends Component {
   render() {
     return (
       <Router >
-        <Stack hideNavBar={true}>
-          <Scene key="Profile" component={Profile} nav={this.props} />
+        <Stack >
+          <Scene key="Profile" component={Profile} nav={this.props} hideNavBar={true}/>
           <Scene key="PatientProfile" component={PatientProfile} />
         </Stack>
       </Router>

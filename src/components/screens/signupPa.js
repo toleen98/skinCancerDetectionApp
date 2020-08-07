@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Alert,
   Dimensions,
@@ -18,13 +18,13 @@ import { Entypo, MaterialCommunityIcons, Ionicons, Fontisto,FontAwesome5 } from 
 import {  Actions} from 'react-native-router-flux'; // 4.0.0-beta.28
 import Login from './login'
 
-const { height, width } = Dimensions.get('window');
+const { height, width } = Dimensions.get("window");
 
 class Signup extends React.Component {
   state = {
-    firstName:"",
-    lastName:"",
-    email:"",
+    firstName: "",
+    lastName: "",
+    email: "",
     password: "",
     phoneNumber:"",
     bloodType:"",
@@ -33,22 +33,35 @@ class Signup extends React.Component {
   }
 
   handleChange = (name, value) => {
-    this.setState({ [name]: value }); 
-  }
+    this.setState({ [name]: value });
+  };
 
   submit = () => {
-    var url = `http://192.168.127.67:8080/api/user/patient/signup`;
-    axios.post(url,this.state)
+if (
+  this.state.bloodType === "" ||
+  this.state.height === "" ||
+  this.state.weight === "" ||
+  this.state.email === "" ||
+  this.state.password === "" ||
+  this.state.phoneNumber === "" ||
+  this.state.firstName === "" ||
+  this.state.lastName === ""
+) {
+  Alert.alert("Please fill all Data");
+} else {
+  var url = `https://skincancerbackend.herokuapp.com/api/user/patient/signup`;
+  axios
+    .post(url, this.state)
     .then(function (response) {
       Alert.alert("User created sucessfully")
-      Actions.push('Home')
+      Actions.push('LoginPatient');
     })
     .catch(function (error) {
-      Alert.alert("Email already exists")
+      Alert.alert("Email already exists");
       console.log(error);
     });
     
-  }
+  }}
 
   render() {
     const { navigation } = this.props;
@@ -72,6 +85,11 @@ class Signup extends React.Component {
               autoCapitalize="none"
               style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('firstName', text)}
+              onBlur={() => {
+                  if (this.state.firstName.length === 0) {
+                    alert("should enter your name");
+                  }
+                }}
               iconContent={<Entypo name="user" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
          
             />
@@ -81,6 +99,11 @@ class Signup extends React.Component {
               autoCapitalize="none"
               style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('lastName', text)}
+              onBlur={() => {
+                  if (this.state.lastName.length === 0) {
+                    alert("should enter your name");
+                  }
+                }}
               iconContent={<Entypo name="user" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
 
             />
@@ -91,6 +114,14 @@ class Signup extends React.Component {
               autoCapitalize="none"
               style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('email', text)}
+              onBlur={() => {
+                  var reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                  if (this.state.email.length === 0) {
+                    alert("should enter email");
+                  } else if (!reg.test(this.state.email)) {
+                    alert("not valid email");
+                  }
+                }}
               iconContent={<MaterialCommunityIcons name="email" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
             />
             <Input
@@ -100,6 +131,10 @@ class Signup extends React.Component {
               placeholder="Password"
               style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('password', text)}
+              onBlur={() => {
+                  if (this.state.password.length === 0) {
+                    alert("should enter password");
+                  }}}
               iconContent={<Ionicons name="ios-lock" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
             />
             <Input
@@ -108,6 +143,16 @@ class Signup extends React.Component {
               textContentType = "telephoneNumber"
               style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('phoneNumber', text)}
+              onBlur={() => {
+                  var regPh = /^(1|2|3|4|5|6|7|8|9|0)/;
+                  if (this.state.phoneNumber.length === 0) {
+                    alert("should enter phone number");
+                  } else if (!regPh.test(this.state.phoneNumber)) {
+                    alert("not valid phone number");
+                  } else if (this.state.phoneNumber.length > 10) {
+                    alert("max number allowed 10");
+                  }
+                }}
               iconContent={<Entypo name="phone" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
 
             />
@@ -116,6 +161,15 @@ class Signup extends React.Component {
               placeholder="Blood Type"
               style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('bloodType', text)}
+              onBlur={() => {
+                  var regB = /^(A|B|AB|O)[-+]$/;
+                  if (this.state.bloodType.length === 0) {
+                    alert("should enter blood type");
+                  } else if (!regB.test(this.state.bloodType)) {
+                    console.log(typeof this.state.bloodType);
+                    alert("not valid blood type, example : A+ / O-");
+                  }
+                }}
               iconContent={<Fontisto name="blood-drop" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
             />
             <Input
@@ -123,6 +177,11 @@ class Signup extends React.Component {
               placeholder="Height"
               style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('heightP', text)}
+              onBlur={() => {
+                  if (this.state.height.length === 0) {
+                    alert("should enter your height");
+                  }
+                }}
               iconContent={<MaterialCommunityIcons name="human-male-height" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
             />
             <Input
@@ -130,6 +189,11 @@ class Signup extends React.Component {
               placeholder="Weight"
               style={{ width: width * 0.8 }}
               onChangeText={text => this.handleChange('weight', text)}
+              onBlur={() => {
+                  if (this.state.weight.length === 0) {
+                    alert("should enter your weight");
+                  }
+                }}
               iconContent={<FontAwesome5 name="weight" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
             />
 

@@ -27,6 +27,7 @@ export default class HomePatient extends React.Component {
               allowsEditing: false,
             });
             this.setState({ image: uri });
+            console.log(uri);
           },
           style: "Camera",
         },

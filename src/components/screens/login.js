@@ -50,7 +50,11 @@ function Login(props) {
     var id;
 
     axios
-      .post("http://192.168.127.67:8080/login", user)
+
+
+      .post("https://skincancerbackend.herokuapp.com/login", user)
+
+
       .then((res) => {
         const token_pa = res.data.token
         id = res.data.patient._id;

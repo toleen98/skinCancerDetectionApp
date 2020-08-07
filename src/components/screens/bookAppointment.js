@@ -51,7 +51,8 @@ class MyDatePicker extends React.Component {
       that.setState({ dr_id: JSON.parse(id),patientId:JSON.parse(userId)});
 
 
-      const url = "http://192.168.127.67:8080/api/user/doctor"
+      const url = "https://skincancerbackend.herokuapp.com/api/user/doctor"
+      
       await axios
       .post(url, {id: JSON.parse(id)})
       .then( (res) => {
@@ -91,7 +92,7 @@ class MyDatePicker extends React.Component {
       return;
     }
 
-    var url = `http://192.168.127.36:8080/bookappointment`;
+    var url = `https://skincancerbackend.herokuapp.com/bookappointment`;
     const appointment = {
       date: this.state.date,
       time: `${this.state.selectedHours} : ${this.state.selectedMinutes}`,

@@ -29,7 +29,7 @@ class Appointments extends React.Component {
       console.log(pointer.state);
 
       await axios
-        .post("http://192.168.127.67:8080/patient/appoints", {
+        .post("https://skincancerbackend.herokuapp.com/patient/appoints", {
           params: {
             value: { id: pointer.state.userId },
           },
@@ -42,7 +42,7 @@ class Appointments extends React.Component {
         .then(async () => {
           await pointer.state.appoints.map(async (element) => {
             await axios
-              .post("http://192.168.127.67:8080/api/user/doctor", {
+              .post("https://skincancerbackend.herokuapp.com/api/user/doctor", {
                 id: element.doctorId[0],
               })
               .then(async (res) => {
