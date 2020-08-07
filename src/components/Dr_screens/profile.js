@@ -5,6 +5,7 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Image,
+  ImageBackground
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 // galio component
@@ -63,7 +64,11 @@ class Profile extends React.Component {
     console.log(dr)
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.BLACK }}>
-        <Header drawer={this.props} />
+      <ImageBackground 
+    source={require('../../../assets/bg.png')}
+    style={{width: width, height: height}} 
+>  
+        <Header drawer={this.props} title={"Profile"} />
         <Block flex  style={styles.profileCard} >
         <Block flex middle style={styles.avatarContainer}>
         <Image
@@ -71,22 +76,22 @@ class Profile extends React.Component {
             style={styles.avatar}
 
         />
-         <Text size={theme.SIZES.FONT * 1.3} color={"#18DCFF"}>{ (dr.firstName +" " + dr.lastName).toUpperCase()}</Text>
+         <Text size={theme.SIZES.FONT * 1.3} color={theme.COLORS.PRIMARY}>{ (dr.firstName +" " + dr.lastName).toUpperCase()}</Text>
         </Block>
         
         <Block flex={1.1}>
-        <Text  size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}><AntDesign name="phone" size={20} color={theme.COLORS.GREY} />{" Phone Number: "}</Text>
-        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      "+dr.phoneNumber+"\n"}</Text>
-        <Text size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}><MaterialCommunityIcons name="email-outline" size={20} color={theme.COLORS.GREY} />{" Email: "}</Text>
-        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      " + dr.email+"\n"}</Text>
-        <Text size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}> <AntDesign name="clockcircleo" size={19} color={theme.COLORS.GREY} />{" Working Hours: "}</Text>
-        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      " + dr.workingFrom +" To "+ dr.workingTo+"\n"}</Text>
-        <Text size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}><EvilIcons name="location" size={24} color={theme.COLORS.GREY} />{"Clinic Location: " }</Text>
-        <Text size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      " + dr.clinicLocation+'\n'}</Text>
+        <Text  size={theme.SIZES.FONT * 1.2} color={theme.COLORS.PRIMARY}><AntDesign name="phone" size={20} color={'#000'} />{" Phone Number: "}</Text>
+        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      "+dr.phoneNumber+"\n"}</Text>
+        <Text size={theme.SIZES.FONT * 1.2} color={theme.COLORS.PRIMARY}><MaterialCommunityIcons name="email-outline" size={20} color={'#000'} />{" Email: "}</Text>
+        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      " + dr.email+"\n"}</Text>
+        <Text size={theme.SIZES.FONT * 1.2} color={theme.COLORS.PRIMARY}> <AntDesign name="clockcircleo" size={19} color={'#000'} />{" Working Hours: "}</Text>
+        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      " + dr.workingFrom +" To "+ dr.workingTo+"\n"}</Text>
+        <Text size={theme.SIZES.FONT * 1.2} color={theme.COLORS.PRIMARY}><EvilIcons name="location" size={24} color={'#000'} />{"Clinic Location: " }</Text>
+        <Text size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      " + dr.clinicLocation+'\n'}</Text>
         <Block middle>
         <Button 
-            round
-            color={"#18DCFF"}
+            
+            color={theme.COLORS.PRIMARY}
             style={{ width: 150 }}
             onPress={()=> {Actions.push('DoctorProfile')}}
             > UPDATE</Button>
@@ -95,6 +100,7 @@ class Profile extends React.Component {
        
         </Block>
         </Block>
+        </ImageBackground>
       </Block>
     );
   }
@@ -122,7 +128,8 @@ const styles = StyleSheet.create({
   },
   avatarContainer: {
     position: "relative",
-    marginTop: -80
+    marginTop: -150,
+    paddingBottom:-10,
   },
   profileCard: {
     // position: "relative",

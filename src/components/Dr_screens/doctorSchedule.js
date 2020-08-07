@@ -71,7 +71,7 @@ export default class DoctorAppointments extends React.Component {
    
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
-      <Header drawer={this.props} />
+      <Header drawer={this.props} title={'Schedule'} />
         <ScrollView contentContainerStyle={styles.cards}>
           <Block flex space="between">
             {this.state.appointment.map((card, id) => (
@@ -109,7 +109,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   card: {
-    backgroundColor: "#18DCFF",
+    marginTop:30,
+    backgroundColor: theme.COLORS.PRIMARY,
     width: width - theme.SIZES.BASE * 2,
     marginVertical: theme.SIZES.BASE * 0.875,
     elevation: theme.SIZES.BASE / 2,

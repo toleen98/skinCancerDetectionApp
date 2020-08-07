@@ -122,7 +122,7 @@ export default class DoctorPendingApp extends React.Component {
   render() {
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
-      <Header drawer={this.props} />
+      <Header drawer={this.props} title={"Pending Appointment"}/>
         <ScrollView contentContainerStyle={styles.cards}>
           <Block flex space="between">
             {this.state.appointment.map((card, id) => (
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   card: {
-    backgroundColor: "#18DCFF",
+    backgroundColor: theme.COLORS.PRIMARY,
     width: width - theme.SIZES.BASE * 2,
     marginVertical: theme.SIZES.BASE * 0.875,
     elevation: theme.SIZES.BASE / 2,
@@ -228,10 +228,11 @@ const styles = StyleSheet.create({
   iconStyleCheck: {
     alignItems: "center",
     left: 280,
-    bottom :10
-    
+    bottom :10,
+     color:"#fff"
   },
   iconStyleCircle: {
+    color:"#fff",
     alignItems: "center",
     right: 20,
     bottom :10

@@ -5,12 +5,14 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Image,
+  ImageBackground
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 // galio component
 import { Block, Button, Input, Text } from "galio-framework";
 import theme from "../../theme";
 import Header from "../common/header";
+import { Entypo,AntDesign,EvilIcons } from '@expo/vector-icons';
 
 const { height, width } = Dimensions.get("window");
 
@@ -70,7 +72,10 @@ class DoctorProfile extends React.Component {
 
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
-        <Header drawer={this.props} />
+       <ImageBackground 
+          source={require('../../../assets/register-bg.png')}
+           style={{width: width, height: 1000}} 
+          >  
         <KeyboardAvoidingView
           style={styles.container}
           behavior="height"
@@ -85,8 +90,7 @@ class DoctorProfile extends React.Component {
             }}
           >
             {/* here logo */}
-            <Image source={require("../../../assets/splash.png")} />
-            <Text muted center size={theme.SIZES.FONT * 1.5} color={"#18DCFF"}>
+            <Text muted center size={theme.SIZES.FONT * 1.5} color={theme.COLORS.PRIMARY}>
               {" "}
               Update Your Profile{" "}
             </Text>
@@ -98,13 +102,13 @@ class DoctorProfile extends React.Component {
             ></Block>
           </Block>
 
-          <Block flex={4} center space="between">
-            <Block flex={2}>
+          <Block flex={5} center space="between">
+            <Block flex={2} middle>
               <Input
-                rounded
+                borderless
                 placeholder="Phone"
                 autoCapitalize="none"
-                style={{ width: width * 0.9 }}
+                style={{ width: width * 0.8 }}
                 onBlur={() => {
                   var regPh = /^(1|2|3|4|5|6|7|8|9|0)/;
                   if (this.state.phoneNumber.length === 0) {
@@ -116,12 +120,13 @@ class DoctorProfile extends React.Component {
                   }
                 }}
                 onChangeText={(text) => this.handleChange("phoneNumber", text)}
+                iconContent={<Entypo name="phone" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
               />
               <Input
-                rounded
+                borderless
                 placeholder="Location"
                 autoCapitalize="none"
-                style={{ width: width * 0.9 }}
+                style={{ width: width * 0.8 }}
                 onBlur={() => {
                   if (this.state.clinicLocation.length === 0) {
                     alert("should enter clinic location");
@@ -130,26 +135,30 @@ class DoctorProfile extends React.Component {
                 onChangeText={(text) =>
                   this.handleChange("clinicLocation", text)
                 }
+                iconContent={<Entypo name="location-pin" size={24} color={theme.COLORS.PRIMARY} />}
               />
               <Input
-                rounded
+                borderless
                 placeholder="workingFrom"
                 autoCapitalize="none"
-                style={{ width: width * 0.9 }}
+                style={{ width: width * 0.8 }}
                 onChangeText={(text) => this.handleChange("workingFrom", text)}
+                iconContent={<AntDesign name="clockcircle" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
               />
               <Input
-                rounded
+                borderless
                 placeholder="workingTo"
                 autoCapitalize="none"
-                style={{ width: width * 0.9 }}
+                style={{ width: width * 0.8 }}
                 onChangeText={(text) => this.handleChange("workingTo", text)}
+                iconContent={<AntDesign name="clockcircle" size={24} color={theme.COLORS.PRIMARY} style={{marginRight: 12}} />}
               />
+            
             </Block>
             <Block flex middle>
               <Button
-                round
-                color="#18DCFF"
+                
+                color={theme.COLORS.PRIMARY}
                 //                 onPress={() =>
                 //                   Alert.alert(
                 //                     "Sign up action",
@@ -167,6 +176,7 @@ class DoctorProfile extends React.Component {
             </Block>
           </Block>
         </KeyboardAvoidingView>
+        </ImageBackground>
       </Block>
     );
   }
@@ -174,11 +184,21 @@ class DoctorProfile extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 4,
-    alignItems: "center",
-    justifyContent: "space-around",
-    paddingHorizontal: theme.SIZES.BASE,
-    backgroundColor: theme.COLORS.WHITE,
+    marginTop:150,
+    margin:20,
+    width: width * 0.9,
+    height: height * 0.70,
+    backgroundColor: "#F4F5F7",
+    borderRadius: 4,
+    shadowColor: theme.COLORS.BLACK,
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowRadius: 8,
+    shadowOpacity: 0.1,
+    elevation: 1,
+    overflow: "hidden"
   },
   social: {
     width: theme.SIZES.BASE * 3.5,
