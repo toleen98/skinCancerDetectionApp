@@ -78,7 +78,7 @@ class Appointments extends React.Component {
             Platform.OS === "android" ? { marginTop: theme.SIZES.BASE } : null
           }
         /> */}
-        <Header drawer={this.props} />
+        <Header drawer={this.props} title={"Appointments"} />
         <ScrollView contentContainerStyle={styles.cards}>
           <Block flex  space="between">
             {this.state.appoints.map((appoint, i) => (
@@ -101,6 +101,12 @@ class Appointments extends React.Component {
                   "Time: " +
                   appoint.time
                 }
+                avatar='https://freeiconshop.com/wp-content/uploads/edd/calendar-flat.png'
+                imageStyle={[appoint.padded ? styles.rounded : null]}
+                imageBlockStyle={[
+                  appoint.padded ? { padding: theme.SIZES.BASE / 1.5 } : null,
+                  appoint.full ? null : styles.noRadius,
+                ]}
               ></Card>
             ))}
           </Block>
@@ -117,7 +123,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   card: {
-    backgroundColor: "#18DCFF",
+    backgroundColor: "#5E72E4",
     width: width - theme.SIZES.BASE * 2,
     marginVertical: theme.SIZES.BASE * 0.875,
     elevation: theme.SIZES.BASE / 2,

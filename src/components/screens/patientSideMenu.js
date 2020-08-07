@@ -21,7 +21,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-community/async-storage";
 
 import HomePatient from "./homePatient";
-import PatientUpdate from "./patientUpdate";
+import Profile from "./profile";
 import ViewDoctor from "./viewDoctor";
 import Logout from "./logOut";
 import AboutUs from "./aboutUs";
@@ -45,7 +45,7 @@ function Drwer(props) {
         />
         <DrwerNavigator.Screen
           name="Profile"
-          component={PatientUpdate}
+          component={Profile}
           options={{
             drawerIcon: ({ tintColor }) => (
               <Feather name="user" size={16} color={tintColor} />

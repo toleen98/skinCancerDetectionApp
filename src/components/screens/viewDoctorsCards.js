@@ -74,7 +74,7 @@ export default class Cards extends React.Component {
     return (
      
       <Block>
-        <Header drawer={this.props.nav} />
+        <Header drawer={this.props.nav} title={"Doctors"} />
         <Block safe style={{ backgroundColor: theme.COLORS.WHITE,  marginTop: theme.SIZES.BASE * 1}}>
 
         <ScrollView contentContainerStyle={styles.cards}>

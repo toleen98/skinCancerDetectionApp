@@ -12,7 +12,7 @@ const Header = (props) => {
     return (
         <Appbar.Header style={{ backgroundColor: theme.COLORS.PR }}>
             <Appbar.Action icon='menu' onPress={props.drawer.navigation.openDrawer} />
-           <Appbar.Content title="      Skin Cancer Detection     " />
+           <Appbar.Content title={props.title || "   Skin Cancer Detection"} />
         </Appbar.Header>
     );
 }

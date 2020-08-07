@@ -61,7 +61,7 @@ export default class HomePatient extends React.Component {
     
     return (
       <View>
-        <Header drawer={this.props} />
+        <Header drawer={this.props} title={"Home"} />
         <View style={styles.container}>
           <Text p style={styles.description} color = {"#484a49"}>
             Upload or capture Image for your ubnormal skin ...
