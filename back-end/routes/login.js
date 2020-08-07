@@ -29,7 +29,9 @@ router.post("/login", function (req, res) {
 
         console.log(pat)
         return res.send(pat);
-      } 
+      } else if (result === false){
+        return res.send(result);
+      }
     });
   });
 });

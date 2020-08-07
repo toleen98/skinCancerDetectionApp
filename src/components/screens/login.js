@@ -43,8 +43,12 @@ function Login(props) {
       email: state.email,
       password: state.password,
     };
-
-    console.log(props);
+    
+    if(state.email === "" || state.password===""){
+      alert("Please enter your credentials!");
+      
+    }
+    // console.log(props);
     
       
     var id;
@@ -56,20 +60,21 @@ function Login(props) {
 
 
       .then((res) => {
-        const token_pa = res.data.token
-        id = res.data.patient._id;
-
-        AsyncStorage.setItem("access_token", JSON.stringify(id));
-        AsyncStorage.setItem("token_pa", JSON.stringify(token_pa));
-
-        if (res.data.result === true) {
+      
+        console.log(res.data)
+        if (res.data === "Email not found") {
+          alert("Email not found");
+        }
+        else if (res.data.result === true) {
+          const token_pa = res.data.token
+          id = res.data.patient._id;
+          AsyncStorage.setItem("access_token", JSON.stringify(id));
+          AsyncStorage.setItem("token_pa", JSON.stringify(token_pa));
           alert("Login Successed! ");
           Actions.push("Home");
         } else if (res.data === false) {
           alert("Login Failed! Wrong password");
-        } else if (res.data === "Email not found") {
-          alert("Email not found");
-        }
+        } 
       })
       .catch((err) => console.log(err));
 
