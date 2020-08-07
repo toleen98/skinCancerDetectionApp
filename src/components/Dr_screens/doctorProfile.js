@@ -55,7 +55,7 @@ class DoctorProfile extends React.Component {
     console.log(doctor);
     console.log("params here");
     console.log(param);
-    var url = "http://192.168.1.149:8080/doctor/update";
+    var url = "https://skincancerbackend.herokuapp.com/doctor/update";
     axios.post(url, param).then((response) => {
       // response.send("account updated");
       console.log("then");

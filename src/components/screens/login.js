@@ -50,7 +50,7 @@ function Login(props) {
     axios
 
 
-      .post("http://192.168.127.67:8080/login", user)
+      .post("https://skincancerbackend.herokuapp.com/login", user)
 
 
       .then((res) => {

@@ -47,7 +47,7 @@ class SignupDr extends React.Component {
     ) {
       Alert.alert("Please fill all Data");
     } else {
-      var url = "http://192.168.1.149:8080/api/user/doctor/signup";
+      var url = "https://skincancerbackend.herokuapp.com/api/user/doctor/signup";
 
       axios
         .post(url, this.state)
