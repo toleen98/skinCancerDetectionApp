@@ -1,12 +1,12 @@
 import React from "react";
-import { ScrollView, StyleSheet, Dimensions } from "react-native";
+import { ScrollView, StyleSheet, Dimensions,ImageBackground } from "react-native";
 import axios from "axios";
 import { Card, Block, Text, Button } from "galio-framework";
 import theme from "../../theme";
 import AsyncStorage from "@react-native-community/async-storage";
 import Header from "../common/header";
 
-const { width } = Dimensions.get("screen");
+const { height, width } = Dimensions.get("window");
 const card = {
   id: 1,
   avatar:
@@ -43,7 +43,11 @@ class Report extends React.Component {
   render() {
     return (
       <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
-      <Header drawer={this.props} />
+      <ImageBackground 
+    source={require('../../../assets/bg.png')}
+    style={{width: width, height: height + 200}} 
+>  
+      <Header drawer={this.props} title={"Reports"}/>
         <Text></Text>
         <ScrollView contentContainerStyle={styles.cards}>
           <Block>
@@ -64,6 +68,7 @@ class Report extends React.Component {
         
           </Block>
         </ScrollView>
+        </ImageBackground>
       </Block>
     );
   }
@@ -72,15 +77,16 @@ export default Report;
 const styles = StyleSheet.create({
   cards: {
     width,
-    backgroundColor: theme.COLORS.WHITE,
     alignItems: "center",
     height: 400,
+    borderColor: theme.COLORS.PRIMARY,
+
   },
   card: {
-    // backgroundColor: "#18DCFF",
+    backgroundColor: "#fff",
     width: width - theme.SIZES.BASE * 2,
     marginVertical: theme.SIZES.BASE * 0.875,
-    borderColor: "#18DCFF",
+    borderColor: "#fff",
   },
   Text1: {
     marginBottom: 70,
