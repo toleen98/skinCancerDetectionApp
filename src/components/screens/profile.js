@@ -5,13 +5,14 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Image,
+  ImageBackground,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 // galio component
 import { Block, Button, Input, Text } from "galio-framework";
 import theme from "../../theme";
 import Header from "../common/header";
-import { AntDesign, MaterialCommunityIcons, EvilIcons } from '@expo/vector-icons'; 
+import {AntDesign ,Entypo, MaterialCommunityIcons,EvilIcons, Ionicons, Fontisto,FontAwesome5 } from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 
 
@@ -61,8 +62,12 @@ class Profile extends React.Component {
     const user= this.state
    
     return (
-      <Block safe flex style={{ backgroundColor: theme.COLORS.BLACK }}>
-        <Header drawer={this.props} />
+      <Block safe flex style={{ backgroundColor: theme.COLORS.BLACK }} >
+      <ImageBackground 
+    source={require('../../../assets/bg.png')}
+    style={{width: width, height: height}} 
+>  
+        <Header drawer={this.props} title={'Profile'}  />
         <Block flex style={styles.profileCard} >
         <Block flex={0.9} middle style={styles.avatarContainer}>
         <Image
@@ -70,24 +75,24 @@ class Profile extends React.Component {
             style={styles.avatar}
 
         />
-         <Text size={theme.SIZES.FONT * 1.3} color={"#18DCFF"}>{ (user.firstName +" " + user.lastName).toUpperCase()}</Text>
+         <Text size={theme.SIZES.FONT * 1.3} color={"#5E72E4"}>{ (user.firstName +" " + user.lastName).toUpperCase()}</Text>
         </Block>
         
         <Block flex={1.3} >
-        <Text  size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}><AntDesign name="phone" size={20} color={theme.COLORS.GREY} />{" Phone Number: "}</Text>
-        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      "+user.phoneNumber+"\n"}</Text>
-        <Text size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}><MaterialCommunityIcons name="email-outline" size={20} color={theme.COLORS.GREY} />{" Email: "}</Text>
-        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      " + user.email+"\n"}</Text>
-        <Text size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}> <AntDesign name="clockcircleo" size={19} color={theme.COLORS.GREY} />{" Height: "}</Text>
-        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      " + user.height+"\n"}</Text>
-        <Text size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}><EvilIcons name="location" size={24} color={theme.COLORS.GREY} />{"Weight: " }</Text>
-        <Text size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      " + user.weight+'\n'}</Text>
-        <Text size={theme.SIZES.FONT * 1.2} color={"#18DCFF"}><EvilIcons name="location" size={24} color={theme.COLORS.GREY} />{"Blood Type: " }</Text>
-        <Text size={theme.SIZES.FONT * 1.1} color={theme.COLORS.GREY}>{"      " + user.blood+'\n'}</Text>
+        <Text  size={theme.SIZES.FONT * 1.2} color={"#5E72E4"}><Entypo name="phone" size={24} color={'#000'} style={{marginRight: 12}} />{" Phone Number: "}</Text>
+        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      "+user.phoneNumber+"\n"}</Text>
+        <Text size={theme.SIZES.FONT * 1.2} color={"#5E72E4"}><MaterialCommunityIcons name="email" size={24} color={'#000'} style={{marginRight: 12}} />{" Email: "}</Text>
+        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      " + user.email+"\n"}</Text>
+        <Text size={theme.SIZES.FONT * 1.2} color={"#5E72E4"}> <MaterialCommunityIcons name="human-male-height" size={24} color={'#000'} style={{marginRight: 12}} />{" Height: "}</Text>
+        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      " + user.height+"\n"}</Text>
+        <Text size={theme.SIZES.FONT * 1.2} color={"#5E72E4"}><FontAwesome5 name="weight" size={24} color={'#000'} style={{marginRight: 12}} />{"Weight: " }</Text>
+        <Text size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      " + user.weight+'\n'}</Text>
+        <Text size={theme.SIZES.FONT * 1.2} color={"#5E72E4"}><Fontisto name="blood-drop" size={24} color={'#000'} style={{marginRight: 12}} />{"Blood Type: " }</Text>
+        <Text size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      " + user.blood+'\n'}</Text>
         <Block middle>
         <Button 
             round
-            color={"#18DCFF"}
+            color={"#5E72E4"}
             style={{ width: 150 }}
             onPress={()=> {Actions.push('DoctorProfile')}}
             > UPDATE</Button>
@@ -96,6 +101,7 @@ class Profile extends React.Component {
        
         </Block>
         </Block>
+        </ImageBackground>
       </Block>
     );
   }
@@ -103,11 +109,24 @@ class Profile extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 4,
-    alignItems: "center",
-    justifyContent: "space-around",
-    paddingHorizontal: theme.SIZES.BASE,
-    backgroundColor: theme.COLORS.WHITE,
+    marginTop:100,
+    margin:20,
+    width: width * 0.9,
+    height: height * 0.9,
+    backgroundColor: "#F4F5F7",
+    borderRadius: 4,
+    shadowColor: theme.COLORS.BLACK,
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowRadius: 8,
+    shadowOpacity: 0.1,
+    elevation: 1,
+    overflow: "hidden"
+  },
+  inputIcons: {
+    marginRight: 12
   },
   social: {
     width: theme.SIZES.BASE * 3.5,
@@ -123,15 +142,15 @@ const styles = StyleSheet.create({
   },
   avatarContainer: {
     position: "relative",
-    marginTop: -130,
+    marginTop: -150,
     paddingBottom:-10,
   },
   profileCard: {
     // position: "relative",
     padding: theme.SIZES.BASE,
     marginHorizontal: theme.SIZES.BASE,
-    marginTop: 65,
-    marginBottom:60,
+    marginTop:70 ,
+    marginBottom:30,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
     backgroundColor: theme.COLORS.WHITE,
