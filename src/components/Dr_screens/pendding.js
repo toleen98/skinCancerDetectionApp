@@ -33,7 +33,7 @@ export default class DoctorPendingApp extends React.Component {
       console.log(pointer.state.userId);
       await axios
         //192.168.1.80
-        .post("http://192.168.127.67:8080/getPending", {
+        .post("https://skincancerbackend.herokuapp.com/getPending", {
           params: {
             value: { id: pointer.state.userId },
           },
@@ -49,7 +49,7 @@ export default class DoctorPendingApp extends React.Component {
             console.log("hi",element)
             console.log("i",i)
              axios
-              .post("http://192.168.127.67:8080/getPatients", {
+              .post("https://skincancerbackend.herokuapp.com/getPatients", {
                 params: {
                   value: { pId: element.patientId },
                 },
@@ -82,7 +82,7 @@ export default class DoctorPendingApp extends React.Component {
 
   approved = (apId,pEmail) => {
    
-    var url = `http://192.168.127.67:8080/approve`;
+    var url = `https://skincancerbackend.herokuapp.com/approve`;
     // Opens prefilled email
     MailComposer.composeAsync({
     recipients: [pEmail], // array of email addresses
@@ -107,7 +107,7 @@ export default class DoctorPendingApp extends React.Component {
       body: "Your appointment is rejected, choose another time."
     })
 
-    var url = `http://192.168.127.67:8080/rejected`;
+    var url = `https://skincancerbackend.herokuapp.com/rejected`;
     axios
       .post(url, { id: apId })
       .then(function (response) {

@@ -38,6 +38,6 @@ app.use("", scheduleDoctor);
 app.use("", pendding);
 app.use("", docprf);
 // app.use("/api/profile", patientupdate)
-
+app.use ("",appoint);
 
 app.listen(port, () => console.log(`Server started on port: ${port}`));

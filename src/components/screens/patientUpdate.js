@@ -52,7 +52,7 @@ class PatientProfile extends React.Component {
       id : this.state.userId,
     };
     console.log(patient);
-    var url = "http://192.168.1.149:8080/api/profile/patient/updatepatient";
+    var url = "https://skincancerbackend.herokuapp.com/api/profile/patient/updatepatient";
     axios.post(url, patient).then((response) => {
       // response.send("account updated");
       console.log("then");

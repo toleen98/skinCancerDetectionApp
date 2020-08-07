@@ -33,7 +33,7 @@ class Profile extends React.Component {
   async componentDidMount() {
     const that = this;
     const id = await AsyncStorage.getItem("access_token");
-    const url = "http://192.168.127.67:8080/api/user/doctor"
+    const url = "https://skincancerbackend.herokuapp.com/api/user/doctor"
     this.setState({userId: JSON.parse(id)})
     await axios
     .post(url, {id: JSON.parse(id)}) 

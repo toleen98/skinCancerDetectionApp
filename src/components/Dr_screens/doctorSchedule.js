@@ -29,7 +29,7 @@ export default class DoctorAppointments extends React.Component {
           // console.log(".......")
           // console.log(pointer.state.userId);
           await axios
-            .post("http://192.168.127.67:8080/getAppointments", {
+            .post("https://skincancerbackend.herokuapp.com/getAppointments", {
               params: {
                 value: { id: pointer.state.userId },
               },
@@ -43,7 +43,7 @@ export default class DoctorAppointments extends React.Component {
             .then (async () => {
               pointer.state.appointment.map(async(element) => {
                 await axios
-                .post("http://192.168.127.67:8080/getPatientsName", {
+                .post("https://skincancerbackend.herokuapp.com/getPatientsName", {
                 params: {
                     value: { pId: element.patientId[0]},
                 },
