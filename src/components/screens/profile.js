@@ -79,19 +79,19 @@ class Profile extends React.Component {
         </Block>
         
         <Block flex={1.3} >
-        <Text  size={theme.SIZES.FONT * 1.2} color={"#5E72E4"}><Entypo name="phone" size={24} color={'#000'} style={{marginRight: 12}} />{" Phone Number: "}</Text>
-        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      "+user.phoneNumber+"\n"}</Text>
-        <Text size={theme.SIZES.FONT * 1.2} color={"#5E72E4"}><MaterialCommunityIcons name="email" size={24} color={'#000'} style={{marginRight: 12}} />{" Email: "}</Text>
-        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      " + user.email+"\n"}</Text>
-        <Text size={theme.SIZES.FONT * 1.2} color={"#5E72E4"}> <MaterialCommunityIcons name="human-male-height" size={24} color={'#000'} style={{marginRight: 12}} />{" Height: "}</Text>
-        <Text  size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      " + user.height+"\n"}</Text>
-        <Text size={theme.SIZES.FONT * 1.2} color={"#5E72E4"}><FontAwesome5 name="weight" size={24} color={'#000'} style={{marginRight: 12}} />{"Weight: " }</Text>
+        <Text  size={theme.SIZES.FONT * 1.1} color={"#5E72E4"}><Entypo name="phone" size={24} color={'#000'} style={{marginRight: 12}} />{" Phone Number: "}</Text>
+        <Text  size={theme.SIZES.FONT * 1} color={theme.COLORS.PLACEHOLDER}>{"      "+user.phoneNumber+"\n"}</Text>
+        <Text size={theme.SIZES.FONT * 1.1} color={"#5E72E4"}><MaterialCommunityIcons name="email" size={24} color={'#000'} style={{marginRight: 12}} />{" Email: "}</Text>
+        <Text  size={theme.SIZES.FONT * 1} color={theme.COLORS.PLACEHOLDER}>{"      " + user.email+"\n"}</Text>
+        <Text size={theme.SIZES.FONT * 1.1} color={"#5E72E4"}> <MaterialCommunityIcons name="human-male-height" size={24} color={'#000'} style={{marginRight: 12}} />{" Height: "}</Text>
+        <Text  size={theme.SIZES.FONT * 1} color={theme.COLORS.PLACEHOLDER}>{"      " + user.height+"\n"}</Text>
+        <Text size={theme.SIZES.FONT * 1.1} color={"#5E72E4"}><FontAwesome5 name="weight" size={22} color={'#000'} style={{marginRight: 12}} />{"Weight: " }</Text>
         <Text size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      " + user.weight+'\n'}</Text>
-        <Text size={theme.SIZES.FONT * 1.2} color={"#5E72E4"}><Fontisto name="blood-drop" size={24} color={'#000'} style={{marginRight: 12}} />{"Blood Type: " }</Text>
-        <Text size={theme.SIZES.FONT * 1.1} color={theme.COLORS.PLACEHOLDER}>{"      " + user.blood+'\n'}</Text>
-        <Block middle>
+        <Text size={theme.SIZES.FONT * 1.1} color={"#5E72E4"}><Fontisto name="blood-drop" size={22} color={'#000'} style={{marginRight: 12}} />{"Blood Type: " }</Text>
+        <Text size={theme.SIZES.FONT * 1} color={theme.COLORS.PLACEHOLDER}>{"      " + user.blood+'\n'}</Text>
+        <Block middle style={{marginBottom:20}}>
         <Button 
-            round
+            
             color={"#5E72E4"}
             style={{ width: 150 }}
             onPress={()=> {Actions.push('PatientProfile')}}
