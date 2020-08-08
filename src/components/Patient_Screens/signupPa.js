@@ -254,7 +254,7 @@ class Signup extends React.Component {
                     style={{ width: width * 0.8 }}
                     onChangeText={(text) => this.handleChange("heightP", text)}
                     onBlur={() => {
-                      if (this.state.height.length === 0) {
+                      if (this.state.heightP.length === 0) {
                         alert("should enter your height");
                       }
                     }}

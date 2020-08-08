@@ -13,7 +13,7 @@
     },
     "android": {
       "package": "com.skinCancerDetiction.skinCancerDetiction",
-      "versionCode": 1
+      "versionCode": 3
     },
     "ios": {
       "bundleIdentifier": "com.skinCancerDetiction.skinCancerDetiction",
