@@ -22,7 +22,7 @@ class Profile extends React.Component {
   state = {
     firstName:"",
     lastName:"",
-    profileImage:"https://bit.ly/3hxXixM",
+    profileImage:"https://cdn1.vectorstock.com/i/1000x1000/51/05/male-profile-avatar-with-brown-hair-vector-12055105.jpg",
     phoneNumber: "",
     height: "",
     userId: "",
@@ -34,7 +34,7 @@ class Profile extends React.Component {
   async componentDidMount() {
     const that = this;
     const id = await AsyncStorage.getItem("access_token");
-    const url = "http://192.168.127.67:8080/api/profile/user/paitent"
+    const url = "https://skincancerbackend.herokuapp.com/api/profile/user/paitent"
     this.setState({userId: JSON.parse(id)})
     await axios
     .post(url, {id: JSON.parse(id)}) 

@@ -125,7 +125,7 @@ function LoginDr(props) {
               onPress={onSubmit}
               style={styles.createButton}
             >
-              <Text bold size={14} color={theme.COLORS.WHITE}>Sign Up</Text>
+              <Text bold size={14} color={theme.COLORS.WHITE}>Login</Text>
             </Button>
             <Block flex row >
             <Text center color={'#8898AA'} size={theme.SIZES.FONT * 0.75}>

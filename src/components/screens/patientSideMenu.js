@@ -20,14 +20,14 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-community/async-storage";
 
-import HomePatient from "./homePatient";
-import ProfileContainer from "./profileContainer";
-import ViewDoctor from "./viewDoctor";
-import Logout from "./logOut";
-import AboutUs from "./aboutUs";
-import Help from "./help";
-import Report from "./patientReport";
-import Appointments from "./patientApmnt";
+import HomePatient from "../Patient_Screens/homePatient";
+import ProfileContainer from "../Patient_Screens/profileContainer";
+import ViewDoctor from "../Patient_Screens/viewDoctor";
+import Logout from "../Patient_Screens/logOut";
+import AboutUs from "../Patient_Screens/aboutUs";
+import Help from "../Patient_Screens/help";
+import Report from "../Patient_Screens/patientReport";
+import Appointments from "../Patient_Screens/patientApmnt";
 const DrwerNavigator = createDrawerNavigator();
 const Stack = createStackNavigator();
 function Drwer(props) {
