@@ -3,7 +3,7 @@ import { Text, StyleSheet, Button } from 'react-native';
 import { Scene, Router, Actions, Stack } from 'react-native-router-flux'; 
 
 import LoginDr from "../Dr_screens/login";
-import DrwerDoctor from './doctorSideMenu'
+import DrwerDoctor from '../screens/doctorSideMenu'
 import Signup from '../Dr_screens/signup'
 export default class LoginContainerDoctor extends Component {
   render() {

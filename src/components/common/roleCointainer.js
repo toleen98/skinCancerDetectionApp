@@ -5,8 +5,8 @@ import { Scene, Router, Actions, Stack } from 'react-native-router-flux';
 
 import Role from "./role";
 import LoginContainerPatient from "../Patient_Screens/loginContainerPatient";
-import LoginContainerDoctor from "../screens/loginContainerDoctor";
-import SignUpContainerDoctor from "../screens/signUpContainerDoctor";
+import LoginContainerDoctor from "../Dr_screens/loginContainerDoctor";
+import SignUpContainerDoctor from "../Dr_screens/signUpContainerDoctor";
 import SignUpContainerPatient from "../Patient_Screens/signUpContainerPatient";
 export default class RoleContainer extends Component {
   render() {
