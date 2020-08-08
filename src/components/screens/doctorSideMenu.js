@@ -20,12 +20,9 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-community/async-storage";
 
-import HomePatient from "./homePatient";
-import DoctorProfile from "../Dr_screens/doctorProfile";
-import ViewDoctor from "./viewDoctor";
-import Logout from "./logOut";
-import AboutUs from "./aboutUs";
-import Help from "./help";
+
+import AboutUs from "../Patient_Screens/aboutUs";
+
 import DoctorAppointments from "../Dr_screens/doctorSchedule";
 import DoctorPendingApp from "../Dr_screens/pendding";
 import ProfileRout from "../Dr_screens/profileRout";
